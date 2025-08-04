@@ -1,0 +1,28 @@
+body {
+margin: 0;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.shapka {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background-color: rgb(34, 179, 58);
+    padding: 20px 10px;
+}
+.shapka-logo {
+    display: flex;
+    align-items: center;
+}
+.shapka-link {
+    display: flex;
+    align-items: center;
+
+}
+
+
+.shapka-link a.active {
+    background-color: rgb(21, 70, 21);
+}

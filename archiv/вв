@@ -1,0 +1,18 @@
+        /* Responsive design for smaller screens */
+        @media screen and (max-width: 600px) {
+            .header {
+                flex-direction: column; /* Stack logo and links vertically */
+                align-items: flex-start;
+            }
+            .header-logo {
+                margin-bottom: 10px;
+            }
+            .header-links {
+                flex-direction: column; /* Stack links vertically */
+                width: 100%;
+            }
+            .header-links a {
+                margin: 5px 0;
+                text-align: left;
+            }
+        }
