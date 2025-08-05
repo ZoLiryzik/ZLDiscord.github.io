@@ -7,18 +7,36 @@
     --text-color-white: white; /* Цвет для текста 2 */
 }
 
-/* Главные стили всей страницы */
+
+/**/
+
+* {
+    box-sizing: border-box;
+}
+/* ======= Главные стили всей страницы ======= */
 body { 
     font-family: Arial, Helvetica, sans-serif; /* Шрифт текста */
     margin: 0; /* отступы блоков на странице*/
     background-color: var(--color-body); /* Главный фон страницы*/
+    width: 100%;
+    height: 100vh;
 }
 
 
-/* Стили шапки сайта, то что наверху */
+/*  ==== ==== */
+.frame {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-/* Главные стили шапки */
+/* ======= Стили шапки сайта, то что наверху ======= */
+
+/* === Главные стили шапки === */
 .shapka { 
+    width: 100%;
     overflow: hidden; /* Скрывает то что не поместилось */
     background-color: var(--color-shapka); /* Главный цвет */
     padding: 20px 10px; /* Установка разных отступов */
@@ -28,19 +46,19 @@ body {
     position: relative;
 }
 
-/* Стили логотипа в шапке */
+/* ===== Стили логотипа в шапке ===== */
 .shapka-logo {
     display: flex; /* управление расположением элементов внутри контейнера */
     align-items: center /* Выравнивает элементы внутри контейнера по центру */;
     gap: 10px;
 }
 
-/* Стили изображения в шапке */
+/* === Стили изображения в шапке === */
 .shapka-logo img {
     height: 50px;
 }
 
-/* Стили названия плагина в шапке*/
+/* === Стили названия плагина в шапке ===*/
 .shapka-title {
     color: var(--text-color-white);
     font-size: 24px;
@@ -48,7 +66,7 @@ body {
     text-decoration: none;
     line-height: 1;
 }
-/* Стили названия плагина в шапке для ссылки*/
+/* === Стили названия плагина в шапке для ссылки === */
 .shapka-title a {
     text-decoration: none;
     color: var(--text-color-white);
@@ -56,11 +74,13 @@ body {
 
 /* Стили кнопок 1 */
 .shapka-links {
+    width: 100%;
     display: flex; /* управление расположением элементов внутри контейнера */
     gap: 10px;
+    justify-content: end;
 }
 
-/* Стили кнопок 2 */
+/* === Стили кнопок 2 === */
 .shapka-links a {
     color: var(--text-color-light);
     text-align: center;
@@ -77,20 +97,21 @@ body {
     color: var(--text-color-white);
 }
 
-/* Стили активной кнопки в шапке */
+/*  === Стили активной кнопки в шапке === */
 .shapka-links a.active {
     background-color: var(--color-hover-active);
     color: var(--text-color-white);
 }
 
-/* Стили кнопки скачать */
+/* === Стили кнопки скачать === */
 .shapka-links a.download {
     background-color: var(--color-download);
     color: var(--text-color-white);
 }
 
-/* Стили меню в шапке*/
+/* === Стили меню в шапке === */
 .menu-toggle {
+    width: 100%;
     display: none;
     background: none;
     border: none;
@@ -99,41 +120,56 @@ body {
     cursor: pointer;
 }
 
-/* Адаптация */
 
+/* ======== Стили контента после шапки ======== */
 
-@media screen and (max-width: 768px) {
-    .shapka {
-        flex-wrap: wrap;
-    }
-    /* Стили кнопок для малых экранов */
-    .shapka-links {
-        display: none;
-        width: 100%;
-        flex-direction: column;
-        background-color: var(--color-shapka);
-        margin-top: 10px;
-        position: relative;
-        z-index: 10;
-    }
-
-    .shapka-links.active-menu {
-        display: flex; /* управление расположением элементов внутри контейнера */
-    }
-    
-    .shapka-links.show {
-        display: flex; /* управление расположением элементов внутри контейнера */
-    }
-
-    .shapka-links a {
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 15px;
-    }
-    /* Меню для малых экранов */ 
-    .menu-toggle {
-        display: block;
-        position: absolute;
-        top: 20px;
-        right: 10px;
-    }
+.content {
+    width: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/assets/img/ava.png);
+    background-position: center; 
+    background-size: cover;
+    padding: 100px 20px;
+    text-align: center;
 }
+.content-title h1, .content-title p {
+    color: var(--text-color-white);
+}
+.content-btns a{
+    color: var(--text-color-white);
+    text-align: center;
+    padding: 12px;
+    margin-left: 10px;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 25px;
+    border-radius: 10px;
+}
+
+.btns-download {
+    background-color: var(--color-download);
+    color: var(--text-color-light);
+}
+
+.btns-bolshe {
+    background-color: #627e70;
+    color: var(--text-color-light);
+}
+
+
+/* Кнопки при наведения */
+.content-btns a {
+    position: relative;
+    top: 0;
+    transition: top ease 0.5s;
+}
+.content-btns a:hover {
+    box-shadow: 0 0 12px var(--color-download);
+    -moz-box-shadow: 0 0 12px var(--color-download);
+    -o-box-shadow: 0 0 12px var(--color-download);
+    -ms-box-shadow: 0 0 12px var(--color-download);
+    -webkit-box-shadow: 0 0 12px var(--color-download);
+}
+
+
+
+

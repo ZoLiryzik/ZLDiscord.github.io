@@ -1,0 +1,38 @@
+ ======== Адаптация ======== 
+
+
+@media screen and (max-width: 768px) {
+     .shapka {
+        flex-wrap: wrap;
+    } 
+     Стили кнопок для малых экранов 
+     .shapka-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        background-color: var(--color-shapka);
+        margin-top: 10px;
+        position: relative;
+        z-index: 10;
+    } 
+
+     .shapka-links.active-menu {
+        display: flex;  управление расположением элементов внутри контейнера 
+    } 
+    
+     .shapka-links.show {
+        display: flex;  управление расположением элементов внутри контейнера 
+    } 
+
+     .shapka-links a {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 15px;
+    } 
+     Меню для малых экранов  
+     .menu-toggle {
+        display: block;
+        position: absolute;
+        top: 20px;
+        right: 10px;
+    } 
+    }
