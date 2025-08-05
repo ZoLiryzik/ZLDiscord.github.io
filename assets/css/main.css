@@ -1,36 +1,66 @@
-/* Добавьте это в начало вашего CSS */
 :root {
-    --color-body: #213d33;
-    --color-shapka: #121c17;
-    --color-hover-active: #2b5641;
-    --color-download: #4CAF50;
-    --text-color-light: #f0f0f0;
-    --text-color-white: white;
-}
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
-    background-color: var(--color-body);
+    --color-body: #213d33; /* Цвет всей страницы body */
+    --color-shapka: #121c17; /* Цвет шапки, то что наверху */
+    --color-hover-active: #2b5641; /* Цвет активной кнопки, в которой сейчас */
+    --color-download: #4CAF50; /* Цвет кнопки скачать плагин */
+    --text-color-light: #f0f0f0; /* Цвет для текста 1 */
+    --text-color-white: white; /* Цвет для текста 2 */
 }
 
-.shapka {
-    overflow: hidden;
-    background-color: var(--color-shapka);
-    padding: 20px 10px;
-    display: flex;
-    align-items: center;
+/* Главные стили всей страницы */
+body { 
+    font-family: Arial, Helvetica, sans-serif; /* Шрифт текста */
+    margin: 0; /* отступы блоков на странице*/
+    background-color: var(--color-body); /* Главный фон страницы*/
+}
+
+
+/* Стили шапки сайта, то что наверху */
+
+/* Главные стили шапки */
+.shapka { 
+    overflow: hidden; /* Скрывает то что не поместилось */
+    background-color: var(--color-shapka); /* Главный цвет */
+    padding: 20px 10px; /* Установка разных отступов */
+    display: flex; /* управление расположением элементов внутри контейнера */
+    align-items: center /* Выравнивает элементы внутри контейнера по центру */;
     justify-content: space-between;
+    position: relative;
 }
 
+/* Стили логотипа в шапке */
+.shapka-logo {
+    display: flex; /* управление расположением элементов внутри контейнера */
+    align-items: center /* Выравнивает элементы внутри контейнера по центру */;
+    gap: 10px;
+}
+
+/* Стили изображения в шапке */
 .shapka-logo img {
     height: 50px;
 }
 
+/* Стили названия плагина в шапке*/
+.shapka-title {
+    color: var(--text-color-white);
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    line-height: 1;
+}
+/* Стили названия плагина в шапке для ссылки*/
+.shapka-title a {
+    text-decoration: none;
+    color: var(--text-color-white);
+} 
+
+/* Стили кнопок 1 */
 .shapka-links {
-    display: flex;
-    gap: 10px; /* Используем gap для отступов между ссылками */
+    display: flex; /* управление расположением элементов внутри контейнера */
+    gap: 10px;
 }
 
+/* Стили кнопок 2 */
 .shapka-links a {
     color: var(--text-color-light);
     text-align: center;
@@ -41,23 +71,27 @@ body {
     border-radius: 4px;
 }
 
+/**/
 .shapka-links a:hover {
     background-color: var(--color-hover-active);
     color: var(--text-color-white);
 }
 
+/* Стили активной кнопки в шапке */
 .shapka-links a.active {
     background-color: var(--color-hover-active);
     color: var(--text-color-white);
 }
+
+/* Стили кнопки скачать */
 .shapka-links a.download {
     background-color: var(--color-download);
     color: var(--text-color-white);
 }
 
-/* Стили для кнопки-гамбургера */
+/* Стили меню в шапке*/
 .menu-toggle {
-    display: none; /* Скрываем на больших экранах */
+    display: none;
     background: none;
     border: none;
     font-size: 24px;
@@ -65,32 +99,41 @@ body {
     cursor: pointer;
 }
 
-/* Медиа-запрос для маленьких устройств (например, до 768px) */
+/* Адаптация */
+
+
 @media screen and (max-width: 768px) {
     .shapka {
-        flex-wrap: wrap; /* Позволяем элементам переноситься на новую строку */
+        flex-wrap: wrap;
     }
-
+    /* Стили кнопок для малых экранов */
     .shapka-links {
-        display: none; /* Скрываем меню по умолчанию */
-        width: 100%; /* Занимаем всю ширину */
+        display: none;
+        width: 100%;
         flex-direction: column;
         background-color: var(--color-shapka);
         margin-top: 10px;
-        position: relative; /* чтобы меню не вылезало за пределы шапки */
-        z-index: 10; /* чтобы меню было поверх остального контента */
+        position: relative;
+        z-index: 10;
     }
 
+    .shapka-links.active-menu {
+        display: flex; /* управление расположением элементов внутри контейнера */
+    }
+    
     .shapka-links.show {
-        display: flex; /* Показываем меню, когда есть класс .show */
+        display: flex; /* управление расположением элементов внутри контейнера */
     }
 
     .shapka-links a {
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         padding: 15px;
     }
-
+    /* Меню для малых экранов */ 
     .menu-toggle {
-        display: block; /* Показываем гамбургер на маленьких экранах */
+        display: block;
+        position: absolute;
+        top: 20px;
+        right: 10px;
     }
 }

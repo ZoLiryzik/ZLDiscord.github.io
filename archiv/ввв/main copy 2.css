@@ -1,0 +1,128 @@
+:root {
+    --color-body: #213d33;
+    --color-shapka: #121c17;
+    --color-hover-active: #2b5641;
+    --color-download: #4CAF50;
+    --text-color-light: #f0f0f0;
+    --text-color-white: white;
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    background-color: var(--color-body);
+}
+
+
+
+.shapka {
+    overflow: hidden;
+    background-color: var(--color-shapka);
+    padding: 20px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+
+
+.shapka-logo img {
+    height: 50px;
+}
+
+
+
+.shapka-links {
+    display: flex;
+    gap: 10px; /* Используем gap для отступов между ссылками */
+}
+
+
+
+.shapka-links a {
+    color: var(--text-color-light);
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 25px;
+    border-radius: 4px;
+}
+
+
+
+.shapka-links a:hover {
+    background-color: var(--color-hover-active);
+    color: var(--text-color-white);
+}
+
+
+
+.shapka-links a.active {
+    background-color: var(--color-hover-active);
+    color: var(--text-color-white);
+}
+
+
+.shapka-links a.download {
+    background-color: var(--color-download);
+    color: var(--text-color-white);
+}
+
+/* Стили для кнопки-гамбургера */
+.menu-toggle {
+    display: none; /* Скрываем на больших экранах */
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: var(--text-color-white);
+    cursor: pointer;
+}
+
+/* Медиа-запрос для маленьких устройств (например, до 768px) */
+@media screen and (max-width: 768px) {
+    .shapka {
+        flex-wrap: wrap; /* Позволяем элементам переноситься на новую строку */
+    }
+
+    .shapka-links {
+        display: none; /* Скрываем меню по умолчанию */
+        width: 100%; /* Занимаем всю ширину */
+        flex-direction: column;
+        background-color: var(--color-shapka);
+        margin-top: 10px;
+        position: relative; /* чтобы меню не вылезало за пределы шапки */
+        z-index: 10; /* чтобы меню было поверх остального контента */
+    }
+    .shapka-links.active-menu {
+        display: flex; /* Показываем меню, когда оно активно */
+    }
+    .shapka-links.show {
+        display: flex; /* Показываем меню, когда есть класс .show */
+    }
+
+    .shapka-links a {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 15px;
+    }
+    .menu-toggle {
+        display: block; /* Показываем гамбургер на маленьких экранах */
+    }
+
+
+    .menu-toggle-active {
+        position: absolute;
+        z-index: 1;
+        left: 50%;
+        margin-left: 10%;
+        margin-top: -150px;
+        width: 50px;
+        height: 30px;
+
+        top: 50%;
+        /* border: 1px solid black; */
+        /* background-color: red; */
+    }
+}
