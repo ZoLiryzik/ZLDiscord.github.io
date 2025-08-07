@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Документация: ZoLiryzik Plugin</title>
+    <link rel="icon" href="/assets/img/ava.png" type="image/png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/features.css">
+    <link rel="stylesheet" href="/assets/css/docs.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+</head>
+
+<body>
+    <div class="frame">
+        <header class="shapka">
+            <div class="shapka-logo">
+                <img src="/assets/img/ava.png" alt="Логотип ZoLiryzik">
+                <div class="shapka-title"><a href="/">ZoLiryzik Plugin</a></div>
+            </div>
+            <nav class="shapka-links" id="navLinks">
+                <a class="google-font" href="/">Главная</a>
+                <a class="google-font" href="#">Релизы</a>
+                <a class="active google-font" href="#" aria-current="page">Документация</a>
+                <a class="google-font" href="#">Контакты</a>
+                <a class="download google-font" href="/project/ZoLiryzik.jar">Скачать</a>
+            </nav>
+            <button class="menu-toggle google-font" id="menuToggle">☰</button>
+        </header>
+
+        <main class="docs-container">
+            <div class="probel"></div>
+            <aside class="sidebar">
+                <nav aria-label="Разделы документации">
+                    <ul>
+                        <li><a href="#conduction" class="google-font">Введение</a></li>
+                        <li><a href="#install" class="google-font">Установка</a></li>
+                        <li><a href="#commands" class="google-font">Команды</a></li>
+                        <li><a href="#commandsds" class="google-font">Команды дс</a></li>
+                        <li><a href="#placeholders" class="google-font">Плейсхолдеры</a></li>
+                        <li><a href="#config" class="google-font">Конфигурация</a></li>
+                        <li><a href="#cmds-primers" class="google-font">Примеры</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <div class="docs-content">
+                <h1>Документация ZoLiryzik Plugin</h1>
+                <hr>
+
+                <section id="conduction" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Введение</h2>
+                    <p>ZoLiryzik Plugin — это универсальный плагин для сервера Minecraft, который предоставляет
+                        расширенные возможности, включая систему голосований, интеграцию с плейсхолдерами для голосовых
+                        чатов и создание кастомных сообщений. Этот плагин разработан для упрощения и автоматизации
+                        управления сервером.</p>
+                </section>
+
+                <hr>
+
+                <section id="install" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Установка</h2>
+                    <p>Для установки плагина выполните следующие шаги:</p>
+                    <ol>
+                        <li>Скачайте последнюю версию плагина с официальной страницы.</li>
+                        <li>Поместите файл <code>ZoLiryzik.jar</code> в папку <code>/plugins/</code> вашего сервера.
+                        </li>
+                        <li>Перезапустите или перезагрузите сервер (команда <code>/reload</code>).</li>
+                        <li>После перезапуска в папке <code>/plugins/ZoLiryzik/</code> будут сгенерированы
+                            конфигурационные файлы.</li>
+                    </ol>
+                </section>
+
+                <hr>
+
+                <section id="commands" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Команды в игре</h2>
+                    <p>Плагин предоставляет следующие команды для администраторов и игроков в игре:</p>
+                    <ul>
+                        <!-- <li><code>/zoliryzik reload</code> — перезагружает конфигурацию плагина (требуются права администратора).</li> -->
+                        <li><code>/zevent "title" "command" "time" "channel_id"</code> — создает новое голосование.
+                            (требуются права администратора).</li>
+                        <li><code>/zlink</code> — привязать аккаунт к дискорду.</li>
+                        <li><code>/zunlink</code> — отвязать аккаунт от дискорда.</li>
+                    </ul>
+                </section>
+
+                <hr>
+
+                <section id="commandsds" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Команды в дискорде</h2>
+                    <p>Плагин предоставляет следующие команды для администраторов и игроков на сервере дискорда:</p>
+
+                    <ul>
+                        <!-- <li><code>/zoliryzik reload</code> — перезагружает конфигурацию плагина (требуются права администратора).</li> -->
+                        <li><code>/zevent</code> — создает новое голосование. (требуются права администратора).</li>
+                        <li><code>/embed</code> — создает создать Embed сообщение в дискорде. (требуются права
+                            администратора).</li>
+                        <li><code>/link < code ></code> — привязать аккаунт к дискорду. ( в личные сообщения бота )</li>
+                        <li><code>/unlink</code> — отвязать аккаунт от дискорда.</li>
+                    </ul>
+                </section>
+
+                <hr>
+
+                <section id="placeholders" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Плейсхолдеры (PlaceholderAPI)</h2>
+                    <p>ZoLiryzik Plugin интегрируется с PlaceholderAPI для отображения статуса голосового чата.
+                        Убедитесь, что у вас установлен PlaceholderAPI.</p>
+                    <p>Доступные плейсхолдеры:</p>
+                    <ul>
+                        <li><code>%zoliryzik_in_vc%</code> — возвращает "В голосовом чате", "Не в голосовом чате" и "Не
+                            привязан".</li>
+                    </ul>
+                </section>
+
+                <hr>
+
+                <section id="config" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Конфигурация</h2>
+                    <p>Основной файл конфигурации находится по адресу <code>/plugins/ZoLiryzik/config.yml</code>. Вы
+                        можете настроить сообщения, разрешения и другие параметры.</p>
+                    <h3>Пример файла <code>config.yml</code>:</h3>
+                    <pre><code id="config-code" class="language-yml">Загрузка...</code></pre>
+                </section>
+
+                <hr>
+
+                <section id="cmds-primers" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Примеры использования</h2>
+                    <h3>Создать голосование для ивента</h3>
+                    <p>Чтобы создать голосование для ивента, просто введите в чат:</p>
+                    <pre><code>/zevent "Осада коробля" "boat run" "20m" "0000000000000000000"                    </code></pre>
+                    <p>Игроки смогут проголосовать, в данном дискорд канале в котором вы указали.</p>
+                </section>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="/assets/img/ava.png" alt="Логотип">
+                    <h2>ZoLiryzik Plugin</h2>
+                </div>
+                <div class="footer-links">
+                    <a href="#">Главная</a>
+                    <a href="/releases">Релизы</a>
+                    <a href="#">Документация</a>
+                    <a href="#">Поддержка</a>
+                    <a href="#">Контакты</a>
+                </div>
+                <div class="copyright">
+                    <p>&copy; <span id="current-year"></span> ZoLiryzik Plugin.</p>
+                    <p>Версия плагина: 1.0 | Поддержка: Spigot 1.16.x - 1.20.x</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <!-- <script src="/assets/js/docs.js"></script> -->
+    <script src="/assets/js/menu-toggle.js"></script>
+
+</body>
+<script>
+    // Код для динамической загрузки и подсветки config.yml
+    const configCodeElement = document.getElementById('config-code');
+    fetch('/project/resources/config.yml')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Не удалось загрузить файл config.yml. Проверьте путь и доступ.');
+            }
+            return response.text();
+        })
+        .then(text => {
+            configCodeElement.textContent = text;
+            hljs.highlightAll();
+        })
+        .catch(error => {
+            console.error('Ошибка:', error);
+            configCodeElement.textContent = 'Ошибка загрузки: ' + error.message;
+        });
+
+    // Код для подсветки активной секции в боковой панели и плавной прокрутки
+    const sections = document.querySelectorAll('.docs-section');
+    const navLinks = document.querySelectorAll('.sidebar a');
+
+    function setActiveLink() {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (window.scrollY >= sectionTop - 150) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.href.includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    function smoothScroll(event) {
+        event.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+
+        if (targetSection) {
+            window.scrollTo({
+                top: targetSection.offsetTop - 90, // Отступ сверху для шапки
+                behavior: 'smooth'
+            });
+
+            // Обновляем URL-хэш без перезагрузки
+            window.history.pushState(null, null, targetId);
+        }
+    }
+
+    // Прикрепляем слушатели событий
+    window.addEventListener('scroll', setActiveLink);
+    navLinks.forEach(link => {
+        link.addEventListener('click', smoothScroll);
+    });
+
+    // Вызываем функцию при загрузке страницы, чтобы установить активный класс
+    window.addEventListener('load', () => {
+        const hash = window.location.hash;
+        if (hash) {
+            const targetSection = document.querySelector(hash);
+            if (targetSection) {
+                window.scrollTo({
+                    top: targetSection.offsetTop - 90,
+                    behavior: 'smooth'
+                });
+            }
+        }
+        setActiveLink();
+    });
+</script>
+</html>

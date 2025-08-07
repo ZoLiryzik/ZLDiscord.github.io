@@ -1,0 +1,178 @@
+/* Общие стили для контента */
+.docs-container {
+    display: flex;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 40px;
+    margin-top: 90px;
+}
+
+/* Боковая панель */
+.sidebar {
+    width: 250px;
+    position: sticky;
+    top: 100px;
+    height: calc(100vh - 100px);
+    overflow-y: auto;
+    flex-shrink: 0;
+    background-color: var(--color-shapka);
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar a {
+    display: block;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.1em;
+    border-left: 3px solid transparent;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    border-left: 3px solid #00ff82;
+    color: #00ff82;
+    background-color: var(--color-shapka);
+}
+
+/* Основное содержимое документации */
+.docs-content {
+    flex-grow: 1;
+    background-color: var(--color-shapka);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.docs-section {
+    margin-bottom: 40px;
+}
+
+.docs-section h1,
+.docs-section h2,
+.docs-section h3 {
+    color: #fff;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.docs-section h1 {
+    font-size: 2.5em;
+}
+
+.docs-section h2 {
+    font-size: 2em;
+}
+
+.docs-section h3 {
+    font-size: 1.5em;
+}
+
+.docs-section p,
+.docs-section ul,
+.docs-section ol {
+    line-height: 1.7;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+ul,
+ol {
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+pre {
+    background-color: #2d2d2d;
+    color: #f8f8f2;
+    padding: 18px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9em;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+code {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #f0f2f5;
+    color: var(--color-download);
+    padding: 2px 5px;
+    border-radius: 4px;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #eee;
+    margin: 40px 0;
+}
+
+/* Адаптация */
+@media (max-width: 992px) {
+    .docs-container {
+        flex-direction: column;
+        margin-top: 70px;
+        padding: 10px;
+    }
+
+    .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        overflow-y: visible;
+        background-color: transparent;
+        border-radius: 0;
+        padding: 0;
+        box-shadow: none;
+    }
+
+    .sidebar ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        justify-content: center;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+    }
+
+    .sidebar li {
+        flex: 1 1 auto;
+        min-width: 120px;
+        text-align: center;
+    }
+
+    .sidebar a {
+        border-left: none;
+        border-bottom: 3px solid transparent;
+        background-color: var(--color-shapka);
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+        border-left: none;
+        border-bottom: 3px solid #00ff82;
+        background-color: var(--color-shapka);
+    }
+
+    .docs-content {
+        padding: 20px;
+    }
+}
