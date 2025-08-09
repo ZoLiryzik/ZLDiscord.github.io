@@ -1,0 +1,29 @@
+# ================================================================= #
+#                ZoLiryzik Plugin Configuration                     #
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
+#   This file contains all customizable parameters for              #
+#   the ZoLiryzik plugin. Please read the comments carefully.       #
+# ================================================================= #
+
+# Select the language for plugin messages. Available options: ru, en
+language: "en"
+
+# Discord server ID (Guild ID) to which the bot will connect.
+# This MUST be the ID of your Discord server.
+# Get it in Discord developer mode (right-click on the server -> Copy ID).
+main-discord-guild-id: "0000000000000000000000"
+
+# Discord bot token. Get it from the Discord Developer Portal.
+# Keep it a secret and NEVER share it publicly.
+discord-bot-token: "BOT_TOKEN"
+
+# List of Discord Role IDs that have permission to use the /zevent and !embed commands.
+# Get them in Discord developer mode (right-click on the role -> Copy ID).
+embed-creator-role-ids:
+  - "0000000000000000000" # "Admin" role ID
+  - "0000000000000000000" # "Moderator" role ID
+
+# Color for Discord Embed messages.
+# You can use HEX codes (e.g., #FF0000 for red)
+# or hexadecimal values with the 0x prefix (e.g., 0xFF0000 for red).
+embed-color: "0xFFAA00"
