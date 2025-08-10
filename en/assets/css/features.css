@@ -1,0 +1,233 @@
+/* Общие стили */
+.features1 {
+    max-width: 100px;
+    min-width: 100px;
+    margin: 0 auto;
+    /* Центрирование всего блока */
+}
+
+.center {
+    text-align: center;
+    /* Глобальное центрирование текста */
+}
+
+.section-title {
+    text-align: center;
+    position: relative;
+    /* Необходимо для позиционирования псевдоэлемента */
+    margin-bottom: 20px;
+    /* Отступ под заголовком */
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 50%;
+    height: 50%;
+    max-width: 4000px;
+    margin: 16px auto 0;
+    height: 4px;
+    background-color: var(--color-download);
+}
+
+/* Секция проектов */
+.projects {
+    width: 100%;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Центрирование всего контента */
+}
+
+/* Заголовок секции */
+.projects--title {
+    font-family: "Unbounded", sans-serif;
+    background: linear-gradient(45deg, #cd2424, #cf523a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 38px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+/* Список проектов */
+.projects--list {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* Горизонтальное центрирование карточек */
+    gap: 12px;
+    margin-top: 26px;
+}
+
+/* Карточка проекта */
+.projects--list-element {
+    border-radius: 18px;
+    width: 440px;
+    height: 260px;
+    background-color: #0f0f11;
+    border: 3px solid #18181b;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    /* Вертикальное центрирование */
+    justify-content: center;
+    /* Горизонтальное центрирование */
+}
+
+/* Контент внутри карточки */
+.projects--list-element-info {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Центрирование элементов по горизонтали */
+    justify-content: center;
+    /* Центрирование элементов по вертикали */
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    z-index: 31;
+    opacity: 1;
+    /* Начальная видимость текста */
+    transition: opacity 0.3s ease;
+}
+
+/* Заголовок карточки */
+.projects--list-element-title {
+    color: #fff;
+    font-family: "Unbounded", sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.projects--list-element-title a {
+    display: block;
+    width: 100%;
+}
+
+/* Описание карточки */
+.projects--list-element-lore {
+    color: #c1c1c1;
+    font-family: "Onest", sans-serif;
+    width: 100%;
+    max-height: 42px;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.projects--list-element-lore a {
+    display: block;
+    width: 100%;
+}
+
+/* Ссылка в карточке */
+.projects--list-element-link {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.projects--list-element-link-text {
+    font-family: "Onest", sans-serif;
+    color: #2462cd;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+/* Фон карточки */
+.projects--list-element-bgimg {
+    position: absolute;
+    z-index: 30;
+    opacity: 14%;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.projects--list-element-bgimg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Кнопка "Смотреть все" */
+.projects--seeall {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    /* Центрирование кнопки */
+    margin-top: 40px;
+    gap: 14px;
+}
+
+.projects--seeall-button button {
+    border: none;
+    font-family: "Onest", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #ffffff;
+    background: linear-gradient(45deg, #c12020, #d64d2b);
+    border-radius: 8px;
+    padding: 12px 28px;
+    cursor: pointer;
+}
+
+/* Скриншоты вверх title lore */
+.projects--list-element-screenshots {
+    justify-content: flex-start;
+    /* Сдвигаем элементы вверх */
+    padding-top: 20px;
+    /* Добавляем отступ сверху */
+}
+
+/* ------------------- Эффекты наведения/нажатия ------------------- */
+/* Для ПК: при наведении */
+.projects--list-element-screenshots-gl:hover .projects--list-element-bgimg {
+    opacity: 1;
+    /* Полная прозрачность */
+}
+
+.projects--list-element-screenshots-gl:hover .projects--list-element-info {
+    opacity: 0;
+    /* Скрываем текст */
+}
+
+/* Для мобильных: при нажатии (с помощью JavaScript) */
+.js-hover.is-active .projects--list-element-bgimg {
+    opacity: 1;
+}
+
+.js-hover.is-active .projects--list-element-info {
+    opacity: 0;
+}
+
+/* --- Адаптация для экранов до 768px --- */
+@media (max-width: 768px) {
+    .projects--list-element {
+        width: 90%; /* Используем проценты для более гибкого растяжения */
+        max-width: 400px;
+        height: auto; /* Позволяем высоте подстраиваться под контент */
+        padding: 15px;
+    }
+
+    .projects--list-element-title {
+        font-size: 24px;
+        line-height: 1.2;
+    }
+
+    .projects--list-element-lore {
+        max-height: none; /* Убираем ограничение высоты для описания */
+        font-size: 14px;
+    }
+}

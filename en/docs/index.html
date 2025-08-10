@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Документация: ZoLiryzik Plugin</title>
+    <link rel="icon" href="/assets/img/ava.png" type="image/png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/features.css">
+    <link rel="stylesheet" href="/assets/css/docs.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+</head>
+
+<body>
+    <div class="frame">
+        <header class="shapka">
+            <div class="shapka-logo">
+                <img src="/assets/img/ava.png" alt="Логотип ZoLiryzik">
+                <div class="shapka-title"><a href="/en">ZoLiryzik Plugin</a></div>
+            </div>
+            <nav class="shapka-links" id="navLinks">
+                <a class="google-font" href="/en">Main</a>
+                <a class="google-font" href="#">Releases</a>
+                <a class="active google-font" href="#" aria-current="page">Documentation</a>
+                <a class="google-font" href="#">Contacts</a>
+                <a class="download google-font" href="/project/ZoLiryzik.jar">Download</a>
+            </nav>
+            <button class="menu-toggle google-font" id="menuToggle">☰</button>
+        </header>
+
+        <main class="docs-container">
+            <div class="probel"></div>
+            <aside class="sidebar">
+                <nav aria-label="Разделы документации">
+                    <ul>
+                        <li><a href="#conduction" class="google-font">Introduction</a></li>
+                        <li><a href="#install" class="google-font">Installation</a></li>
+                        <li><a href="#commands" class="google-font">In-Game Commands</a></li>
+                        <li><a href="#commandsds" class="google-font active">Discord Commands</a></li>
+                        <li><a href="#placeholders" class="google-font">Placeholders</a></li>
+                        <li><a href="#config" class="google-font">Configuration</a></li>
+                        <li><a href="#cmds-primers" class="google-font">Examples</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <div class="docs-content">
+                <h1>ZoLiryzik Plugin Documentation</h1>
+                <hr>
+
+                <section id="conduction" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Introduction</h2>
+                    <p>ZoLiryzik Plugin is a versatile plugin for your Minecraft server, providing
+                        advanced features including a voting system, integration with placeholders for voice
+                        chats, and custom message creation. This plugin is designed to simplify and automate
+                        server management.</p>
+                </section>
+
+                <hr>
+
+                <section id="install" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Installation</h2>
+                    <p>To install the plugin, follow these steps:</p>
+                    <ol>
+                        <li>Download the latest version of the plugin from the official page.</li>
+                        <li>Place the <code>ZoLiryzik.jar</code> file into your server's <code>/plugins/</code> folder.
+                        </li>
+                        <li>Restart or reload your server (using the <code>/reload</code>).</li>
+                        <li>After restarting, configuration files will be generated in the
+                            <code>/plugins/ZoLiryzik/</code> folder.</li>
+                    </ol>
+                </section>
+
+                <hr>
+
+                <section id="commands" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>In-Game Commands</h2>
+                    <p>The plugin provides the following commands for administrators and players in-game:</p>
+                    <ul>
+                        <!-- <li><code>/zoliryzik reload</code> — перезагружает конфигурацию плагина (требуются права администратора).</li> -->
+                        <li><code>/zevent "title" "command" "time" "channel_id"</code> — creates a new poll.
+                            (requires administrator privileges).</li>
+                        <li><code>/zembed "Unique Name" "Title" "Description" "Channel ID" "Image URL" "Thumbnail URL" "Footer Text" "Footer Icon URL"</code>
+                            — creates a new embed message.
+                            (requires administrator privileges).</li>
+                        <li><code>/zembedmanage "action" "unique_name" "new_value"</code> — edits an embed message.
+                            (requires administrator privileges).</li>
+                        <li><code>/zlink</code> — links your Minecraft account to Discord.</li>
+                        <li><code>/zunlink</code>— unlinks your Minecraft account from Discord.</li>
+                    </ul>
+                </section>
+
+                <hr>
+
+                <section id="commandsds" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Discord Commands</h2>
+                    <p>The plugin provides the following commands for administrators and players on the Discord server:
+                    </p>
+
+                    <ul>
+                        <!-- <li><code>/zoliryzik reload</code> — перезагружает конфигурацию плагина (требуются права администратора).</li> -->
+                        <li><code>/zevent</code> — creates a new poll. (requires administrator privileges).</li>
+                        <li><code>!embed</code> — creates an embed message in Discord. (requires administrator
+                            privileges).</li>
+                        <li><code>/link &lt; code &gt;</code> — links your Minecraft account to Discord. (in the bot's
+                            private messages)</li>
+                        <li><code>/unlink</code> — unlinks your Minecraft account from Discord.</li>
+                    </ul>
+                </section>
+
+                <hr>
+
+                <section id="placeholders" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Placeholders (PlaceholderAPI)</h2>
+                    <p>ZoLiryzik Plugin integrates with PlaceholderAPI to display voice chat status.
+                        Ensure you have PlaceholderAPI installed.</p>
+                    <p>Available placeholders:</p>
+                    <ul>
+                        <li><code>%zoliryzik_in_vc%</code> — returns "In Voice Chat", "Not in Voice Chat", and "Not
+                            Linked".</li>
+                    </ul>
+                </section>
+
+                <hr>
+
+                <section id="config" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Configuration</h2>
+                    <p>The main configuration file is located at <code>/plugins/ZoLiryzik/config.yml</code>. You
+                        can configure messages, permissions, and other parameters.</p>
+                    <h3>Example <code>config.yml</code> file:</h3>
+                    <pre><code id="config-code" class="language-yml">Loading...</code></pre>
+                </section>
+
+                <hr>
+
+                <section id="cmds-primers" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Usage Examples</h2>
+                    <h3>Create a poll for an event</h3>
+                    <p>To create a poll for an event, simply enter the following in the chat:</p>
+                    <pre><code>/zevent "Ship Siege" "boat run" "20m" "0000000000000000000"</code></pre>
+                    <p>Players will be able to vote in the specified Discord channel.</p>
+                    <h3>Create an embed message in Discord</h3>
+                    <p>To create an embed message in Discord, simply enter the following in the chat:</p>
+                    <pre><code>/zembed "Ship Siege" "Ship Siege" "The Ship Siege event is underway\nCoords X: 0 Y: 0" "0000000000000000000"</code></pre>
+                    <p>Players will be able to see this message in the specified Discord channel.</p>
+                </section>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="/assets/img/ava.png" alt="Логотип">
+                    <h2>ZoLiryzik Plugin</h2>
+                </div>
+                <div class="footer-links">
+                    <a href="#">Home</a>
+                    <a href="/releases">Releases</a>
+                    <a href="#">Documentation</a>
+                    <a href="#">Support</a>
+                    <a href="#">Contacts</a>
+                </div>
+                <div class="copyright">
+                    <p>&copy; <span id="current-year"></span> ZoLiryzik Plugin.</p>
+                    <p>Plugin version: 1.1 | Support: Spigot 1.16.x - 1.20.x</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <!-- <script src="/assets/js/docs.js"></script> -->
+    <script src="/assets/js/menu-toggle.js"></script>
+
+</body>
+<script>
+    // Код для динамической загрузки и подсветки config.yml
+    const configCodeElement = document.getElementById('config-code');
+    fetch('/project/resources/config.yml')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Не удалось загрузить файл config.yml. Проверьте путь и доступ.');
+            }
+            return response.text();
+        })
+        .then(text => {
+            configCodeElement.textContent = text;
+            hljs.highlightAll();
+        })
+        .catch(error => {
+            console.error('Ошибка:', error);
+            configCodeElement.textContent = 'Ошибка загрузки: ' + error.message;
+        });
+
+    // Код для подсветки активной секции в боковой панели и плавной прокрутки
+    const sections = document.querySelectorAll('.docs-section');
+    const navLinks = document.querySelectorAll('.sidebar a');
+
+    function setActiveLink() {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (window.scrollY >= sectionTop - 150) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.href.includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    function smoothScroll(event) {
+        event.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+
+        if (targetSection) {
+            window.scrollTo({
+                top: targetSection.offsetTop - 90, // Отступ сверху для шапки
+                behavior: 'smooth'
+            });
+
+            // Обновляем URL-хэш без перезагрузки
+            window.history.pushState(null, null, targetId);
+        }
+    }
+
+    // Прикрепляем слушатели событий
+    window.addEventListener('scroll', setActiveLink);
+    navLinks.forEach(link => {
+        link.addEventListener('click', smoothScroll);
+    });
+
+    // Вызываем функцию при загрузке страницы, чтобы установить активный класс
+    window.addEventListener('load', () => {
+        const hash = window.location.hash;
+        if (hash) {
+            const targetSection = document.querySelector(hash);
+            if (targetSection) {
+                window.scrollTo({
+                    top: targetSection.offsetTop - 90,
+                    behavior: 'smooth'
+                });
+            }
+        }
+        setActiveLink();
+    });
+</script>
+
+</html>
