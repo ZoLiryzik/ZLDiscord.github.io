@@ -12,21 +12,132 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
 </head>
+<style>
+    /* Убираем абсолютное позиционирование для .language-select */
+.language-select {
+    position: relative;
+    z-index: 999;
+    cursor: pointer;
+    margin-right: 10px; /* Добавляем отступ для десктопа */
+}
 
+/* Стилизуем Language, чтобы он выглядел как другие ссылки */
+.language-label {
+    background-color: transparent;
+    color: var(--text-color-light);
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 18px;
+    line-height: 25px;
+    font-weight: 400;
+    font-family: "Onest", sans-serif;
+    display: inline-block;
+}
+
+/* Эффект при наведении на Language */
+.language-label:hover {
+    background-color: var(--color-hover-active);
+    color: var(--text-color-white);
+}
+
+/* Позиционирование выпадающего меню языков */
+.language-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #0b0b0b;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    z-index: 998;
+    width: auto;
+    min-width: 120px;
+    opacity: 1;
+    transition: none;
+}
+
+.language-option {
+    display: block;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    border-radius: 0;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.3s, box-shadow 0.3s;
+}
+
+.language-option:hover {
+    background-color: var(--color-hover-active);
+}
+
+/* Медиа-запросы для адаптации на разных экранах */
+@media (max-width: 768px) {
+    .shapka-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: left;
+        margin-top: 10px;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: var(--color-shapka);
+        border-top: 1px solid #333;
+        padding: 10px 20px;
+        z-index: 99;
+    }
+
+    .shapka-links.show {
+        display: flex;
+    }
+
+    .shapka-links a, .language-select {
+        padding: 10px 0;
+        border-bottom: 1px solid #333;
+        width: 100%;
+        text-align: center;
+        margin-right: 0;
+    }
+
+    .language-dropdown {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+        background-color: transparent;
+        padding-left: 20px;
+    }
+
+    .language-label {
+        width: 100%;
+        padding: 10px 0;
+    }
+}
+</style>
 <body>
     <div class="frame">
+        <!-- Шапка сайта -->
         <header class="shapka">
             <div class="shapka-logo">
-                <img src="/assets/img/ava.png" alt="Логотип ZoLiryzik">
-                <div class="shapka-title"><a href="/en">ZLDiscord</a></div>
+                <img src="https://plugin.zoliryzik.ru/assets/img/ava.png" alt="Логотип">
+                <div class="shapka-title"><a href="#">ZLDiscord</a></div>
             </div>
-            <nav class="shapka-links" id="navLinks">
-                <a class="google-font" href="/en">Main</a>
+            <div class="shapka-links" id="navLinks">
+                <div class="language-select">
+                    <span class="language-label google-font">Language</span>
+                    <div class="language-dropdown">
+                        <a href="/docs" class="language-option google-font">Русский</a>
+                        <a href="#" class="language-option google-font">English</a>
+                    </div>
+                </div>
+                <a class="google-font" href="/">Main</a>
                 <a class="google-font" href="#">Releases</a>
-                <a class="active google-font" href="#" aria-current="page">Documentation</a>
+                <a class="active google-font" href="#">Documentation</a>
                 <a class="google-font" href="#">Contacts</a>
                 <a class="download google-font" href="/project/ZoLiryzik.jar">Download</a>
-            </nav>
+            </div>
             <button class="menu-toggle google-font" id="menuToggle">☰</button>
         </header>
 
