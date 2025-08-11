@@ -1,0 +1,118 @@
+/* Контейнер с фоном и отступами */
+.feed-container {
+    width: 100%;
+    background: #23272A;
+    border-top: 2px solid #eee;
+    overflow-x: hidden !important;
+    padding: 40px 0;
+    margin-top: 60px;
+}
+  
+  /* Горизонтальный контейнер */
+  .comments-container {
+    display: flex;
+    gap: 16px;
+    transition: transform 0.3s ease;
+    will-change: transform;
+  }
+  
+  /* Отдельный комментарий */
+  .comment {
+    flex: 0 0 auto;
+    width: 280px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+    z-index: 1;
+    position: relative;
+    opacity: 1;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .comment:hover {
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+  }
+  
+  /* Заголовок и рейтинг */
+  .comment-header {
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    /* color: #2d2d2d; */
+  }
+  
+  /* Текст комментария */
+  .comment-text {
+    font-size: 14px;
+    line-height: 1.5;
+    /* color: #444; */
+  }
+  
+  /* Сообщения о состоянии */
+  .loader,
+  .error-state,
+  .empty-state {
+    text-align: center;
+    padding: 15px;
+    color: #888;
+    font-size: 14px;
+  }
+  
+  .hidden {
+    display: none !important;
+  }
+  
+  /* Кнопки навигации */
+  .carousel-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+  
+  .carousel-nav .nav-btn {
+    pointer-events: auto;
+    background-color: #ffffffdd;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  
+  .carousel-nav .nav-btn:hover {
+    background-color: #f0f0f0;
+  }
+  .sidebar-button {
+    position: fixed;
+    left: 0px;
+    bottom: 60px;
+    transform: rotate(0deg);
+    /* transform-origin: right top; */
+    z-index: 10000;
+    padding: 12px 25px;
+    /* background: #007bff; */
+    color: white;
+    border: none;
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+    font-size: 30px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    /* animation: pulse 2s infinite; */
+    background-color: #151819;
+}
+
+.sidebar-button:hover {
+    background: #4c555c;
+}
