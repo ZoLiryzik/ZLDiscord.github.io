@@ -215,9 +215,9 @@
 /* --- Адаптация для экранов до 768px --- */
 @media (max-width: 768px) {
     .projects--list-element {
-        width: 90%; /* Используем проценты для более гибкого растяжения */
+        width: 90%;
         max-width: 400px;
-        height: auto; /* Позволяем высоте подстраиваться под контент */
+        height: auto;
         padding: 15px;
     }
 
@@ -227,7 +227,74 @@
     }
 
     .projects--list-element-lore {
-        max-height: none; /* Убираем ограничение высоты для описания */
+        max-height: none;
         font-size: 14px;
     }
+}
+
+/* Добавленные стили для полноэкранного режима */
+.fullscreen-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: var(--color-download);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "Onest", sans-serif;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    display: none; /* Скрываем по умолчанию для ПК */
+}
+
+/* Показываем кнопку при наведении на элемент */
+.projects--list-element-screenshots-gl:hover .fullscreen-btn {
+    display: block;
+}
+
+/* Всегда показываем кнопку на мобильных устройствах */
+@media (max-width: 768px) {
+    .fullscreen-btn {
+        display: block;
+    }
+}
+
+/* Полноэкранный оверлей */
+.fullscreen-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: none; /* Скрыт по умолчанию */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.fullscreen-overlay img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+/* Кнопка закрытия */
+.fullscreen-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.fullscreen-close:hover,
+.fullscreen-close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
 }
