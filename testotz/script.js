@@ -1,44 +1,67 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('review-form');
-    const messageDiv = document.getElementById('message');
-  
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-  
-      messageDiv.textContent = '';
-      messageDiv.className = 'message';
-  
-      const reviewText = document.getElementById('reviewText').value;
-      const rating = parseInt(document.getElementById('rating').value, 10);
-  
-      const reviewData = {
-        reviewText,
-        rating
-      };
-  
-      try {
-        const response = await fetch('https://srv.zoliryzik.ru/api/submit-review', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(reviewData)
-        });
-  
-        const data = await response.json();
-  
-        if (response.ok && data.success) {
-          messageDiv.textContent = data.message;
-          messageDiv.classList.add('success');
-          form.reset(); // Очистить форму после успешной отправки
-        } else {
-          messageDiv.textContent = data.message || 'Произошла ошибка при отправке.';
-          messageDiv.classList.add('error');
-        }
-      } catch (error) {
-        console.error('Ошибка сети:', error);
-        messageDiv.textContent = 'Ошибка сети. Пожалуйста, попробуйте еще раз.';
-        messageDiv.classList.add('error');
-      }
-    });
-  });
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.reviews-section {
+    width: 100%;
+    max-width: 800px;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.review-card {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-left: 4px solid #007bff;
+    padding: 20px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+}
+
+.review-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.review-author {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.review-rating {
+    font-size: 1.2em;
+    color: #ffc107;
+}
+
+.review-text {
+    line-height: 1.6;
+    color: #555;
+}
+
+#loading-message, #error-message {
+    text-align: center;
+    color: #6c757d;
+    font-style: italic;
+}
