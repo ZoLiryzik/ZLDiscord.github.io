@@ -1,67 +1,52 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f2f5;
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-}
+document.addEventListener('DOMContentLoaded', () => {
+    const reviewsContainer = document.getElementById('reviews-container');
+    const loadingMessage = document.getElementById('loading-message');
 
-.reviews-section {
-    width: 100%;
-    max-width: 800px;
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
+    // Функция для получения и отображения отзывов
+    const fetchReviews = async () => {
+        try {
+            const response = await fetch('https://srv.zoliryzik.ru/api/feedbacks');
+            const data = await response.json();
 
-h1 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 25px;
-}
+            // Удаляем сообщение о загрузке
+            loadingMessage.style.display = 'none';
 
-.reviews-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
+            if (data.success && data.data.length > 0) {
+                data.data.forEach(review => {
+                    const reviewCard = document.createElement('div');
+                    reviewCard.className = 'review-card';
 
-.review-card {
-    background-color: #f8f9fa;
-    border: 1px solid #e9ecef;
-    border-left: 4px solid #007bff;
-    padding: 20px;
-    border-radius: 6px;
-    display: flex;
-    flex-direction: column;
-}
+                    const metaDiv = document.createElement('div');
+                    metaDiv.className = 'review-meta';
 
-.review-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
+                    const authorSpan = document.createElement('span');
+                    authorSpan.className = 'review-author';
+                    authorSpan.textContent = review.username;
 
-.review-author {
-    font-weight: bold;
-    color: #007bff;
-}
+                    const ratingSpan = document.createElement('span');
+                    ratingSpan.className = 'review-rating';
+                    ratingSpan.textContent = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
 
-.review-rating {
-    font-size: 1.2em;
-    color: #ffc107;
-}
+                    metaDiv.appendChild(authorSpan);
+                    metaDiv.appendChild(ratingSpan);
 
-.review-text {
-    line-height: 1.6;
-    color: #555;
-}
+                    const textP = document.createElement('p');
+                    textP.className = 'review-text';
+                    textP.textContent = review.text;
 
-#loading-message, #error-message {
-    text-align: center;
-    color: #6c757d;
-    font-style: italic;
-}
+                    reviewCard.appendChild(metaDiv);
+                    reviewCard.appendChild(textP);
+
+                    reviewsContainer.appendChild(reviewCard);
+                });
+            } else {
+                reviewsContainer.innerHTML = '<p id="no-reviews-message">Отзывов пока нет.</p>';
+            }
+        } catch (error) {
+            console.error('Ошибка при получении отзывов:', error);
+            reviewsContainer.innerHTML = '<p id="error-message">Произошла ошибка при загрузке отзывов. Попробуйте еще раз позже.</p>';
+        }
+    };
+
+    fetchReviews();
+});
