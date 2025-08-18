@@ -1,4 +1,4 @@
-const BASE_URL = 'http://srv.zoliryzik.ru';
+const BASE_URL = 'https://srv.zoliryzik.ru';
 const authForm = document.getElementById('auth-form');
 const getReviewsBtn = document.getElementById('get-reviews-btn');
 const authSection = document.getElementById('auth-section');
@@ -133,3 +133,4 @@ getReviewsBtn.addEventListener('click', async () => {
 // Запускаем проверку сессии при загрузке страницы
 
 document.addEventListener('DOMContentLoaded', checkSession);
+
