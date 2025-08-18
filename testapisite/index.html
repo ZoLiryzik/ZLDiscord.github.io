@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API-Интеграция</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Панель управления API</h1>
+        
+        <section id="auth-section">
+            <h2>Аутентификация</h2>
+            <form id="auth-form">
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="password" id="password" placeholder="Пароль" required autocomplete="current-password">
+                <button type="submit">Запросить токен</button>
+            </form>
+            <p id="auth-message" class="message"></p>
+        </section>
+
+        <section id="reviews-section" class="hidden">
+            <h2>Отзывы</h2>
+            <button id="get-reviews-btn">Получить отзывы</button>
+            <p id="reviews-message" class="message"></p>
+            <div id="reviews-list"></div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
