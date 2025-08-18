@@ -1,6 +1,7 @@
 const BASE_URL = 'https://srv.zoliryzik.ru'; // Убедитесь, что здесь HTTPS
 
 const authForm = document.getElementById('auth-form');
+const confirmBtn = document.getElementById('confirm-btn');
 const getReviewsBtn = document.getElementById('get-reviews-btn');
 const authSection = document.getElementById('auth-section');
 const reviewsSection = document.getElementById('reviews-section');
@@ -16,7 +17,6 @@ let tempToken = null;
 function checkSession() {
     refreshToken = localStorage.getItem('refreshToken');
     if (refreshToken) {
-        // Если Refresh Token найден, пытаемся получить новый Access Token
         refreshAccessToken();
     }
 }
@@ -28,13 +28,10 @@ async function refreshAccessToken() {
     try {
         const response = await fetch(`${BASE_URL}/api/auth/refresh`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ refreshToken })
         });
 
-        // Проверяем, что ответ - валидный JSON
         const data = await response.json().catch(() => null);
         if (!data || !data.success) {
             console.error('Не удалось обновить токен:', data ? data.error : 'Некорректный ответ сервера');
@@ -65,53 +62,57 @@ authForm.addEventListener('submit', async (e) => {
     const password = document.getElementById('password').value;
 
     authMessage.textContent = 'Запрос отправлен...';
+    authForm.classList.add('hidden');
 
     try {
         const response = await fetch(`${BASE_URL}/api/auth/admin`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
         });
         
-        // Проверяем, что ответ - валидный JSON
         const data = await response.json().catch(() => null);
 
         if (!data || !data.success) {
             authMessage.textContent = `Ошибка аутентификации: ${data ? data.error : 'Некорректный ответ сервера'}`;
+            authForm.classList.remove('hidden');
             return;
         }
-
-        authMessage.textContent = 'Временный токен получен. Автоматическое подтверждение...';
-        tempToken = data.token; // Сохраняем токен
         
-        // Автоматически отправляем запрос на check-token
-        await confirmToken();
-
+        tempToken = data.token;
+        authMessage.textContent = 'Временный токен отправлен на вашу почту. Пожалуйста, перейдите по ссылке в письме и затем нажмите кнопку "Подтвердить"';
+        confirmBtn.classList.remove('hidden');
     } catch (error) {
         console.error('Ошибка при аутентификации:', error);
         authMessage.textContent = 'Произошла ошибка при отправке запроса.';
+        authForm.classList.remove('hidden');
     }
 });
 
-// Новая функция для автоматического подтверждения
-async function confirmToken() {
+// Обработка кнопки "Подтвердить"
+confirmBtn.addEventListener('click', async () => {
+    if (!tempToken) {
+        authMessage.textContent = 'Сначала запросите токен.';
+        return;
+    }
+
+    authMessage.textContent = 'Подтверждение токена...';
+    confirmBtn.classList.add('hidden');
+
     try {
         const response = await fetch(`${BASE_URL}/api/auth/check-token?token=${tempToken}`);
         
-        // Проверяем, что ответ - валидный JSON
         const data = await response.json().catch(() => null);
         
         if (!data || !data.authenticated) {
             authMessage.textContent = `Подтверждение не удалось: ${data ? data.error : 'Некорректный ответ сервера'}`;
+            authForm.classList.remove('hidden');
             return;
         }
         
-        // Успешная аутентификация
         accessToken = data.accessToken;
         refreshToken = data.refreshToken;
-        localStorage.setItem('refreshToken', refreshToken); // Сохраняем сессию
+        localStorage.setItem('refreshToken', refreshToken);
         
         authSection.classList.add('hidden');
         reviewsSection.classList.remove('hidden');
@@ -120,8 +121,9 @@ async function confirmToken() {
     } catch (error) {
         console.error('Ошибка при подтверждении токена:', error);
         authMessage.textContent = 'Произошла ошибка при подтверждении токена.';
+        authForm.classList.remove('hidden');
     }
-}
+});
 
 // Обработка кнопки "Получить отзывы"
 getReviewsBtn.addEventListener('click', async () => {
@@ -133,9 +135,7 @@ getReviewsBtn.addEventListener('click', async () => {
     try {
         const response = await fetch(`${BASE_URL}/api/otz`, {
             method: 'GET',
-            headers: {
-                'X-Api-Key': accessToken
-            }
+            headers: { 'X-Api-Key': accessToken }
         });
 
         const data = await response.json().catch(() => null);
@@ -144,7 +144,6 @@ getReviewsBtn.addEventListener('click', async () => {
             reviewsMessage.textContent = 'Токен истёк. Попытка обновления...';
             const refreshed = await refreshAccessToken();
             if (refreshed) {
-                // Если удалось обновить, повторяем запрос
                 getReviewsBtn.click();
             } else {
                 reviewsMessage.textContent = 'Не удалось обновить токен. Пожалуйста, авторизуйтесь снова.';
@@ -153,7 +152,7 @@ getReviewsBtn.addEventListener('click', async () => {
         }
 
         if (data && data.success) {
-            reviewsList.innerHTML = ''; // Очищаем список
+            reviewsList.innerHTML = '';
             if (data.data.length > 0) {
                 data.data.forEach(review => {
                     const reviewEl = document.createElement('div');
@@ -174,5 +173,4 @@ getReviewsBtn.addEventListener('click', async () => {
     }
 });
 
-// Запускаем проверку сессии при загрузке страницы
 document.addEventListener('DOMContentLoaded', checkSession);
