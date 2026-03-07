@@ -1,1 +1,115 @@
-g
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>С 8 Марта!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            width: 20%;
+            background-color: #f8bbd0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 30px;
+            /*margin-top: 100px;*/
+            margin: 0;
+            padding: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .card::before {
+            content: "🌸";
+            position: absolute;
+            left: -30px;
+            /* для десктопа */
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+        }
+
+        .card::after {
+            content: "🌼";
+            position: absolute;
+            right: -30px;
+            /* для десктопа */
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+        }
+
+        /* button {
+            background: #d43f8d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #b8327a;
+        } */
+
+        @media (max-width: 600px) {
+            .card {
+                width: 90%;
+                margin: 0;
+                /* или 0 auto, но не 50px auto, чтобы центрирование не сбилось */
+            }
+
+            .card::before {
+                left: -15px;
+                font-size: 1.5rem;
+                /* top и transform наследуются, можно не писать, но для надёжности продублируй */
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .card::after {
+                right: -15px;
+                font-size: 1.5rem;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+
+        @media (orientation: landscape) {
+            .card {
+                width: 60%;
+            }
+
+            .card::before {
+                left: -40px;
+                /* чуть дальше, если экран широкий */
+            }
+
+            .card::after {
+                right: -40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>С 8 марта!</h1>
+        <p>Поздравляю тебя с праздником весны!  Желаю тебе бодрости, здоровья и чтобы каждый день приносил радость.</p>
+        <p style="text-align: center;">Будь счастлива! 🌸</p>
+        <!-- <button>Нажми на меня</button> -->
+    </div>
+</body>
+
+</html>
