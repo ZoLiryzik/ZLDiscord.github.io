@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Аватар с поздравлением</title>
+</head>
+<body>
+    <canvas id="avatarCanvas" width="500" height="500"></canvas>
+
+    <script>
+        const canvas = document.getElementById('avatarCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Загружаем изображение аватара (замените URL на прямой адрес фото)
+        const img = new Image();
+        img.onload = function() {
+            ctx.drawImage(img, 0, 0, 500, 500); // Рисуем аватар на canvas
+
+            // Настраиваем текст
+            ctx.font = '20px Comic Sans MS'; // Шрифт и размер
+            ctx.fillStyle = 'white'; // Цвет текста
+            ctx.textBaseline = 'top'; // Выравнивание по верху
+            ctx.shadowColor = 'black'; // Тень для читаемости
+            ctx.shadowBlur = 5; // Размытие тени
+
+            // Текст с эмодзи
+            const text = 'Алекса, поздравляю с днюхой! 🥳✨ Будь счастлива, улыбайся почаще 😊 и смело делай то, что задумала. 💪 Пусть никакие препятствия не сбивают тебя с пути, а если и встретятся — ты с лёгкостью их преодолеешь! 🤸‍♀️ С днём рождения!';
+
+            // Разбиваем на строки (иначе не влезет)
+            const lines = text.split('\n');
+            let y = 350; // Начальная Y-координата текста (подстройте под аватар)
+
+            lines.forEach(line => {
+                ctx.fillText(line, 20, y); // X=20 — отступ слева
+                y += 25; // Расстояние между строками
+            });
+        };
+        img.src = 'https://vk.ru/photo603557110_457240798'; // Ваша ссылка на фото
+    </script>
+</body>
+</html>
