@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZLDiscord — Документация</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.7; }
+  .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+  h1 { font-size: 2.5em; color: #58a6ff; margin-bottom: 8px; }
+  h1 small { font-size: 0.5em; color: #8b949e; }
+  h2 { font-size: 1.6em; color: #58a6ff; margin: 40px 0 16px; border-bottom: 1px solid #21262d; padding-bottom: 8px; }
+  h3 { font-size: 1.2em; color: #f0f6fc; margin: 24px 0 12px; }
+  p, li { color: #c9d1d9; margin-bottom: 8px; }
+  a { color: #58a6ff; }
+  code { background: #161b22; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.9em; color: #f0f6fc; }
+  pre { background: #161b22; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 12px 0; border: 1px solid #21262d; }
+  pre code { background: none; padding: 0; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #21262d; }
+  th { color: #58a6ff; font-weight: 600; }
+  tr:hover td { background: #161b22; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.8em; font-weight: 600; margin-right: 4px; }
+  .tag-mc { background: #1f6feb33; color: #58a6ff; }
+  .tag-discord { background: #5865f233; color: #949cf7; }
+  .tag-both { background: #23863633; color: #3fb950; }
+  .note { background: #1f6feb11; border-left: 3px solid #58a6ff; padding: 12px 16px; border-radius: 6px; margin: 16px 0; }
+  .warn { background: #d2992211; border-left: 3px solid #d29922; padding: 12px 16px; border-radius: 6px; margin: 16px 0; }
+  ul, ol { padding-left: 24px; }
+  .cmd-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; margin: 16px 0; }
+  .cmd-card { background: #161b22; border: 1px solid #21262d; border-radius: 8px; padding: 16px; }
+  .cmd-card .name { font-family: 'JetBrains Mono', monospace; font-size: 1.1em; color: #58a6ff; }
+  .cmd-card .desc { font-size: 0.9em; color: #8b949e; margin-top: 4px; }
+  .cmd-card .where { margin-top: 8px; }
+  nav { position: sticky; top: 0; background: #0d1117; padding: 12px 0; border-bottom: 1px solid #21262d; margin-bottom: 24px; }
+  nav a { margin-right: 16px; font-size: 0.9em; }
+  .subtitle { color: #8b949e; font-size: 1.1em; margin-bottom: 24px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav>
+  <a href="#intro">Введение</a>
+  <a href="#install">Установка</a>
+  <a href="#commands">Команды</a>
+  <a href="#config">Конфиг</a>
+  <a href="#linking">Привязка</a>
+  <a href="#custom">Кастомные команды</a>
+  <a href="#templates">Шаблоны</a>
+  <a href="#papi">PlaceholderAPI</a>
+  <a href="#bridges">Bridge</a>
+  <a href="#troubleshoot">Проблемы</a>
+</nav>
+
+<h1>ZLDiscord <small>v1.2</small></h1>
+<p class="subtitle">Minecraft ↔ Discord интеграция: привязка аккаунтов, голосования, эмбеды, кастомные команды с шаблонизатором</p>
+
+<!-- ============================================ -->
+<h2 id="intro">Введение</h2>
+<p>ZLDiscord — Paper-плагин, связывающий Minecraft-сервер с Discord-каналом. Поддерживает <strong>Paper 1.16.5+</strong> (Java 11+).</p>
+
+<ul>
+  <li>Привязка Minecraft аккаунтов к Discord</li>
+  <li>Голосования с таймером через Discord Embed</li>
+  <li>Отправка и управление Embed-сообщениями из Minecraft</li>
+  <li>Кастомные команды с мощным шаблонизатором</li>
+  <li>PlaceholderAPI — <code>%player_name%</code>, <code>%server_online%</code></li>
+  <li>Прямой запуск команд: <code>/hello</code> в чате, <code>z!hello</code> в Discord</li>
+</ul>
+
+<!-- ============================================ -->
+<h2 id="install">Установка</h2>
+<ol>
+  <li>Скачать <code>ZoLiryzik.jar</code> (14MB, JDA встроен)</li>
+  <li>Положить в <code>plugins/</code></li>
+  <li>Запустить сервер — создастся <code>plugins/ZLDiscord/config.yml</code></li>
+  <li>Настроить <strong>bot token</strong>, <strong>guild ID</strong>, <strong>role IDs</strong></li>
+  <li>Перезапустить сервер</li>
+</ol>
+
+<div class="warn">
+  <strong>Важно:</strong> Требуется Java 11+. Discord Bot Token создаётся в <a href="https://discord.com/developers/applications">Discord Developer Portal</a>.
+  Включите Intents: <code>GUILD_MESSAGES</code>, <code>DIRECT_MESSAGES</code>, <code>MESSAGE_CONTENT</code>, <code>GUILD_MEMBERS</code>, <code>GUILD_PRESENCES</code>, <code>GUILD_VOICE_STATES</code>.
+</div>
+
+<pre><code># Зависимости (soft):
+- PlaceholderAPI (опционально, но рекомендуется)
+</code></pre>
+
+<!-- ============================================ -->
+<h2 id="config">Конфиг (<code>config.yml</code>)</h2>
+<pre><code>language: "ru"                          # ru / en
+main-discord-guild-id: "1192790524415983657"
+discord-bot-token: "MTQwNDMyOTA2NDE0NzE4OTc4MA..."
+embed-creator-role-ids:
+  - "1405587114871226509"               # Кто может создавать эмбеды / голосования
+embed-color: "0xFFAA00"                 # Цвет по умолчанию
+</code></pre>
+
+<!-- ============================================ -->
+<h2 id="commands">Команды</h2>
+
+<div class="cmd-grid">
+  <div class="cmd-card">
+    <div class="name">/<span style="color:#fff">имя</span></div>
+    <div class="desc">Любая кастомная команда напрямую</div>
+    <div class="where"><span class="tag tag-mc">Minecraft</span></div>
+  </div>
+  <div class="cmd-card">
+    <div class="name">/zcc</div>
+    <div class="desc">Управление кастомными командами (list, info, run, create, remove, reload)</div>
+    <div class="where"><span class="tag tag-mc">Minecraft</span> <code>zoliryzik.cc</code></div>
+  </div>
+  <div class="cmd-card">
+    <div class="name">/zlink</div>
+    <div class="desc">Привязать Discord аккаунт (генерирует 6-значный код)</div>
+    <div class="where"><span class="tag tag-mc">Minecraft</span> <code>zoliryzik.zlink</code></div>
+  </div>
+  <div class="cmd-card">
+    <div class="name">/zunlink</div>
+    <div class="desc">Отвязать Discord аккаунт</div>
+    <div class="where"><span class="tag tag-mc">Minecraft</span> <code>zoliryzik.zunlink</code></div>
+  </div>
+  <div class="cmd-card">
+    <div class="name">/zevent</div>
+    <div class="desc">Создать голосование в Discord (embed с ✅/❌)</div>
+    <div class="where"><span class="tag tag-mc">Minecraft</span> <code>zoliryzik.use</code></div>
+  </div>
+  <div class="cmd-card">
+    <div class="name">/zembed</div>
+    <div class="desc">Отправить embed в Discord канал</div>
+    <div class="where"><span class="tag tag-mc">Minecraft</span> <code>zoliryzik.zembed</code></div>
+  </div>
+  <div class="cmd-card">
+    <div class="name">/zembedmanage</div>
+    <div class="desc">Редактировать/удалить отправленный embed</div>
+    <div class="where"><span class="tag tag-mc">Minecraft</span> <code>zoliryzik.zembed_manage</code></div>
+  </div>
+  <div class="cmd-card">
+    <div class="name">z!<span style="color:#fff">имя</span></div>
+    <div class="desc">Любая кастомная команда через текстовый префикс</div>
+    <div class="where"><span class="tag tag-discord">Discord</span></div>
+  </div>
+  <div class="cmd-card">
+    <div class="name">/cc</div>
+    <div class="desc">Управление кастомными командами (list, run, create, remove, reload)</div>
+    <div class="where"><span class="tag tag-discord">Discord slash</span></div>
+  </div>
+  <div class="cmd-card">
+    <div class="name">/zevent</div>
+    <div class="desc">Создать голосование (discord slash)</div>
+    <div class="where"><span class="tag tag-discord">Discord slash</span></div>
+  </div>
+  <div class="cmd-card">
+    <div class="name">/link</div>
+    <div class="desc">Привязать аккаунт (ввести код в DM)</div>
+    <div class="where"><span class="tag tag-discord">Discord slash / DM</span></div>
+  </div>
+  <div class="cmd-card">
+    <div class="name">/unlink</div>
+    <div class="desc">Отвязать аккаунт</div>
+    <div class="where"><span class="tag tag-discord">Discord slash / DM</span></div>
+  </div>
+  <div class="cmd-card">
+    <div class="name">!embed</div>
+    <div class="desc">Открыть модальное окно создания embed</div>
+    <div class="where"><span class="tag tag-discord">Discord текст</span></div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<h2 id="linking">Привязка аккаунтов</h2>
+<ol>
+  <li>Войти на сервер, написать <code>/zlink</code></li>
+  <li>Получить 6-значный код (действует 5 минут)</li>
+  <li>В Discord написать в ЛС боту <code>/link код</code></li>
+  <li>Готово. Привязанный Discord-ID сохраняется в <code>links.yml</code></li>
+</ol>
+<p>Плейсхолдер <code>%zoliryzik_in_vc%</code> показывает, находится ли привязанный пользователь в голосовом канале.</p>
+
+<!-- ============================================ -->
+<h2 id="custom">Кастомные команды</h2>
+
+<h3>Создание</h3>
+<ul>
+  <li><strong>Minecraft:</strong> <code>/zcc create hello "Привет, %player_name%!"</code></li>
+  <li><strong>Discord:</strong> <code>/cc create</code> — откроет модальное окно</li>
+  <li><strong>Файл:</strong> Править <code>custom_commands.yml</code>, затем <code>/zcc reload</code></li>
+</ul>
+
+<h3>Выполнение</h3>
+<table>
+  <tr><th>Откуда</th><th>Синтаксис</th><th>Пример</th></tr>
+  <tr><td>Minecraft чат</td><td><code>/имя_команды [args]</code></td><td><code>/hello ZoLiryzik</code></td></tr>
+  <tr><td>Discord текст</td><td><code>z!имя_команды [args]</code></td><td><code>z!hello ZoLiryzik</code></td></tr>
+  <tr><td>Discord slash</td><td><code>/cc run имя [args]</code></td><td><code>/cc run hello ZoLiryzik</code></td></tr>
+  <tr><td>Minecraft</td><td><code>/zcc run имя [args]</code></td><td><code>/zcc run hello ZoLiryzik</code></td></tr>
+</table>
+
+<h3>Формат <code>custom_commands.yml</code></h3>
+<pre><code>commands:
+  hello:
+    template: "&lt;~ papi(%player_name%) ~&gt;, привет!"
+    description: "Приветствие"
+    cooldown: 10          # секунд между использованиями
+    aliases: ["hi"]
+    enabled: true
+
+  heal:
+    template: |
+      &lt;do mc.command("heal " + args[0])&gt;
+      &lt;~ args[0] ~&gt; вылечен!
+    description: "Вылечить игрока"
+    cooldown: 30
+    aliases: []
+    enabled: true
+</code></pre>
+
+<!-- ============================================ -->
+<h2 id="templates">Шаблонизатор (DSL)</h2>
+
+<div class="note">
+  Шаблоны — это строки, которые рендерятся движком. Поддерживают переменные, условия, циклы, функции, bridge-действия.
+</div>
+
+<h3>Переменные</h3>
+<table>
+  <tr><th>Переменная</th><th>Описание</th></tr>
+  <tr><td><code>args</code></td><td>Список аргументов команды (list)</td></tr>
+  <tr><td><code>args[0]</code>, <code>args[1]</code>...</td><td>Конкретный аргумент</td></tr>
+  <tr><td><code>_args_raw</code></td><td>Все аргументы одной строкой</td></tr>
+  <tr><td><code>_cmd_name</code></td><td>Имя вызванной команды</td></tr>
+  <tr><td><code>_player_name</code></td><td>Имя игрока (только MC)</td></tr>
+  <tr><td><code>_player_uuid</code></td><td>UUID игрока</td></tr>
+  <tr><td><code>_player_world</code></td><td>Мир игрока</td></tr>
+  <tr><td><code>mc_online</code></td><td>Онлайн сервера</td></tr>
+  <tr><td><code>mc_max_players</code></td><td>Макс. игроков</td></tr>
+</table>
+
+<h3>Теги</h3>
+<table>
+  <tr><th>Тег</th><th>Описание</th></tr>
+  <tr><td><code>&lt;~ expr ~&gt;</code></td><td>Вывести выражение</td></tr>
+  <tr><td><code>&lt;set var = expr&gt;</code></td><td>Присвоить переменную</td></tr>
+  <tr><td><code>&lt;if cond&gt; ... &lt;elseif cond&gt; ... &lt;else&gt; ... &lt;/if&gt;</code></td><td>Условие</td></tr>
+  <tr><td><code>&lt;for var in expr&gt; ... &lt;else&gt; ... &lt;/for&gt;</code></td><td>Цикл</td></tr>
+  <tr><td><code>&lt;do действие(...)&gt;</code></td><td>Выполнить bridge-действие</td></tr>
+  <tr><td><code>&lt;return expr&gt;</code></td><td>Вернуть значение и выйти</td></tr>
+  <tr><td><code>&lt;require cond [else msg]&gt;</code></td><td>Проверить условие, иначе выход</td></tr>
+  <tr><td><code>&lt;# комментарий #&gt;</code></td><td>Комментарий</td></tr>
+</table>
+
+<h3>Операторы</h3>
+<table>
+  <tr><th>Оператор</th><th>Пример</th></tr>
+  <tr><td><code>==</code> / <code>!=</code></td><td><code>args[0] == "admin"</code></td></tr>
+  <tr><td><code>and</code> / <code>or</code> / <code>not</code></td><td><code>args[0] != null and args[1] != null</code></td></tr>
+  <tr><td><code>+</code></td><td><code>"Hello, " + args[0]</code></td></tr>
+  <tr><td><code>|</code> (фильтр)</td><td><code>args[0] | upper</code></td></tr>
+</table>
+
+<h3>Функции</h3>
+<table>
+  <tr><th>Функция</th><th>Описание</th><th>Пример</th></tr>
+  <tr><td><code>papi(placeholder [, player])</code></td><td>PlaceholderAPI плейсхолдер</td><td><code>papi(%player_name%)</code>, <code>papi(%level%, args[0])</code></td></tr>
+  <tr><td><code>lower(s)</code>, <code>upper(s)</code></td><td>Регистр</td><td><code>lower(args[0])</code></td></tr>
+  <tr><td><code>length(val)</code></td><td>Длина (строка/список)</td><td><code>length(args)</code></td></tr>
+  <tr><td><code>join(list, sep)</code></td><td>Склеить список</td><td><code>join(args, ", ")</code></td></tr>
+  <tr><td><code>split(str, sep)</code></td><td>Разбить строку</td><td><code>split("a,b,c", ",")</code></td></tr>
+  <tr><td><code>replace(str, from, to)</code></td><td>Замена</td><td><code>replace(text, "old", "new")</code></td></tr>
+  <tr><td><code>default(val, def)</code></td><td>Значение по умолчанию</td><td><code>default(args[0], "игрок")</code></td></tr>
+  <tr><td><code>random(list)</code></td><td>Случайный элемент</td><td><code>random(["а", "б", "в"])</code></td></tr>
+  <tr><td><code>plural(n, lang, one, few, many)</code></td><td>Склонение (ru/en)</td><td><code>plural(5, "ru", "игрок", "игрока", "игроков")</code></td></tr>
+  <tr><td><code>first(list)</code>, <code>last(list)</code></td><td>Первый/последний</td><td><code>first(args)</code></td></tr>
+  <tr><td><code>slice(val, start, len)</code></td><td>Срез строки/списка</td><td><code>slice("привет", 0, 3)</code></td></tr>
+  <tr><td><code>sort(list, mode)</code></td><td>Сортировка (ASC/DESC)</td><td><code>sort(["b", "a"])</code></td></tr>
+  <tr><td><code>date(date, format, tz)</code></td><td>Форматирование даты</td><td><code>date("now", "dd.MM.yyyy")</code></td></tr>
+  <tr><td><code>capitalize(s)</code></td><td>Заглавная первая</td><td><code>capitalize(args[0])</code></td></tr>
+  <tr><td><code>number_format(n, dec)</code></td><td>Формат числа</td><td><code>number_format(1000.5, 2)</code></td></tr>
+</table>
+
+<!-- ============================================ -->
+<h2 id="papi">PlaceholderAPI</h2>
+<p>Шаблоны автоматически обрабатывают <code>%placeholder%</code> через PAPI. Доступны <strong>все</strong> установленные плейсхолдеры.</p>
+
+<pre><code># Прямо в тексте (автоматически):
+Привет, %player_name%! Онлайн: %server_online%
+
+# Через функцию papi():
+&lt;~ papi(%player_name%) ~&gt;
+&lt;~ papi(%level%, args[0]) ~&gt;     &lt;!-- Для конкретного игрока --&gt;
+&lt;~ papi(%server_online%) ~&gt;
+</code></pre>
+
+<h3>Собственный плейсхолдер: <code>%zoliryzik_in_vc%</code></h3>
+<p>Показывает, находится ли привязанный Discord-пользователь в голосовом канале. Кэшируется на 60 секунд.</p>
+
+<!-- ============================================ -->
+<h2 id="bridges">Bridge-действия</h2>
+<p>Bridge — действия, которые выполняются при рендеринге шаблона, но не выводят текст.</p>
+
+<h3>Minecraft Bridge</h3>
+<table>
+  <tr><th>Действие</th><th>Описание</th></tr>
+  <tr><td><code>&lt;do mc.command("команда")&gt;</code></td><td>Выполнить консольную команду</td></tr>
+  <tr><td><code>&lt;do mc.broadcast("текст")&gt;</code></td><td>Broadcast с цветами (&amp;)</td></tr>
+  <tr><td><code>&lt;do mc.give("ник предмет количество")&gt;</code></td><td>Выдать предмет через /give</td></tr>
+</table>
+
+<h3>Discord Bridge</h3>
+<table>
+  <tr><th>Действие</th><th>Описание</th></tr>
+  <tr><td><code>&lt;do discord.send("channelId", "текст")&gt;</code></td><td>Отправить сообщение в канал</td></tr>
+  <tr><td><code>&lt;do discord.embed("channelId", ...)&gt;</code></td><td>Отправить embed (title, description, color, image, fields)</td></tr>
+  <tr><td><code>&lt;do discord.reaction("✅")&gt;</code></td><td>Добавить реакцию к последнему embed</td></tr>
+  <tr><td><code>&lt;do discord.button("style", "id", "label")&gt;</code></td><td>Кнопка под последним embed</td></tr>
+</table>
+
+<h3>Пример шаблона</h3>
+<pre><code>&lt;set target = args[0]&gt;
+&lt;if target == null&gt;
+  &lt;return "Укажи ник!"&gt;
+&lt;/if&gt;
+&lt;do mc.command("heal " + target); mc.broadcast("&amp;a" + target + " вылечен!")&gt;
+&lt;do discord.send("123456789", target + " вылечен!")&gt;
+Игрок &lt;~ target ~&gt; вылечен. Здоровье: &lt;~ papi(%player_health%, target) ~&gt;
+</code></pre>
+
+<!-- ============================================ -->
+<h2 id="troubleshoot">Частые проблемы</h2>
+
+<table>
+  <tr><th>Проблема</th><th>Решение</th></tr>
+  <tr><td>Бот не отвечает в Discord</td><td>Проверить токен и Intents в Discord Developer Portal. Проверить <code>main-discord-guild-id</code></td></tr>
+  <tr><td><code>/команда</code> не работает в Minecraft</td><td>Выполнить <code>/zcc reload</code>. Убедиться что команда включена (<code>enabled: true</code>)</td></tr>
+  <tr><td><code>z!команда</code> не работает в Discord</td><td>Бот должен иметь доступ к каналу. Убедиться что команда существует через <code>/cc list</code></td></tr>
+  <tr><td>PlaceholderAPI не работает</td><td>Установить PlaceholderAPI в plugins/. Плагин пишет лог при старте</td></tr>
+  <tr><td><code>%player_name%</code> не заменяется в Discord</td><td>В Discord PAPI работает только с <code>papi(%placeholder%)</code> функцией, не автоматом</td></tr>
+  <tr><td>Ошибка <em>"SimplePluginManager deprecated"</em></td><td>Не влияет на работу. Плагин работает на всех Paper 1.16.5+</td></tr>
+  <tr><td>JDA не запускается</td><td>Проверить интернет-соединение сервера. JDA требует доступ к Discord API</td></tr>
+</table>
+
+<div class="note">
+  <strong>Файлы:</strong> Все данные хранятся в <code>plugins/ZLDiscord/</code>: <code>config.yml</code>, <code>custom_commands.yml</code>, <code>embeds.yml</code>, <code>links.yml</code>, <code>lang_ru.yml</code>, <code>lang_en.yml</code>
+</div>
+
+<hr style="border-color:#21262d; margin: 40px 0;">
+<p style="color:#8b949e; text-align:center; font-size:0.9em;">
+  ZLDiscord v1.2 &mdash; автор: ZoLiryzik
+</p>
+
+</div>
+</body>
+</html>
