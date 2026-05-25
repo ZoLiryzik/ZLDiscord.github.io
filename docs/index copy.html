@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZLDiscord v1.2 — Документация</title>
+    <link rel="icon" href="/assets/img/ava.png" type="image/png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <style>
+        body { background: #0b0b0b; color: #c9d1d9; font: 15px/1.6 sans-serif; }
+        .docs-container { max-width: 960px; margin: 0 auto; padding: 40px 20px; }
+        h1 { color: #58a6ff; border-bottom: 2px solid #5865F2; padding-bottom: 8px; font-size: 2em; }
+        h2 { color: #58a6ff; margin-top: 32px; border-bottom: 1px solid #21262d; padding-bottom: 4px; }
+        h3 { color: #f0f6fc; margin-top: 24px; }
+        h4 { color: #f0f6fc; margin-top: 20px; }
+        code { background: #161b22; padding: 2px 6px; border-radius: 3px; font-size: 0.9em; color: #f0f6fc; }
+        pre { background: #161b22; color: #cdd6f4; padding: 14px; border-radius: 6px; overflow-x: auto; font-size: 0.85em; border: 1px solid #21262d; }
+        pre .kw { color: #cba6f7 } pre .str { color: #a6e3a1 } pre .fn { color: #89b4fa }
+        table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+        td, th { border: 1px solid #21262d; padding: 8px 12px; text-align: left; }
+        th { background: #161b22; color: #58a6ff; }
+        tr:nth-child(even) td { background: #0d1117; }
+        tr:hover td { background: #161b22; }
+        .tag { display: inline-block; background: #5865F2; color: #fff; padding: 1px 8px; border-radius: 10px; font-size: 0.8em; margin: 2px; }
+        .tag.green { background: #40a02b } .tag.orange { background: #fe640b } .tag.red { background: #d20f39 }
+        a { color: #58a6ff; }
+        ul, ol { padding-left: 24px; }
+        li { margin-bottom: 4px; }
+        hr { border: none; border-top: 1px solid #21262d; margin: 40px 0; }
+        nav { margin-bottom: 24px; }
+        nav a { margin-right: 12px; font-size: 0.9em; color: #8b949e; text-decoration: none; }
+        nav a:hover { color: #58a6ff; }
+    </style>
+</head>
+<body>
+    <div class="frame">
+        <header class="shapka">
+            <div class="shapka-logo">
+                <img src="/assets/img/ava.png" alt="Логотип">
+                <div class="shapka-title"><a href="/">ZLDiscord</a></div>
+            </div>
+            <div class="shapka-links" id="navLinks">
+                <div class="language-select">
+                    <span class="language-label google-font">Язык</span>
+                    <div class="language-dropdown">
+                        <a href="/docs" class="language-option google-font">Русский</a>
+                        <a href="/en/docs" class="language-option google-font">English</a>
+                    </div>
+                </div>
+                <a class="google-font" href="/">Главная</a>
+                <a class="google-font" href="#">Релизы</a>
+                <a class="active google-font" href="/docs">Документация</a>
+                <a class="google-font" href="#">Контакты</a>
+                <a class="download google-font" href="/project/ZoLiryzik.jar">Скачать</a>
+            </div>
+            <button class="menu-toggle google-font" id="menuToggle">☰</button>
+        </header>
+
+        <div class="docs-container">
+
+<nav>
+  <a href="#ru">🇷🇺 Документация</a>
+  <a href="#en">🇬🇧 Documentation</a>
+</nav>
+
+<h1>ZLDiscord v1.2</h1>
+
+<!-- ======================== RUSSIAN ======================== -->
+<h2 id="ru">🇷🇺 Документация</h2>
+
+<h3>1. Команды</h3>
+
+<h4>1.1 /zevent</h4>
+<p>Создать голосование в Discord. Через заданное время подводит итоги (✅ / ❌) и выполняет команду при победе ✅.</p>
+<pre><span class="kw">/zevent</span> <span class="str">"Название"</span> <span class="str">"команда"</span> <span class="str">"время"</span> <span class="str">"channel_id"</span></pre>
+<table>
+<tr><th>Параметр</th><th>Описание</th></tr>
+<tr><td>Название</td><td>Заголовок embed. Поддерживает <code>%placeholder%</code></td></tr>
+<tr><td>команда</td><td>Minecraft-команда при победе ✅ (консоль)</td></tr>
+<tr><td>время</td><td><code>5s</code>, <code>10m</code>, <code>1h</code> — длительность</td></tr>
+<tr><td>channel_id</td><td>ID текстового канала Discord</td></tr>
+</table>
+
+<h4>1.2 /zcc — Кастомные команды</h4>
+<pre><span class="kw">/zcc list</span>             — список
+<span class="kw">/zcc run &lt;name&gt;</span>       — выполнить
+<span class="kw">/zcc create &lt;name&gt;</span>    — создать (\n для новой строки)
+<span class="kw">/zcc remove &lt;name&gt;</span>    — удалить
+<span class="kw">/zcc reload</span>           — перезагрузить</pre>
+
+<p>Шаблоны в отдельных файлах <code>commands/...</code> и подпапках:</p>
+<pre><span class="kw">  lp:</span>
+<span class="kw">    template: commands/lp/lp.yml</span>
+<span class="kw">    description: Отправить событие в LongPoll</span>
+<span class="kw">    cooldown: 3</span>
+<span class="kw">    enabled: true</span></pre>
+
+<h4>1.3 /zlink / /zunlink</h4>
+<p>Привязка/отвязка Discord-аккаунта. Только для игроков.</p>
+
+<h4>1.4 /zembed</h4>
+<pre><span class="kw">/zembed</span> <span class="str">"имя"</span> <span class="str">"заголовок"</span> <span class="str">"описание"</span> <span class="str">"channel_id"</span> [картинка] [миниатюра] [футер] [иконка_футера]</pre>
+<p>Создаёт embed в Discord, сохраняет messageId. <span class="tag green">PAPI</span></p>
+
+<h4>1.5 /zembedmanage</h4>
+<pre><span class="kw">/zembedmanage delete &lt;имя&gt;</span>
+<span class="kw">/zembedmanage edit_title &lt;имя&gt;</span> <span class="str">"новый заголовок"</span>
+<span class="kw">/zembedmanage edit_description &lt;имя&gt;</span> <span class="str">"новое описание"</span></pre>
+
+<h4>1.6 /zattr — DataStore</h4>
+<pre><span class="kw">/zattr get &lt;bot|member|player&gt;</span> &lt;key&gt; [player]
+<span class="kw">/zattr set &lt;bot|member|player&gt;</span> &lt;key&gt; &lt;value&gt; [player]
+<span class="kw">/zattr inc|dec &lt;...&gt;</span> &lt;key&gt; &lt;amount&gt; [player]
+<span class="kw">/zattr list &lt;bot|member|player&gt;</span> [player]</pre>
+
+<h4>1.7 /zlongpoll</h4>
+<pre><span class="kw">/zlongpoll create &lt;name&gt;</span> &lt;url&gt; &lt;key&gt; [wait]
+<span class="kw">/zlongpoll list</span>
+<span class="kw">/zlongpoll remove &lt;name&gt;</span>
+<span class="kw">/zlongpoll reload</span></pre>
+
+<h3>2. Система шаблонов (Template Engine)</h3>
+
+<h4>2.1 Переменные</h4>
+<table>
+<tr><th>Переменная</th><th>Где</th><th>Описание</th></tr>
+<tr><td><code>args</code></td><td>всегда</td><td>List аргументов</td></tr>
+<tr><td><code>_args_raw</code></td><td>всегда</td><td>Строка всех аргументов</td></tr>
+<tr><td><code>_cmd_name</code></td><td>всегда</td><td>Имя команды</td></tr>
+<tr><td><code>mc_online</code></td><td>всегда</td><td>Игроков онлайн</td></tr>
+<tr><td><code>mc_max_players</code></td><td>всегда</td><td>Макс. игроков</td></tr>
+<tr><td><code>mc_tps</code></td><td>всегда</td><td>TPS</td></tr>
+<tr><td><code>mc_motd</code></td><td>всегда</td><td>MOTD</td></tr>
+<tr><td><code>_player_name</code></td><td>Minecraft</td><td>Имя игрока</td></tr>
+<tr><td><code>_player_uuid</code></td><td>Minecraft</td><td>UUID</td></tr>
+<tr><td><code>_player_world</code></td><td>Minecraft</td><td>Мир</td></tr>
+<tr><td><code>_discord_member_id</code></td><td>Discord</td><td>ID участника</td></tr>
+<tr><td><code>_discord_member_name</code></td><td>Discord</td><td>Имя участника</td></tr>
+<tr><td><code>_discord_member_nick</code></td><td>Discord</td><td>Никнейм</td></tr>
+<tr><td><code>_discord_channel_id</code></td><td>Discord</td><td>ID канала</td></tr>
+<tr><td><code>_discord_channel_name</code></td><td>Discord</td><td>Название канала</td></tr>
+<tr><td><code>_discord_guild_id</code></td><td>Discord</td><td>ID гильдии</td></tr>
+<tr><td><code>_discord_guild_name</code></td><td>Discord</td><td>Название гильдии</td></tr>
+<tr><td><code>_mentioned_user_id</code></td><td>Discord</td><td>ID упомянутого</td></tr>
+<tr><td><code>_mentioned_user_name</code></td><td>Discord</td><td>Имя упомянутого</td></tr>
+</table>
+
+<h4>2.2 Теги</h4>
+<table>
+<tr><th>Тег</th><th>Описание</th></tr>
+<tr><td><code>&lt;~ expr ~&gt;</code></td><td>Вывести значение</td></tr>
+<tr><td><code>&lt;set var = expr&gt;</code></td><td>Присвоить переменную</td></tr>
+<tr><td><code>&lt;if cond&gt;...&lt;else&gt;...&lt;/if&gt;</code></td><td>Условие</td></tr>
+<tr><td><code>&lt;for var in list&gt;...&lt;/for&gt;</code></td><td>Цикл</td></tr>
+<tr><td><code>&lt;do action(...)&gt;</code></td><td>Выполнить действие</td></tr>
+<tr><td><code>&lt;require cond return "msg"&gt;</code></td><td>Проверка</td></tr>
+<tr><td><code>&lt;return "msg"&gt;</code></td><td>Выход с сообщением</td></tr>
+<tr><td><code>&lt;global var = expr&gt;</code></td><td>Глобальная переменная</td></tr>
+<tr><td><code>&lt;# комментарий #&gt;</code></td><td>Комментарий</td></tr>
+</table>
+
+<h4>2.3 Функции</h4>
+<p><strong>Строки:</strong> <code>lower</code>, <code>upper</code>, <code>capitalize</code>, <code>trim</code>, <code>title</code>, <code>replace(a,b,s)</code>, <code>split(sep,s)</code>, <code>length</code>, <code>format</code>, <code>after(N)</code></p>
+<p><strong>Проверки:</strong> <code>defined</code>, <code>empty</code>, <code>not</code>, <code>number</code>, <code>iterable</code>, <code>even</code>, <code>odd</code>, <code>contains</code>, <code>startsWith</code>, <code>endsWith</code>, <code>typeof</code></p>
+<p><strong>Математика:</strong> <code>abs</code>, <code>round</code>, <code>number_format</code>, <code>random(min,max)</code>, <code>random_hex</code>, <code>random_uuid</code></p>
+<p><strong>Коллекции:</strong> <code>first</code>, <code>last</code>, <code>reverse</code>, <code>slice</code>, <code>sort</code>, <code>shuffle</code>, <code>batch</code>, <code>concat</code>, <code>join</code>, <code>keys</code>, <code>values</code>, <code>default</code></p>
+<p><strong>PAPI:</strong> <code>papi("placeholder" [, player])</code> — можно указать игрока вторым аргументом</p>
+<p><strong>DataStore:</strong> <code>getattribute(key)</code>, <code>member.getattribute(key)</code>, <code>player.getattribute(key)</code>, <code>bot.getattribute(key)</code>, <code>find_player_by_session(id)</code></p>
+<p><strong>HTTP:</strong> <code>http_get(url)</code>, <code>http_post(url, body|key,val...)</code>, <code>http_put</code>, <code>http_delete</code>, <code>http_patch</code>, <code>http_code(resp)</code>, <code>http_body(resp)</code>, <code>http_header(name,val)</code>, <code>http_bearer(token)</code>, <code>json_parse(str)</code></p>
+<p><span class="tag orange">Важно</span> <code>http_post</code> с чётным кол-вом пар сам строит JSON:</p>
+<pre>http_post(url, "type", _type, "player", _player_name) → {"type":"...","player":"..."}</pre>
+
+<h4>2.4 Действия (&lt;do&gt;)</h4>
+<table>
+<tr><th>Действие</th><th>Описание</th></tr>
+<tr><td><code>mc.command("cmd")</code></td><td>Выполнить команду (консоль/игрок)</td></tr>
+<tr><td><code>mc.broadcast("msg")</code></td><td>Отправить в чат (&amp; для цвета)</td></tr>
+<tr><td><code>mc.give("player","item")</code></td><td>Выдать предмет</td></tr>
+<tr><td><code>discord.send(channelId,"text")</code></td><td>Сообщение в Discord</td></tr>
+<tr><td><code>discord.embed(...)</code></td><td>Embed (title, description, color, fields, buttons, reactions...)</td></tr>
+<tr><td><code>discord.role_add/role_give(memberId, roleId)</code></td><td>Добавить роль (или список [id1,id2])</td></tr>
+<tr><td><code>discord.role_remove/role_delete(memberId, roleId)</code></td><td>Удалить роль</td></tr>
+<tr><td><code>bot.setstatus("online/dnd/idle")</code></td><td>Статус бота</td></tr>
+<tr><td><code>bot.setstatustext("текст")</code></td><td>Текст статуса</td></tr>
+</table>
+
+<p><strong>Chain API:</strong></p>
+<pre>guild.getChannel("id").createEmbed().withTitle("...").withColor("#hex").withField("n","v",true).send()</pre>
+
+<h3>3. LongPoll Bot API</h3>
+<p>Node.js-бот на <code>http://localhost:17523</code>. Аутентификация: <code>Authorization: Bearer secret</code>.</p>
+<table>
+<tr><th>Метод</th><th>Endpoint</th><th>Тело</th></tr>
+<tr><td>POST</td><td><code>/event</code></td><td><code>{"type":"...", ...}</code></td></tr>
+<tr><td>POST</td><td><code>/api/config</code></td><td><code>{"key":"value"}</code></td></tr>
+<tr><td>GET</td><td><code>/api/script?type=X</code></td><td>—</td></tr>
+<tr><td>POST</td><td><code>/api/script?type=X</code></td><td><code>{"script":"..."}</code></td></tr>
+</table>
+
+<h4>Конфигурация подключения</h4>
+<p>Каждое подключение — отдельный YAML-файл в <code>longpoll/</code>:</p>
+<table>
+<tr><th>Поле</th><th>Описание</th></tr>
+<tr><td><code>server</code></td><td>URL LongPoll сервера</td></tr>
+<tr><td><code>key</code></td><td>Bearer токен</td></tr>
+<tr><td><code>wait</code></td><td>Секунд ожидания (0 = бесконечно, макс 60)</td></tr>
+<tr><td><code>enabled</code></td><td><code>true</code>/<code>false</code> — подключение активно? (по умолч. true)</td></tr>
+<tr><td><code>debug</code></td><td><code>true</code>/<code>false</code> — лог событий</td></tr>
+<tr><td><code>script</code></td><td>Имя папки в <code>papca/</code> или код шаблона</td></tr>
+</table>
+<p><span class="tag green">Автоперезапуск</span> При любой ошибке подключение ждёт 5 сек и переподключается автоматически. Работает 24/7 пока <code>enabled: true</code>.</p>
+
+<h4>LongPoll скрипты</h4>
+<p><code>longpoll/papca/&lt;connection&gt;/&lt;type&gt;.yml</code></p>
+<table>
+<tr><th>Переменная</th><th>Описание</th></tr>
+<tr><td><code>_event.type</code></td><td>Тип события</td></tr>
+<tr><td><code>_event.player</code>, <code>_event.amount</code>, ...</td><td>Поля из JSON</td></tr>
+</table>
+<p><span class="tag red">Важно</span> Только <code>&lt;do action(...)&gt;</code>, НЕ <code>&lt;action(...)&gt;</code>.</p>
+
+<h3>4. Установка</h3>
+<ol>
+<li>Скопировать <code>ZoLiryzik.jar</code> в <code>plugins/</code></li>
+<li>Запустить бота: <code>node longpoll-server.js &amp;</code></li>
+<li>Перезапустить сервер (stop → start, <span class="tag red">не /reload</span>)</li>
+<li><code>/zlongpoll create demo http://localhost:17523/poll secret 25</code></li>
+</ol>
+<p><span class="tag orange">config.yml</span> <code>save-examples: false</code> — отключает авто-создание примеров команд и LongPoll скриптов при старте.</p>
+
+<h3>5. Переменные окружения</h3>
+<table>
+<tr><th>Переменная</th><th>Описание</th></tr>
+<tr><td><code>DISCORD_TOKEN</code></td><td>Токен Discord бота</td></tr>
+<tr><td><code>LONGPOLL_KEY</code></td><td>Ключ API (умолч. secret)</td></tr>
+<tr><td><code>LONGPOLL_PORT</code></td><td>Порт (умолч. 17523)</td></tr>
+</table>
+
+<h3>6. PlaceholderAPI</h3>
+<p>Плагин регистрирует расширение <code>zoliryzik</code>:</p>
+<table>
+<tr><th>Плейсхолдер</th><th>Описание</th></tr>
+<tr><td><code>%zoliryzik_in_vc%</code></td><td>Проверяет, находится ли привязанный Discord-участник в голосовом канале. Возвращает сообщение из config.yml (<code>placeholder-messages.*</code>)</td></tr>
+<tr><td><code>%zoliryzik_attr_member_&lt;key&gt;%</code></td><td>Атрибут DataStore для привязанного Discord-участника</td></tr>
+<tr><td><code>%zoliryzik_attr_player_&lt;key&gt;%</code></td><td>Атрибут DataStore для игрока</td></tr>
+<tr><td><code>%zoliryzik_attr_bot_&lt;key&gt;%</code></td><td>Атрибут DataStore для бота</td></tr>
+</table>
+<p>Также работает любой внешний <code>%placeholder%</code> через <code>PlaceholderAPI.setPlaceholders()</code>:</p>
+<ul>
+<li><span class="tag green">Игрок</span> — от имени отправителя</li>
+<li><span class="tag orange">Консоль</span> — от первого онлайн</li>
+<li><span class="tag green">papi("x", "Nick")</span> — для любого игрока</li>
+</ul>
+
+<h3>7. Примеры</h3>
+
+<h4>LP команда из майнкрафта</h4>
+<pre>commands/lp/lp.yml:
+&lt;set _ = http_header("Authorization", "Bearer secret")&gt;
+&lt;set _type = args[0]&gt;
+&lt;set _resp = http_post("http://localhost:17523/event",
+  "type", _type, "player", _player_name, "world", _player_world,
+  "cmd", _cmd_name, "args", _args_raw)&gt;
+&lt;do mc.broadcast("&amp;a[LP] &amp;f" + _type + " &amp;a✓")&gt;</pre>
+
+<h4>Donate-уведомление (с _lang)</h4>
+<pre>&lt;if _event.amount &gt;= 5000&gt;
+  &lt;if _lang == "ru"&gt;
+    &lt;do mc.broadcast("&amp;a&amp;l\u2B50 Мега-донат от &amp;e" + _event.nickname)&gt;
+  &lt;else&gt;
+    &lt;do mc.broadcast("&amp;a&amp;l\u2B50 Mega-donate from &amp;e" + _event.nickname)&gt;
+  &lt;/if&gt;
+&lt;else&gt;
+  &lt;if _lang == "ru"&gt;
+    &lt;do mc.broadcast("&amp;a❤ " + _event.nickname + " задонатил &amp;e" + _event.amount)&gt;
+  &lt;else&gt;
+    &lt;do mc.broadcast("&amp;a❤ " + _event.nickname + " donated &amp;e" + _event.amount)&gt;
+  &lt;/if&gt;
+&lt;/if&gt;</pre>
+
+<h4>PAPI для другого игрока</h4>
+<pre>&lt;set target = args[0]&gt;
+&lt;~ papi("player_health", target) ~&gt;
+&lt;~ papi("player_world", target) ~&gt;</pre>
+
+<hr>
+
+<!-- ======================== ENGLISH ======================== -->
+<h2 id="en">🇬🇧 Documentation</h2>
+
+<h3>1. Commands</h3>
+
+<h4>1.1 /zevent</h4>
+<p>Create a Discord vote. After the timer runs out, counts ✅ / ❌ reactions. If ✅ wins, executes the command.</p>
+<pre><span class="kw">/zevent</span> <span class="str">"title"</span> <span class="str">"command"</span> <span class="str">"duration"</span> <span class="str">"channel_id"</span></pre>
+<table>
+<tr><th>Param</th><th>Description</th></tr>
+<tr><td>title</td><td>Embed title. Supports <code>%placeholder%</code></td></tr>
+<tr><td>command</td><td>Minecraft command on ✅ win (console)</td></tr>
+<tr><td>duration</td><td><code>5s</code>, <code>10m</code>, <code>1h</code></td></tr>
+<tr><td>channel_id</td><td>Discord text channel ID</td></tr>
+</table>
+
+<h4>1.2 /zcc — Custom Commands</h4>
+<pre><span class="kw">/zcc list</span>             — list commands
+<span class="kw">/zcc run &lt;name&gt;</span>       — execute
+<span class="kw">/zcc create &lt;name&gt;</span>    — create (\n for newline)
+<span class="kw">/zcc remove &lt;name&gt;</span>    — remove
+<span class="kw">/zcc reload</span>           — reload from custom_commands.yml</pre>
+
+<p>Templates can be stored in separate files and subfolders:</p>
+<pre><span class="kw">  lp:</span>
+<span class="kw">    template: commands/lp/lp.yml</span>
+<span class="kw">    description: Send event to LongPoll</span>
+<span class="kw">    cooldown: 3</span>
+<span class="kw">    enabled: true</span></pre>
+
+<h4>1.3 /zlink / /zunlink</h4>
+<p>Link/unlink Discord account. Players only.</p>
+
+<h4>1.4 /zembed</h4>
+<pre><span class="kw">/zembed</span> <span class="str">"name"</span> <span class="str">"title"</span> <span class="str">"description"</span> <span class="str">"channel_id"</span> [image] [thumbnail] [footer] [footer_icon]</pre>
+<p>Sends embed to Discord, saves messageId. <span class="tag green">PAPI</span></p>
+
+<h4>1.5 /zembedmanage</h4>
+<pre><span class="kw">/zembedmanage delete &lt;name&gt;</span>
+<span class="kw">/zembedmanage edit_title &lt;name&gt;</span> <span class="str">"new title"</span>
+<span class="kw">/zembedmanage edit_description &lt;name&gt;</span> <span class="str">"new description"</span></pre>
+
+<h4>1.6 /zattr — DataStore</h4>
+<pre><span class="kw">/zattr get &lt;bot|member|player&gt;</span> &lt;key&gt; [player]
+<span class="kw">/zattr set &lt;bot|member|player&gt;</span> &lt;key&gt; &lt;value&gt; [player]
+<span class="kw">/zattr inc|dec &lt;...&gt;</span> &lt;key&gt; &lt;amount&gt; [player]
+<span class="kw">/zattr list &lt;bot|member|player&gt;</span> [player]</pre>
+
+<h4>1.7 /zlongpoll</h4>
+<pre><span class="kw">/zlongpoll create &lt;name&gt;</span> &lt;url&gt; &lt;key&gt; [wait]
+<span class="kw">/zlongpoll list</span>
+<span class="kw">/zlongpoll remove &lt;name&gt;</span>
+<span class="kw">/zlongpoll reload</span></pre>
+
+<h3>2. Template Engine</h3>
+
+<h4>2.1 Variables</h4>
+<table>
+<tr><th>Variable</th><th>Scope</th><th>Description</th></tr>
+<tr><td><code>args</code></td><td>always</td><td>List of arguments</td></tr>
+<tr><td><code>_args_raw</code></td><td>always</td><td>Raw argument string</td></tr>
+<tr><td><code>_cmd_name</code></td><td>always</td><td>Command name</td></tr>
+<tr><td><code>mc_online</code></td><td>always</td><td>Online players count</td></tr>
+<tr><td><code>mc_max_players</code></td><td>always</td><td>Max players</td></tr>
+<tr><td><code>mc_tps</code></td><td>always</td><td>Server TPS</td></tr>
+<tr><td><code>mc_motd</code></td><td>always</td><td>Server MOTD</td></tr>
+<tr><td><code>_player_name</code></td><td>Minecraft</td><td>Player name</td></tr>
+<tr><td><code>_player_uuid</code></td><td>Minecraft</td><td>Player UUID</td></tr>
+<tr><td><code>_player_world</code></td><td>Minecraft</td><td>Player world</td></tr>
+<tr><td><code>_discord_member_id</code></td><td>Discord</td><td>Member ID</td></tr>
+<tr><td><code>_discord_member_name</code></td><td>Discord</td><td>Member name</td></tr>
+<tr><td><code>_discord_member_nick</code></td><td>Discord</td><td>Member nickname</td></tr>
+<tr><td><code>_discord_channel_id</code></td><td>Discord</td><td>Channel ID</td></tr>
+<tr><td><code>_discord_channel_name</code></td><td>Discord</td><td>Channel name</td></tr>
+<tr><td><code>_discord_guild_id</code></td><td>Discord</td><td>Guild ID</td></tr>
+<tr><td><code>_discord_guild_name</code></td><td>Discord</td><td>Guild name</td></tr>
+<tr><td><code>_mentioned_user_id</code></td><td>Discord</td><td>Mentioned user ID</td></tr>
+<tr><td><code>_mentioned_user_name</code></td><td>Discord</td><td>Mentioned user name</td></tr>
+</table>
+
+<h4>2.2 Tags</h4>
+<table>
+<tr><th>Tag</th><th>Description</th></tr>
+<tr><td><code>&lt;~ expr ~&gt;</code></td><td>Print expression value</td></tr>
+<tr><td><code>&lt;set var = expr&gt;</code></td><td>Assign variable</td></tr>
+<tr><td><code>&lt;if cond&gt;...&lt;else&gt;...&lt;/if&gt;</code></td><td>Condition</td></tr>
+<tr><td><code>&lt;for var in list&gt;...&lt;/for&gt;</code></td><td>Loop</td></tr>
+<tr><td><code>&lt;do action(...)&gt;</code></td><td>Execute action</td></tr>
+<tr><td><code>&lt;require cond return "msg"&gt;</code></td><td>Guard with error message</td></tr>
+<tr><td><code>&lt;return "msg"&gt;</code></td><td>Early return</td></tr>
+<tr><td><code>&lt;global var = expr&gt;</code></td><td>Global variable</td></tr>
+<tr><td><code>&lt;# comment #&gt;</code></td><td>Comment (not rendered)</td></tr>
+</table>
+
+<h4>2.3 Functions</h4>
+<p><strong>String:</strong> <code>lower</code>, <code>upper</code>, <code>capitalize</code>, <code>trim</code>, <code>title</code>, <code>replace(a,b,s)</code>, <code>split(sep,s)</code>, <code>length</code>, <code>format</code>, <code>after(N)</code></p>
+<p><strong>Checks:</strong> <code>defined</code>, <code>empty</code>, <code>not</code>, <code>number</code>, <code>iterable</code>, <code>even</code>, <code>odd</code>, <code>contains</code>, <code>startsWith</code>, <code>endsWith</code>, <code>typeof</code></p>
+<p><strong>Math:</strong> <code>abs</code>, <code>round</code>, <code>number_format</code>, <code>random(min,max)</code>, <code>random_hex</code>, <code>random_uuid</code></p>
+<p><strong>Collections:</strong> <code>first</code>, <code>last</code>, <code>reverse</code>, <code>slice</code>, <code>sort</code>, <code>shuffle</code>, <code>batch</code>, <code>concat</code>, <code>join</code>, <code>keys</code>, <code>values</code>, <code>default</code></p>
+<p><strong>PAPI:</strong> <code>papi("placeholder" [, player])</code> — optional player name as 2nd arg</p>
+<p><strong>DataStore:</strong> <code>getattribute(key)</code>, <code>member.getattribute(key)</code>, <code>player.getattribute(key)</code>, <code>bot.getattribute(key)</code>, <code>find_player_by_session(id)</code></p>
+<p><strong>HTTP:</strong> <code>http_get(url)</code>, <code>http_post(url, body|key,val...)</code>, <code>http_put</code>, <code>http_delete</code>, <code>http_patch</code>, <code>http_code(resp)</code>, <code>http_body(resp)</code>, <code>http_header(name,val)</code>, <code>http_bearer(token)</code>, <code>json_parse(str)</code></p>
+<p><span class="tag orange">Note</span> <code>http_post</code> with even number of key-val pairs auto-builds JSON body:</p>
+<pre>http_post(url, "type", _type, "player", _player_name) → {"type":"...","player":"..."}</pre>
+
+<h4>2.4 Actions (&lt;do&gt;)</h4>
+<table>
+<tr><th>Action</th><th>Description</th></tr>
+<tr><td><code>mc.command("cmd")</code></td><td>Execute Minecraft command (console/player)</td></tr>
+<tr><td><code>mc.broadcast("msg")</code></td><td>Broadcast to chat (&amp; for colors)</td></tr>
+<tr><td><code>mc.give("player","item")</code></td><td>Give item</td></tr>
+<tr><td><code>discord.send(channelId,"text")</code></td><td>Send message to Discord</td></tr>
+<tr><td><code>discord.embed(...)</code></td><td>Embed with fields, buttons, reactions</td></tr>
+<tr><td><code>discord.role_add/role_give(memberId, roleId)</code></td><td>Add role (single or [id1,id2])</td></tr>
+<tr><td><code>discord.role_remove/role_delete(memberId, roleId)</code></td><td>Remove role</td></tr>
+<tr><td><code>bot.setstatus("online/dnd/idle")</code></td><td>Bot status</td></tr>
+<tr><td><code>bot.setstatustext("text")</code></td><td>Bot status text</td></tr>
+</table>
+
+<p><strong>Chain API:</strong></p>
+<pre>guild.getChannel("id").createEmbed().withTitle("...").withColor("#hex").withField("n","v",true).send()</pre>
+
+<h3>3. LongPoll Bot API</h3>
+<p>Node.js bot at <code>http://localhost:17523</code>. Auth: <code>Authorization: Bearer secret</code>.</p>
+<table>
+<tr><th>Method</th><th>Endpoint</th><th>Body</th></tr>
+<tr><td>POST</td><td><code>/event</code></td><td><code>{"type":"...", ...}</code></td></tr>
+<tr><td>POST</td><td><code>/api/config</code></td><td><code>{"key":"value"}</code></td></tr>
+<tr><td>GET</td><td><code>/api/script?type=X</code></td><td>—</td></tr>
+<tr><td>POST</td><td><code>/api/script?type=X</code></td><td><code>{"script":"..."}</code></td></tr>
+</table>
+
+<h4>Connection Config</h4>
+<p>Each connection is a separate YAML file in <code>longpoll/</code>:</p>
+<table>
+<tr><th>Field</th><th>Description</th></tr>
+<tr><td><code>server</code></td><td>LongPoll server URL</td></tr>
+<tr><td><code>key</code></td><td>Bearer token</td></tr>
+<tr><td><code>wait</code></td><td>Poll wait seconds (0 = infinite, max 60)</td></tr>
+<tr><td><code>enabled</code></td><td><code>true</code>/<code>false</code> — is connection active? (default true)</td></tr>
+<tr><td><code>debug</code></td><td><code>true</code>/<code>false</code> — log events</td></tr>
+<tr><td><code>script</code></td><td>Folder name in <code>papca/</code> or inline template code</td></tr>
+</table>
+<p><span class="tag green">Auto-reconnect</span> On any error the connection waits 5 seconds then reconnects automatically. Runs 24/7 while <code>enabled: true</code>.</p>
+
+<h4>LongPoll Scripts</h4>
+<p><code>longpoll/papca/&lt;connection&gt;/&lt;type&gt;.yml</code></p>
+<table>
+<tr><th>Variable</th><th>Description</th></tr>
+<tr><td><code>_event.type</code></td><td>Event type</td></tr>
+<tr><td><code>_event.player</code>, <code>_event.amount</code>, ...</td><td>Fields from JSON</td></tr>
+</table>
+<p><span class="tag red">Important</span> Use <code>&lt;do action(...)&gt;</code>, NOT <code>&lt;action(...)&gt;</code>.</p>
+
+<h3>4. Installation</h3>
+<ol>
+<li>Copy <code>ZoLiryzik.jar</code> to <code>plugins/</code></li>
+<li>Start bot: <code>node longpoll-server.js &amp;</code></li>
+<li>Restart server (stop → start, <span class="tag red">not /reload</span>)</li>
+<li><code>/zlongpoll create demo http://localhost:17523/poll secret 25</code></li>
+</ol>
+<p><span class="tag orange">config.yml</span> <code>save-examples: false</code> — disables auto-creation of example commands and LongPoll scripts on startup.</p>
+
+<h3>5. Environment Variables</h3>
+<table>
+<tr><th>Variable</th><th>Description</th></tr>
+<tr><td><code>DISCORD_TOKEN</code></td><td>Discord bot token</td></tr>
+<tr><td><code>LONGPOLL_KEY</code></td><td>API key (default: secret)</td></tr>
+<tr><td><code>LONGPOLL_PORT</code></td><td>Port (default: 17523)</td></tr>
+</table>
+
+<h3>6. PlaceholderAPI</h3>
+<p>The plugin registers the <code>zoliryzik</code> expansion:</p>
+<table>
+<tr><th>Placeholder</th><th>Description</th></tr>
+<tr><td><code>%zoliryzik_in_vc%</code></td><td>Checks if the linked Discord member is in a voice channel. Returns message from config.yml (<code>placeholder-messages.*</code>)</td></tr>
+<tr><td><code>%zoliryzik_attr_member_&lt;key&gt;%</code></td><td>DataStore attribute for linked Discord member</td></tr>
+<tr><td><code>%zoliryzik_attr_player_&lt;key&gt;%</code></td><td>DataStore attribute for the player</td></tr>
+<tr><td><code>%zoliryzik_attr_bot_&lt;key&gt;%</code></td><td>DataStore attribute for the bot</td></tr>
+</table>
+<p>Also resolves any external <code>%placeholder%</code> via <code>PlaceholderAPI.setPlaceholders()</code>:</p>
+<ul>
+<li><span class="tag green">Player</span> — resolves for command sender</li>
+<li><span class="tag orange">Console</span> — resolves for first online player</li>
+<li><span class="tag green">papi("x", "Nick")</span> — target any player by name</li>
+</ul>
+
+<h3>7. Examples</h3>
+
+<h4>LP command from Minecraft</h4>
+<pre>commands/lp/lp.yml:
+&lt;set _ = http_header("Authorization", "Bearer secret")&gt;
+&lt;set _type = args[0]&gt;
+&lt;set _resp = http_post("http://localhost:17523/event",
+  "type", _type, "player", _player_name, "world", _player_world,
+  "cmd", _cmd_name, "args", _args_raw)&gt;
+&lt;do mc.broadcast("&amp;a[LP] &amp;f" + _type + " &amp;a✓")&gt;</pre>
+
+<h4>Donate notification (with _lang)</h4>
+<pre>&lt;if _event.amount &gt;= 5000&gt;
+  &lt;if _lang == "ru"&gt;
+    &lt;do mc.broadcast("&amp;a&amp;l\u2B50 Мега-донат от &amp;e" + _event.nickname)&gt;
+  &lt;else&gt;
+    &lt;do mc.broadcast("&amp;a&amp;l\u2B50 Mega-donate from &amp;e" + _event.nickname)&gt;
+  &lt;/if&gt;
+&lt;else&gt;
+  &lt;if _lang == "ru"&gt;
+    &lt;do mc.broadcast("&amp;a❤ " + _event.nickname + " задонатил &amp;e" + _event.amount)&gt;
+  &lt;else&gt;
+    &lt;do mc.broadcast("&amp;a❤ " + _event.nickname + " donated &amp;e" + _event.amount)&gt;
+  &lt;/if&gt;
+&lt;/if&gt;</pre>
+
+<h4>PAPI targeting another player</h4>
+<pre>&lt;set target = args[0]&gt;
+&lt;~ papi("player_health", target) ~&gt;
+&lt;~ papi("player_world", target) ~&gt;</pre>
+
+        </div>
+        <script src="/assets/js/main.js"></script>
+        <script src="/assets/js/menu-toggle.js"></script>
+    </div>
+</body>
+</html>

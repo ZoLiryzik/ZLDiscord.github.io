@@ -1,4 +1,3 @@
-/* Общие стили для контента */
 .docs-container {
     display: flex;
     padding: 20px;
@@ -8,7 +7,6 @@
     margin-top: 90px;
 }
 
-/* Боковая панель */
 .sidebar {
     width: 250px;
     position: sticky;
@@ -21,158 +19,98 @@
     padding: 10px;
 }
 
-.sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
+.sidebar ul { list-style: none; padding: 0; margin: 0; }
 
 .sidebar a {
-    display: block;
-    padding: 12px 15px;
-    text-decoration: none;
-    color: #fff;
-    font-size: 1.1em;
-    border-left: 3px solid transparent;
-    transition: all 0.3s ease;
-    border-radius: 4px;
-    white-space: nowrap;
+    display: block; padding: 12px 15px; text-decoration: none;
+    color: #fff; font-size: 1.1em; border-left: 3px solid transparent;
+    transition: all 0.3s ease; border-radius: 4px;
 }
 
-.sidebar a:hover,
-.sidebar a.active {
-    border-left: 3px solid #00ff82;
-    color: #00ff82;
-    background-color: var(--color-shapka);
+.sidebar a:hover, .sidebar a.active {
+    border-left: 3px solid #00ff82; color: #00ff82; background-color: var(--color-shapka);
 }
 
-/* Основное содержимое документации */
 .docs-content {
-    flex-grow: 1;
-    background-color: var(--color-shapka);
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    flex-grow: 1; background-color: var(--color-shapka); padding: 30px;
+    border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.docs-section {
-    margin-bottom: 40px;
-}
+.docs-section { margin-bottom: 40px; }
 
-.docs-section h1,
-.docs-section h2,
-.docs-section h3 {
-    color: #fff;
-    margin-top: 0;
-    margin-bottom: 20px;
-}
+.docs-section h1, .docs-section h2, .docs-section h3 { color: #fff; margin-top: 0; margin-bottom: 20px; }
+.docs-section h1 { font-size: 2.5em; }
+.docs-section h2 { font-size: 2em; }
+.docs-section h3 { font-size: 1.5em; }
 
-.docs-section h1 {
-    font-size: 2.5em;
-}
-
-.docs-section h2 {
-    font-size: 2em;
-}
-
-.docs-section h3 {
-    font-size: 1.5em;
-}
-
-.docs-section p,
-.docs-section ul,
-.docs-section ol {
-    line-height: 1.7;
-    color: #fff;
-    margin-bottom: 15px;
-}
-
-ul,
-ol {
-    padding-left: 20px;
-}
-
-li {
-    margin-bottom: 8px;
-}
+.docs-section p, .docs-section ul, .docs-section ol { line-height: 1.7; color: #fff; margin-bottom: 15px; }
+ul, ol { padding-left: 20px; }
+li { margin-bottom: 8px; }
 
 pre {
-    background-color: #2d2d2d;
-    color: #f8f8f2;
-    padding: 18px;
-    border-radius: 8px;
-    overflow-x: auto;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.9em;
-    line-height: 1.5;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    word-break: break-all;
+    background-color: #2d2d2d; color: #f8f8f2; padding: 18px; border-radius: 8px;
+    overflow-x: auto; font-family: 'Courier New', Courier, monospace; font-size: 0.9em;
+    line-height: 1.5; white-space: pre-wrap; word-wrap: break-word; word-break: break-all;
 }
 
 code {
-    font-family: 'Courier New', Courier, monospace;
-    background-color: #f0f2f5;
-    color: var(--color-download);
-    padding: 2px 5px;
-    border-radius: 4px;
+    font-family: 'Courier New', Courier, monospace; background-color: #f0f2f5;
+    color: var(--color-download); padding: 2px 5px; border-radius: 4px;
 }
 
-hr {
-    border: 0;
-    height: 1px;
-    background: #eee;
-    margin: 40px 0;
+hr { border: 0; height: 1px; background: #eee; margin: 40px 0; }
+
+.mobile-nav-btn { display: none; }
+.mobile-nav-overlay { display: none; }
+.mobile-nav-panel { display: none; }
+
+/* Mobile */
+@media (max-width: 1000px) {
+    .docs-container { flex-direction: column; margin-top: 90px; padding: 0; gap: 0; }
+    .sidebar { display: none; }
+
+    .mobile-nav-btn {
+        display: flex; position: fixed; bottom: 16px; right: 16px; z-index: 150;
+        width: 50px; height: 50px; border-radius: 50%;
+        background: #00ff82; color: #121c17; border: none;
+        font-size: 22px; align-items: center; justify-content: center;
+        cursor: pointer; box-shadow: 0 3px 12px rgba(0,255,130,0.3);
+    }
+
+    .mobile-nav-overlay {
+        display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.6); z-index: 200;
+        justify-content: center; align-items: center;
+    }
+    .mobile-nav-overlay.show { display: flex; }
+
+    .mobile-nav-panel {
+        display: block; background: var(--color-shapka); border-radius: 14px;
+        padding: 16px; width: 85%; max-width: 360px; max-height: 75vh; overflow-y: auto;
+    }
+    .mobile-nav-panel a {
+        display: block; padding: 12px 14px; color: #fff; text-decoration: none;
+        font-size: 1em; border-radius: 8px; font-family: "Onest", sans-serif;
+    }
+    .mobile-nav-panel a:active { background: var(--color-hover-active); color: #00ff82; }
+
+    .docs-content { padding: 14px; border-radius: 0; }
+    .docs-content h1 { font-size: 1.5em; }
+    .docs-content h2 { font-size: 1.25em; }
+    .docs-content h3 { font-size: 1.1em; }
+    .docs-content table { font-size: 0.8em; display: block; overflow-x: auto; }
+    .docs-content table td, .docs-content table th { padding: 5px 7px; }
+    .docs-content pre { font-size: 0.75em; padding: 10px; overflow-x: auto; }
+    .docs-content code { font-size: 0.8em; word-break: break-all; }
 }
 
-/* Адаптация */
-@media (max-width: 992px) {
-    .docs-container {
-        flex-direction: column;
-        margin-top: 70px;
-        padding: 10px;
-    }
-
-    .sidebar {
-        position: static;
-        width: 100%;
-        height: auto;
-        overflow-y: visible;
-        background-color: transparent;
-        border-radius: 0;
-        padding: 0;
-        box-shadow: none;
-    }
-
-    .sidebar ul {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 5px;
-        justify-content: center;
-        border-bottom: 1px solid #ddd;
-        padding-bottom: 10px;
-    }
-
-    .sidebar li {
-        flex: 1 1 auto;
-        min-width: 120px;
-        text-align: center;
-    }
-
-    .sidebar a {
-        border-left: none;
-        border-bottom: 3px solid transparent;
-        background-color: var(--color-shapka);
-    }
-
-    .sidebar a:hover,
-    .sidebar a.active {
-        border-left: none;
-        border-bottom: 3px solid #00ff82;
-        background-color: var(--color-shapka);
-    }
-
-    .docs-content {
-        padding: 20px;
-    }
+@media (max-width: 480px) {
+    .mobile-nav-btn { width: 44px; height: 44px; font-size: 18px; bottom: 12px; right: 12px; }
+    .docs-content { padding: 10px; }
+    .docs-content h1 { font-size: 1.3em; }
+    .docs-content h2 { font-size: 1.1em; }
+    .docs-content h3 { font-size: 1em; }
+    .docs-content table { font-size: 0.75em; }
+    .mobile-nav-panel { width: 90%; padding: 12px; }
+    .mobile-nav-panel a { padding: 10px 12px; font-size: 0.9em; }
 }

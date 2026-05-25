@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Документация: ZLDiscord v1.2</title>
+    <link rel="icon" href="/assets/img/ava.png" type="image/png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/features.css">
+    <link rel="stylesheet" href="/assets/css/docs.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+</head>
+<style>
+/* Language selector */
+.language-select {
+    position: relative;
+    z-index: 999;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.language-label {
+    background-color: transparent;
+    color: var(--text-color-light);
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 18px;
+    line-height: 25px;
+    font-weight: 400;
+    font-family: "Onest", sans-serif;
+    display: inline-block;
+}
+.language-label:hover {
+    background-color: var(--color-hover-active);
+    color: var(--text-color-white);
+}
+.language-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #0b0b0b;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    z-index: 998;
+    width: auto;
+    min-width: 120px;
+}
+.language-option {
+    display: block;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    border-radius: 0;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.3s, box-shadow 0.3s;
+}
+.language-option:hover {
+    background-color: var(--color-hover-active);
+}
+.tag {
+    display: inline-block;
+    background: #5865F2;
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: .78em;
+    margin: 2px 4px 2px 0;
+}
+.tag.green { background: #40a02b }
+.tag.orange { background: #fe640b }
+.tag.red { background: #d20f39 }
+@media (max-width: 768px) {
+    .shapka-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: left;
+        margin-top: 10px;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: var(--color-shapka);
+        border-top: 1px solid #333;
+        padding: 10px 20px;
+        z-index: 99;
+    }
+    .shapka-links.show { display: flex; }
+    .shapka-links a, .language-select {
+        padding: 10px 0;
+        border-bottom: 1px solid #333;
+        width: 100%;
+        text-align: center;
+        margin-right: 0;
+    }
+    .language-dropdown {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+        background-color: transparent;
+        padding-left: 20px;
+    }
+    .language-label {
+        width: 100%;
+        padding: 10px 0;
+    }
+}
+</style>
+<body>
+    <div class="frame">
+        <header class="shapka">
+            <div class="shapka-logo">
+                <img src="/assets/img/ava.png" alt="Логотип">
+                <div class="shapka-title"><a href="/">ZLDiscord</a></div>
+            </div>
+            <div class="shapka-links" id="navLinks">
+                <div class="language-select">
+                    <span class="language-label google-font">Язык</span>
+                    <div class="language-dropdown">
+                        <a href="#" class="language-option google-font">Русский</a>
+                        <a href="/en/docs" class="language-option google-font">English</a>
+                    </div>
+                </div>
+                <a class="google-font" href="/">Главная</a>
+                <a class="google-font" href="#">Релизы</a>
+                <a class="active google-font" href="#">Документация</a>
+                <a class="google-font" href="#">Контакты</a>
+                <a class="download google-font" href="/project/ZoLiryzik.jar">Скачать</a>
+            </div>
+            <button class="menu-toggle google-font" id="menuToggle">☰</button>
+        </header>
+
+        <main class="docs-container">
+            <div class="probel"></div>
+            <aside class="sidebar">
+                <nav aria-label="Разделы документации">
+                    <ul>
+                        <li><a href="#intro" class="google-font">Введение</a></li>
+                        <li><a href="#install" class="google-font">Установка</a></li>
+                        <li><a href="#commands" class="google-font">Команды</a></li>
+                        <li><a href="#cc" class="google-font">Кастомные команды</a></li>
+                        <li><a href="#template" class="google-font">Шаблоны</a></li>
+                        <li><a href="#longpoll" class="google-font">LongPoll</a></li>
+                        <li><a href="#placeholders" class="google-font">Плейсхолдеры</a></li>
+                        <li><a href="#config" class="google-font">Конфигурация</a></li>
+                        <li><a href="#scripts" class="google-font">Скрипты</a></li>
+                        <li><a href="#examples" class="google-font">Примеры</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <div class="docs-content">
+                <h1>ZLDiscord v1.2 — Документация</h1>
+                <hr>
+
+                <section id="intro" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Введение</h2>
+                    <p>ZLDiscord — универсальный плагин для Paper 1.16.5–1.21.x, интегрирующий Minecraft с Discord. Встроенный шаблонизатор, LongPoll-бот, кастомные команды, голосования, DataStore и полная поддержка PlaceholderAPI.</p>
+                </section>
+
+                <hr>
+
+                <section id="install" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Установка</h2>
+                    <ol>
+                        <li>Скопировать <code>ZoLiryzik.jar</code> в <code>plugins/</code></li>
+                        <li>Запустить LongPoll-бота: <code>node longpoll-server.js &amp;</code></li>
+                        <li>Перезапустить сервер (<span class="tag red">stop → start, не /reload</span>)</li>
+                        <li>Настроить <code>config.yml</code>: Discord Token, Guild ID, роли</li>
+                        <li>Подключить LongPoll: <code>/zlongpoll create demo http://localhost:17523/poll secret 25</code></li>
+                    </ol>
+                </section>
+
+                <hr>
+
+                <section id="commands" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Команды</h2>
+
+                    <h3>/zevent — Голосование</h3>
+                    <pre><code>/zevent "Название" "команда" "время" "channel_id"</code></pre>
+                    <ul>
+                        <li><strong>Название</strong> — заголовок embed (поддерживает <code>%placeholder%</code>)</li>
+                        <li><strong>команда</strong> — Minecraft-команда консоли при победе ✅</li>
+                        <li><strong>время</strong> — длительность: <code>5s</code>, <code>10m</code>, <code>1h</code></li>
+                        <li><strong>channel_id</strong> — ID текстового канала Discord</li>
+                    </ul>
+                    <p>После таймера подсчитываются ✅ / ❌. При победе ✅ — выполняется команда.</p>
+
+                    <h3>/zcc — Кастомные команды</h3>
+                    <pre><code>/zcc list             — список команд
+/zcc run &lt;name&gt;       — выполнить
+/zcc create &lt;name&gt;    — создать (\n для новой строки)
+/zcc remove &lt;name&gt;    — удалить
+/zcc reload           — перезагрузить</code></pre>
+
+                    <h3>/zlink / /zunlink — Привязка Discord</h3>
+                    <p><code>/zlink</code> — получить код в Minecraft<br>
+                    <code>/unlink</code> — отвязать в Discord (ЛС бота)</p>
+
+                    <h3>/zembed — Embed-сообщение</h3>
+                    <pre><code>/zembed "имя" "заголовок" "описание" "channel_id" [картинка] [миниатюра] [футер] [иконка_футера]</code></pre>
+                    <p>Создаёт embed в Discord, сохраняет messageId. <span class="tag green">PAPI</span></p>
+
+                    <h3>/zembedmanage — Управление embed</h3>
+                    <pre><code>/zembedmanage delete &lt;имя&gt;
+/zembedmanage edit_title &lt;имя&gt; "новый заголовок"
+/zembedmanage edit_description &lt;имя&gt; "новое описание"</code></pre>
+
+                    <h3>/zattr — DataStore</h3>
+                    <pre><code>/zattr get &lt;bot|member|player&gt; &lt;key&gt; [player]
+/zattr set &lt;bot|member|player&gt; &lt;key&gt; &lt;value&gt; [player]
+/zattr inc|dec &lt;...&gt; &lt;key&gt; &lt;amount&gt; [player]
+/zattr list &lt;bot|member|player&gt; [player]</code></pre>
+
+                    <h3>/zlongpoll — LongPoll</h3>
+                    <pre><code>/zlongpoll create &lt;name&gt; &lt;url&gt; &lt;key&gt; [wait]
+/zlongpoll list
+/zlongpoll remove &lt;name&gt;
+/zlongpoll reload</code></pre>
+
+                    <h3>Команды в Discord</h3>
+                    <p><span class="tag orange">Prefix</span> Текстовые команды в Discord имеют фиксированный префикс <code>z!</code> (например, <code>z!hello</code>, <code>z!info</code>). Поменять его нельзя.</p>
+                    <ul>
+                        <li><code>/zevent</code> — создать голосование (роли embed-creator)</li>
+                        <li><code>!embed</code> — кнопка для создания Embed</li>
+                        <li><code>/link &lt;code&gt;</code> — привязать (ЛС бота)</li>
+                        <li><code>/unlink</code> — отвязать (ЛС бота)</li>
+                        <li>Slash-команды из <code>custom_commands.yml</code> регистрируются автоматически</li>
+                        <li>Текстовые команды из <code>custom_commands.yml</code> — через префикс <code>z!</code> (например, <code>z!warn</code>, <code>z!report</code>)</li>
+                    </ul>
+                </section>
+
+                <hr>
+
+                <section id="cc" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Кастомные команды</h2>
+                    <p>Файл <code>custom_commands.yml</code>:</p>
+                    <pre><code class="language-yaml">commands:
+  hello:
+    file: "commands/hello.yml"
+    description: "Приветствие"
+    cooldown: 10
+    enabled: true
+    scope: all              # all / minecraft / discord
+    permission: zoliryzik.hello
+    permission-message: "&cНет прав"
+    command_mc: hello        # имя в майнкрафте
+    command_ds: hello        # имя в дискорде (префикс z! — z!hello, изменить нельзя)
+    aliases_mc: ["h"]
+    aliases_ds: ["h"]
+    discord-roles: ["role_id_1", "role_id_2"]</code></pre>
+
+                    <p>Поддерживается вложенность папок: <code>commands/lp/lp.yml</code></p>
+
+                    <h4>Пример hello.yml</h4>
+                    <pre><code class="language-yaml">&lt;~ args[0] ~&gt;, привет с сервера!</code></pre>
+
+                    <h4>Пример fly.yml (условия, аргументы, PAPI)</h4>
+                    <pre><code class="language-yaml">&lt;set target = args[0]&gt;
+&lt;require target != null return "Укажи ник игрока"&gt;
+&lt;set mode = args[1]&gt;
+&lt;if mode == null or mode == ""&gt;
+  &lt;set mode = "toggle"&gt;
+&lt;/if&gt;
+&lt;if mode == "on"&gt;
+  &lt;do mc.command("zflytoggle " + target + " on")&gt;
+  &lt;~ target ~&gt;: полёт &amp;aвключён
+&lt;elseif mode == "off"&gt;
+  &lt;do mc.command("zflytoggle " + target + " off")&gt;
+  &lt;~ target ~&gt;: полёт &amp;cвыключен
+&lt;else&gt;
+  &lt;do mc.command("zflytoggle " + target)&gt;
+  &lt;~ target ~&gt;: полёт переключён
+&lt;/if&gt;</code></pre>
+                </section>
+
+                <hr>
+
+                <section id="template" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Система шаблонов</h2>
+
+                    <h3>Переменные</h3>
+                    <table>
+                        <tr><th>Переменная</th><th>Где</th><th>Описание</th></tr>
+                        <tr><td><code>args</code></td><td>всегда</td><td>List аргументов</td></tr>
+                        <tr><td><code>_args_raw</code></td><td>всегда</td><td>Строка аргументов</td></tr>
+                        <tr><td><code>_cmd_name</code></td><td>всегда</td><td>Имя команды</td></tr>
+                        <tr><td><code>_lang</code></td><td>всегда</td><td>Язык: ru/en</td></tr>
+                        <tr><td><code>mc_online</code></td><td>всегда</td><td>Игроков онлайн</td></tr>
+                        <tr><td><code>mc_max_players</code></td><td>всегда</td><td>Макс. игроков</td></tr>
+                        <tr><td><code>mc_tps</code></td><td>всегда</td><td>TPS</td></tr>
+                        <tr><td><code>mc_motd</code></td><td>всегда</td><td>MOTD</td></tr>
+                        <tr><td><code>_player_name</code></td><td>Minecraft</td><td>Имя игрока</td></tr>
+                        <tr><td><code>_player_uuid</code></td><td>Minecraft</td><td>UUID</td></tr>
+                        <tr><td><code>_player_world</code></td><td>Minecraft</td><td>Мир</td></tr>
+                        <tr><td><code>_discord_member_id</code></td><td>Discord</td><td>ID участника</td></tr>
+                        <tr><td><code>_discord_member_name</code></td><td>Discord</td><td>Имя</td></tr>
+                        <tr><td><code>_discord_member_nick</code></td><td>Discord</td><td>Никнейм</td></tr>
+                        <tr><td><code>_discord_channel_id</code></td><td>Discord</td><td>ID канала</td></tr>
+                        <tr><td><code>_discord_channel_name</code></td><td>Discord</td><td>Название канала</td></tr>
+                        <tr><td><code>_discord_guild_id</code></td><td>Discord</td><td>ID гильдии</td></tr>
+                        <tr><td><code>_discord_guild_name</code></td><td>Discord</td><td>Название гильдии</td></tr>
+                        <tr><td><code>_mentioned_user_id</code></td><td>Discord</td><td>ID упомянутого</td></tr>
+                        <tr><td><code>_mentioned_user_name</code></td><td>Discord</td><td>Имя упомянутого</td></tr>
+                    </table>
+
+                    <h3>Теги</h3>
+                    <table>
+                        <tr><th>Тег</th><th>Описание</th></tr>
+                        <tr><td><code>&lt;~ expr ~&gt;</code></td><td>Вывести значение</td></tr>
+                        <tr><td><code>&lt;set var = expr&gt;</code></td><td>Присвоить переменную</td></tr>
+                        <tr><td><code>&lt;if cond&gt;...&lt;else&gt;...&lt;/if&gt;</code></td><td>Условие</td></tr>
+                        <tr><td><code>&lt;for var in list&gt;...&lt;/for&gt;</code></td><td>Цикл</td></tr>
+                        <tr><td><code>&lt;do action(...)&gt;</code></td><td>Выполнить действие</td></tr>
+                        <tr><td><code>&lt;require cond return "msg"&gt;</code></td><td>Проверка с ошибкой</td></tr>
+                        <tr><td><code>&lt;return "msg"&gt;</code></td><td>Выход с сообщением</td></tr>
+                        <tr><td><code>&lt;global var = expr&gt;</code></td><td>Глобальная переменная</td></tr>
+                        <tr><td><code>&lt;# comment #&gt;</code></td><td>Комментарий</td></tr>
+                    </table>
+
+                    <h3>Функции</h3>
+                    <p><strong>Строки:</strong> <code>lower</code>, <code>upper</code>, <code>capitalize</code>, <code>trim</code>, <code>title</code>, <code>replace(a,b,s)</code>, <code>split(sep,s)</code>, <code>length</code>, <code>format</code>, <code>after(N)</code></p>
+                    <p><strong>Проверки:</strong> <code>defined</code>, <code>empty</code>, <code>not</code>, <code>number</code>, <code>iterable</code>, <code>even</code>, <code>odd</code>, <code>contains</code>, <code>startsWith</code>, <code>endsWith</code>, <code>typeof</code></p>
+                    <p><strong>Математика:</strong> <code>abs</code>, <code>round</code>, <code>number_format</code>, <code>random(min,max)</code>, <code>random_hex</code>, <code>random_uuid</code></p>
+                    <p><strong>Коллекции:</strong> <code>first</code>, <code>last</code>, <code>reverse</code>, <code>slice</code>, <code>sort</code>, <code>shuffle</code>, <code>batch</code>, <code>concat</code>, <code>join</code>, <code>keys</code>, <code>values</code>, <code>default</code></p>
+                    <p><strong>PAPI:</strong> <code>papi("placeholder" [, player])</code></p>
+                    <p><strong>DataStore:</strong> <code>getattribute(key)</code>, <code>member.getattribute(key)</code>, <code>player.getattribute(key)</code>, <code>bot.getattribute(key)</code>, <code>find_player_by_session(id)</code></p>
+                    <p><strong>HTTP:</strong> <code>http_get(url)</code>, <code>http_post(url, body|key,val...)</code>, <code>http_put</code>, <code>http_delete</code>, <code>http_patch</code>, <code>http_code(resp)</code>, <code>http_body(resp)</code>, <code>http_header(name,val)</code>, <code>http_bearer(token)</code>, <code>json_parse(str)</code></p>
+
+                    <h3>Действия (&lt;do&gt;)</h3>
+                    <table>
+                        <tr><th>Действие</th><th>Описание</th></tr>
+                        <tr><td><code>mc.command("cmd")</code></td><td>Выполнить команду (консоль/игрок)</td></tr>
+                        <tr><td><code>mc.broadcast("msg")</code></td><td>Отправить в чат (&amp; для цвета)</td></tr>
+                        <tr><td><code>mc.give("player","item")</code></td><td>Выдать предмет</td></tr>
+                        <tr><td><code>discord.send(channelId,"text")</code></td><td>Сообщение в Discord</td></tr>
+                        <tr><td><code>discord.embed(...)</code></td><td>Embed (title, description, color, fields, buttons, reactions)</td></tr>
+                        <tr><td><code>discord.role_add/give(memberId, roleId)</code></td><td>Добавить роль</td></tr>
+                        <tr><td><code>discord.role_remove/delete(memberId, roleId)</code></td><td>Удалить роль</td></tr>
+                        <tr><td><code>bot.setstatus("online/dnd/idle")</code></td><td>Статус бота</td></tr>
+                        <tr><td><code>bot.setstatustext("текст")</code></td><td>Текст статуса</td></tr>
+                    </table>
+
+                    <h4>Chain API</h4>
+                    <pre><code>guild.getChannel("id").createEmbed().withTitle("...").withColor("#hex").withField("n","v",true).send()</code></pre>
+
+                    <h3>Статус бота</h3>
+                    <p>Файл <code>bot_status.yml</code>:</p>
+                    <pre><code class="language-yaml">enabled: true
+type: "playing"     # playing / watching / listening / competing / custom
+text: "с сервером"</code></pre>
+                </section>
+
+                <hr>
+
+                <section id="longpoll" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>LongPoll Bot API</h2>
+                    <p>Node.js-бот на <code>http://localhost:17523</code>. Аутентификация: <code>Authorization: Bearer secret</code>.</p>
+                    <table>
+                        <tr><th>Метод</th><th>Endpoint</th><th>Тело</th></tr>
+                        <tr><td>POST</td><td><code>/event</code></td><td><code>{"type":"...", ...}</code></td></tr>
+                        <tr><td>POST</td><td><code>/api/config</code></td><td><code>{"key":"value"}</code></td></tr>
+                        <tr><td>GET</td><td><code>/api/script?type=X</code></td><td>—</td></tr>
+                        <tr><td>POST</td><td><code>/api/script?type=X</code></td><td><code>{"script":"..."}</code></td></tr>
+                    </table>
+
+                    <h3>LongPoll скрипты</h3>
+                    <p>Путь: <code>longpoll/papca/&lt;connection&gt;/&lt;type&gt;.yml</code></p>
+                    <table>
+                        <tr><th>Переменная</th><th>Описание</th></tr>
+                        <tr><td><code>_event</code></td><td>Map со всеми полями</td></tr>
+                        <tr><td><code>_event.type</code></td><td>Тип события</td></tr>
+                        <tr><td><code>_event.player</code>, ...</td><td>Поля из JSON</td></tr>
+                        <tr><td><code>_conn_name</code></td><td>Имя подключения</td></tr>
+                    </table>
+                    <p><span class="tag red">Важно</span> Только <code>&lt;do action(...)&gt;</code>, НЕ <code>&lt;action(...)&gt;</code>.</p>
+
+                    <h4>Пример donate.yml</h4>
+                    <pre><code class="language-yaml">&lt;if !defined(_event.nickname)&gt;
+  &lt;do mc.command("say", "Donate: no nickname in event")&gt;
+&lt;else&gt;
+  &lt;set _nick = _event.nickname&gt;
+  &lt;set _amount = _event.amount&gt;
+  &lt;do mc.command("give " + _nick + " diamond " + (_amount / 100))&gt;
+  &lt;if _lang == "ru"&gt;
+    &lt;do mc.broadcast("&amp;a🎉 Игрок " + _nick + " задонатил &amp;e" + _amount + " &amp;aи получил " + (_amount / 100) + " алмазов!")&gt;
+  &lt;else&gt;
+    &lt;do mc.broadcast("&amp;a🎉 Player " + _nick + " donated &amp;e" + _amount + " &amp;aand got " + (_amount / 100) + " diamonds!")&gt;
+  &lt;/if&gt;
+  &lt;do player.getAttribute("donations").increment(_amount)&gt;
+&lt;/if&gt;</code></pre>
+                </section>
+
+                <hr>
+
+                <section id="placeholders" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>PlaceholderAPI</h2>
+                    <ul>
+                        <li><span class="tag green">Игрок</span> — от имени отправителя</li>
+                        <li><span class="tag orange">Консоль</span> — от первого онлайн</li>
+                        <li><span class="tag green">papi("x", "Nick")</span> — для любого игрока</li>
+                    </ul>
+                    <table>
+                        <tr><th>Плейсхолдер</th><th>Описание</th></tr>
+                        <tr><td><code>%zoliryzik_in_vc%</code></td><td>Статус в голосовом канале: "В голосовом чате" / "Не в голосовом чате" / "Не привязан"</td></tr>
+                        <tr><td><code>%zoliryzik_attr_member_&lt;key&gt;%</code></td><td>Атрибут Discord-участника из DataStore по ключу</td></tr>
+                        <tr><td><code>%zoliryzik_attr_player_&lt;key&gt;%</code></td><td>Атрибут игрока из DataStore по ключу</td></tr>
+                        <tr><td><code>%zoliryzik_attr_bot_&lt;key&gt;%</code></td><td>Глобальный атрибут бота из DataStore по ключу</td></tr>
+                    </table>
+                </section>
+
+                <hr>
+
+                <section id="config" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Конфигурация</h2>
+                    <pre><code class="language-yml" id="config-code">Загрузка...</code></pre>
+
+                    <h3>Переменные окружения</h3>
+                    <table>
+                        <tr><th>Переменная</th><th>Описание</th></tr>
+                        <tr><td><code>DISCORD_TOKEN</code></td><td>Токен Discord бота</td></tr>
+                        <tr><td><code>LONGPOLL_KEY</code></td><td>Ключ API (умолч. secret)</td></tr>
+                        <tr><td><code>LONGPOLL_PORT</code></td><td>Порт (умолч. 17523)</td></tr>
+                    </table>
+                </section>
+
+                <hr>
+
+                <section id="scripts" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Примеры скриптов</h2>
+                    <p>Примеры для отправки событий в LongPoll-бот из внешних скриптов.</p>
+
+                    <h3>Python</h3>
+                    <pre><code class="language-python">import requests, json
+
+URL = "http://localhost:17523/event"
+HEADERS = {
+    "Authorization": "Bearer secret",
+    "Content-Type": "application/json"
+}
+
+# Отправить событие donate
+event = {
+    "type": "donate",
+    "nickname": "Player123",
+    "amount": 1500,
+    "product": "Diamond Pack"
+}
+r = requests.post(URL, headers=HEADERS, json=event)
+print("Status:", r.status_code, r.json())
+
+# Отправить событие kick
+event = {
+    "type": "kick",
+    "nickname": "Griefer",
+    "reason": "Spam",
+    "moderator": "Admin"
+}
+r = requests.post(URL, headers=HEADERS, json=event)
+print("Status:", r.status_code, r.json())</code></pre>
+
+                    <h3>Node.js</h3>
+                    <pre><code class="language-javascript">const URL = "http://localhost:17523/event";
+const HEADERS = {
+    "Authorization": "Bearer secret",
+    "Content-Type": "application/json"
+};
+
+// Отправить событие donate
+fetch(URL, {
+    method: "POST",
+    headers: HEADERS,
+    body: JSON.stringify({
+        type: "donate",
+        nickname: "Player123",
+        amount: 1500,
+        product: "Diamond Pack"
+    })
+}).then(r => r.json()).then(console.log);
+
+// Отправить событие kick
+fetch(URL, {
+    method: "POST",
+    headers: HEADERS,
+    body: JSON.stringify({
+        type: "kick",
+        nickname: "Griefer",
+        reason: "Spam",
+        moderator: "Admin"
+    })
+}).then(r => r.json()).then(console.log);</code></pre>
+
+                    <h3>curl</h3>
+                    <pre><code>curl http://localhost:17523/event -X POST \
+  -H "Authorization: Bearer secret" \
+  -H "Content-Type: application/json" \
+  -d '{"type":"donate","nickname":"Player123","amount":1500}'
+
+curl http://localhost:17523/event -X POST \
+  -H "Authorization: Bearer secret" \
+  -H "Content-Type: application/json" \
+  -d '{"type":"kick","nickname":"Griefer","reason":"Spam","moderator":"Admin"}'</code></pre>
+                </section>
+
+                <hr>
+
+                <section id="examples" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Примеры</h2>
+
+                    <h3>LP команда из Minecraft</h3>
+                    <pre><code class="language-yaml">&lt;set _ = http_header("Authorization", "Bearer secret")&gt;
+&lt;set _type = args[0]&gt;
+&lt;set _resp = http_post("http://localhost:17523/event",
+  "type", _type, "player", _player_name, "world", _player_world,
+  "cmd", _cmd_name, "args", _args_raw)&gt;
+&lt;do mc.broadcast("&amp;a[LP] &amp;f" + _type + " &amp;a✓")&gt;</code></pre>
+
+                    <h3>Donate-уведомление</h3>
+                    <pre><code class="language-yaml">&lt;if _event.amount &gt;= 5000&gt;
+  &lt;do mc.broadcast("&amp;a&amp;l⭐ Мега-донат от &amp;e" + _event.nickname)&gt;
+&lt;else&gt;
+  &lt;do mc.broadcast("&amp;a❤ " + _event.nickname + " задонатил &amp;e" + _event.amount)&gt;
+&lt;/if&gt;</code></pre>
+
+                    <h3>Информация об игроке (info.yml)</h3>
+                    <pre><code class="language-yaml">&lt;set target = args[0]&gt;
+&lt;if target == null or target == ""&gt;
+  &lt;set target = _player_name&gt;
+&lt;/if&gt;
+📊 Информация о &lt;~ target ~&gt;
+├ Уровень: &lt;~ papi("%level%", target) ~&gt;
+├ Здоровье: &lt;~ papi("%player_health%", target) ~&gt;
+├ Мир: &lt;~ papi("%player_world%", target) ~&gt;
+└ Онлайн: &lt;~ mc_online ~&gt;/&lt;~ mc_max_players ~&gt;</code></pre>
+
+                    <h3>Report (Discord-команда)</h3>
+                    <pre><code class="language-yaml">&lt;set target = args[0]&gt;
+&lt;set reason = after(1)&gt;
+&lt;require target != null and reason != "" return "Укажи ID или упоминание нарушителя и причину"&gt;
+Был отправлен репорт на участника &lt;~ target ~&gt;:
+&lt;~ reason ~&gt;
+&lt;do discord.send(_discord_channel_id, format("%s, Ваш репорт успешно отправлен!", _discord_member_nick))&gt;</code></pre>
+
+                    <h3>Диагностика</h3>
+                    <p><code>/zdiag</code> (ZDiag) — 12 тестов: бот, каналы, роли, LongPoll, атрибуты, HTTP, шаблоны, PAPI, права.</p>
+                </section>
+            </div>
+        </main>
+
+        <!-- Mobile navigation -->
+        <button class="mobile-nav-btn google-font" id="mobileNavBtn" aria-label="Навигация">☰</button>
+        <div class="mobile-nav-overlay" id="mobileNavOverlay">
+            <div class="mobile-nav-panel">
+                <a href="#intro">Введение</a>
+                <a href="#install">Установка</a>
+                <a href="#commands">Команды</a>
+                <a href="#cc">Кастомные команды</a>
+                <a href="#template">Шаблоны</a>
+                <a href="#longpoll">LongPoll</a>
+                <a href="#placeholders">Плейсхолдеры</a>
+                <a href="#config">Конфигурация</a>
+                <a href="#scripts">Скрипты</a>
+                <a href="#examples">Примеры</a>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="/assets/img/ava.png" alt="Логотип">
+                    <h2>ZLDiscord</h2>
+                </div>
+                <div class="footer-links">
+                    <a href="#">Главная</a>
+                    <a href="/releases">Релизы</a>
+                    <a href="#">Документация</a>
+                    <a href="#">Поддержка</a>
+                    <a href="#">Контакты</a>
+                </div>
+                <div class="copyright">
+                    <p>&copy; <span id="current-year"></span> ZLDiscord.</p>
+                    <p>Версия плагина: 1.2 | Поддержка: Paper 1.16.5 – 1.21.x</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/menu-toggle.js"></script>
+
+</body>
+<script>
+    const configCodeElement = document.getElementById('config-code');
+    fetch('/project/resources/config.yml')
+        .then(response => {
+            if (!response.ok) throw new Error('Не удалось загрузить config.yml.');
+            return response.text();
+        })
+        .then(text => {
+            configCodeElement.textContent = text;
+            hljs.highlightAll();
+        })
+        .catch(error => {
+            configCodeElement.textContent = 'Ошибка загрузки: ' + error.message;
+        });
+
+    const sections = document.querySelectorAll('.docs-section');
+    const navLinks = document.querySelectorAll('.sidebar a');
+
+    function setActiveLink() {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (window.scrollY >= sectionTop - 150) {
+                current = section.getAttribute('id');
+            }
+        });
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.href.includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    function smoothScroll(event) {
+        event.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        if (targetSection) {
+            window.scrollTo({
+                top: targetSection.offsetTop - 90,
+                behavior: 'smooth'
+            });
+            window.history.pushState(null, null, targetId);
+        }
+    }
+
+    window.addEventListener('scroll', setActiveLink);
+    navLinks.forEach(link => {
+        link.addEventListener('click', smoothScroll);
+    });
+
+    window.addEventListener('load', () => {
+        const hash = window.location.hash;
+        if (hash) {
+            const targetSection = document.querySelector(hash);
+            if (targetSection) {
+                window.scrollTo({
+                    top: targetSection.offsetTop - 90,
+                    behavior: 'smooth'
+                });
+            }
+        }
+        setActiveLink();
+    });
+
+    // Mobile nav toggle
+    const mobileBtn = document.getElementById('mobileNavBtn');
+    const mobileOverlay = document.getElementById('mobileNavOverlay');
+    if (mobileBtn && mobileOverlay) {
+        mobileBtn.addEventListener('click', () => {
+            mobileOverlay.classList.toggle('show');
+        });
+        mobileOverlay.addEventListener('click', (e) => {
+            if (e.target === mobileOverlay) {
+                mobileOverlay.classList.remove('show');
+            }
+        });
+        mobileOverlay.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+                mobileOverlay.classList.remove('show');
+            });
+        });
+    }
+</script>
+
+</html>

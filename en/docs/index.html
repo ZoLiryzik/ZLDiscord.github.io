@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation: ZLDiscord v1.2</title>
+    <link rel="icon" href="/assets/img/ava.png" type="image/png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/features.css">
+    <link rel="stylesheet" href="/assets/css/docs.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+</head>
+<style>
+.language-select {
+    position: relative;
+    z-index: 999;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.language-label {
+    background-color: transparent;
+    color: var(--text-color-light);
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 18px;
+    line-height: 25px;
+    font-weight: 400;
+    font-family: "Onest", sans-serif;
+    display: inline-block;
+}
+.language-label:hover {
+    background-color: var(--color-hover-active);
+    color: var(--text-color-white);
+}
+.language-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #0b0b0b;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    z-index: 998;
+    width: auto;
+    min-width: 120px;
+}
+.language-option {
+    display: block;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    border-radius: 0;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.3s, box-shadow 0.3s;
+}
+.language-option:hover {
+    background-color: var(--color-hover-active);
+}
+.tag {
+    display: inline-block;
+    background: #5865F2;
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: .78em;
+    margin: 2px 4px 2px 0;
+}
+.tag.green { background: #40a02b }
+.tag.orange { background: #fe640b }
+.tag.red { background: #d20f39 }
+@media (max-width: 768px) {
+    .shapka-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: left;
+        margin-top: 10px;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: var(--color-shapka);
+        border-top: 1px solid #333;
+        padding: 10px 20px;
+        z-index: 99;
+    }
+    .shapka-links.show { display: flex; }
+    .shapka-links a, .language-select {
+        padding: 10px 0;
+        border-bottom: 1px solid #333;
+        width: 100%;
+        text-align: center;
+        margin-right: 0;
+    }
+    .language-dropdown {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+        background-color: transparent;
+        padding-left: 20px;
+    }
+    .language-label {
+        width: 100%;
+        padding: 10px 0;
+    }
+}
+</style>
+<body>
+    <div class="frame">
+        <header class="shapka">
+            <div class="shapka-logo">
+                <img src="https://plugin.zoliryzik.ru/assets/img/ava.png" alt="Logo">
+                <div class="shapka-title"><a href="/en">ZLDiscord</a></div>
+            </div>
+            <div class="shapka-links" id="navLinks">
+                <div class="language-select">
+                    <span class="language-label google-font">Language</span>
+                    <div class="language-dropdown">
+                        <a href="/docs" class="language-option google-font">Русский</a>
+                        <a href="#" class="language-option google-font">English</a>
+                    </div>
+                </div>
+                <a class="google-font" href="/en">Main</a>
+                <a class="google-font" href="#">Releases</a>
+                <a class="active google-font" href="#">Documentation</a>
+                <a class="google-font" href="#">Contacts</a>
+                <a class="download google-font" href="/project/ZoLiryzik.jar">Download</a>
+            </div>
+            <button class="menu-toggle google-font" id="menuToggle">☰</button>
+        </header>
+
+        <main class="docs-container">
+            <div class="probel"></div>
+            <aside class="sidebar">
+                <nav aria-label="Documentation sections">
+                    <ul>
+                        <li><a href="#intro" class="google-font">Introduction</a></li>
+                        <li><a href="#install" class="google-font">Installation</a></li>
+                        <li><a href="#commands" class="google-font">Commands</a></li>
+                        <li><a href="#cc" class="google-font">Custom Commands</a></li>
+                        <li><a href="#template" class="google-font">Templates</a></li>
+                        <li><a href="#longpoll" class="google-font">LongPoll</a></li>
+                        <li><a href="#placeholders" class="google-font">Placeholders</a></li>
+                        <li><a href="#config" class="google-font">Configuration</a></li>
+                        <li><a href="#scripts" class="google-font">Scripts</a></li>
+                        <li><a href="#examples" class="google-font">Examples</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <div class="docs-content">
+                <h1>ZLDiscord v1.2 — Documentation</h1>
+                <hr>
+
+                <section id="intro" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Introduction</h2>
+                    <p>ZLDiscord is a universal Paper 1.16.5–1.21.x plugin bridging Minecraft with Discord. Built-in template engine, LongPoll bot, custom commands, voting, DataStore and full PlaceholderAPI support.</p>
+                </section>
+
+                <hr>
+
+                <section id="install" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Installation</h2>
+                    <ol>
+                        <li>Copy <code>ZoLiryzik.jar</code> to <code>plugins/</code></li>
+                        <li>Start LongPoll bot: <code>node longpoll-server.js &amp;</code></li>
+                        <li>Restart server (<span class="tag red">stop → start, no /reload</span>)</li>
+                        <li>Configure <code>config.yml</code>: Discord Token, Guild ID, roles</li>
+                        <li>Connect LongPoll: <code>/zlongpoll create demo http://localhost:17523/poll secret 25</code></li>
+                    </ol>
+                </section>
+
+                <hr>
+
+                <section id="commands" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Commands</h2>
+
+                    <h3>/zevent — Voting</h3>
+                    <pre><code>/zevent "title" "command" "duration" "channel_id"</code></pre>
+                    <ul>
+                        <li><strong>title</strong> — embed title (supports <code>%placeholder%</code>)</li>
+                        <li><strong>command</strong> — console command on ✅ win</li>
+                        <li><strong>duration</strong> — <code>5s</code>, <code>10m</code>, <code>1h</code></li>
+                        <li><strong>channel_id</strong> — Discord text channel ID</li>
+                    </ul>
+                    <p>When the timer runs out, ✅ / ❌ are counted. If ✅ wins, the command executes.</p>
+
+                    <h3>/zcc — Custom Commands</h3>
+                    <pre><code>/zcc list             — list commands
+/zcc run &lt;name&gt;       — execute
+/zcc create &lt;name&gt;    — create (\n for newline)
+/zcc remove &lt;name&gt;    — remove
+/zcc reload           — reload</code></pre>
+
+                    <h3>/zlink / /zunlink — Discord Linking</h3>
+                    <p><code>/zlink</code> — get code in Minecraft<br>
+                    <code>/unlink</code> — unlink in Discord (bot DMs)</p>
+
+                    <h3>/zembed — Embed Message</h3>
+                    <pre><code>/zembed "name" "title" "description" "channel_id" [image] [thumbnail] [footer] [footer_icon]</code></pre>
+                    <p>Sends embed to Discord, saves messageId. <span class="tag green">PAPI</span></p>
+
+                    <h3>/zembedmanage — Embed Management</h3>
+                    <pre><code>/zembedmanage delete &lt;name&gt;
+/zembedmanage edit_title &lt;name&gt; "new title"
+/zembedmanage edit_description &lt;name&gt; "new description"</code></pre>
+
+                    <h3>/zattr — DataStore</h3>
+                    <pre><code>/zattr get &lt;bot|member|player&gt; &lt;key&gt; [player]
+/zattr set &lt;bot|member|player&gt; &lt;key&gt; &lt;value&gt; [player]
+/zattr inc|dec &lt;...&gt; &lt;key&gt; &lt;amount&gt; [player]
+/zattr list &lt;bot|member|player&gt; [player]</code></pre>
+
+                    <h3>/zlongpoll — LongPoll</h3>
+                    <pre><code>/zlongpoll create &lt;name&gt; &lt;url&gt; &lt;key&gt; [wait]
+/zlongpoll list
+/zlongpoll remove &lt;name&gt;
+/zlongpoll reload</code></pre>
+
+                    <h3>Discord Commands</h3>
+                    <p><span class="tag orange">Prefix</span> Text commands in Discord use the fixed prefix <code>z!</code> (e.g. <code>z!hello</code>, <code>z!info</code>). It cannot be changed.</p>
+                    <ul>
+                        <li><code>/zevent</code> — create a vote (embed-creator roles)</li>
+                        <li><code>!embed</code> — button to create Embed</li>
+                        <li><code>/link &lt;code&gt;</code> — link account (bot DMs)</li>
+                        <li><code>/unlink</code> — unlink (bot DMs)</li>
+                        <li>Slash commands from <code>custom_commands.yml</code> register automatically</li>
+                        <li>Text commands from <code>custom_commands.yml</code> use <code>z!</code> prefix (e.g. <code>z!warn</code>, <code>z!report</code>)</li>
+                    </ul>
+                </section>
+
+                <hr>
+
+                <section id="cc" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Custom Commands</h2>
+                    <p>File <code>custom_commands.yml</code>:</p>
+                    <pre><code class="language-yaml">commands:
+  hello:
+    file: "commands/hello.yml"
+    description: "Greeting"
+    cooldown: 10
+    enabled: true
+    scope: all              # all / minecraft / discord
+    permission: zoliryzik.hello
+    permission-message: "&cNo permission"
+    command_mc: hello
+    command_ds: hello        # Discord prefix z! is fixed — z!hello, cannot be changed
+    aliases_mc: ["h"]
+    aliases_ds: ["h"]
+    discord-roles: ["role_id_1", "role_id_2"]</code></pre>
+
+                    <p>Nested folders supported: <code>commands/lp/lp.yml</code></p>
+
+                    <h4>hello.yml example</h4>
+                    <pre><code class="language-yaml">&lt;~ args[0] ~&gt;, hello from the server!</code></pre>
+
+                    <h4>fly.yml example (conditions, arguments, PAPI)</h4>
+                    <pre><code class="language-yaml">&lt;set target = args[0]&gt;
+&lt;require target != null return "Specify player name"&gt;
+&lt;set mode = args[1]&gt;
+&lt;if mode == null or mode == ""&gt;
+  &lt;set mode = "toggle"&gt;
+&lt;/if&gt;
+&lt;if mode == "on"&gt;
+  &lt;do mc.command("zflytoggle " + target + " on")&gt;
+  Fly &amp;aenabled
+&lt;elseif mode == "off"&gt;
+  &lt;do mc.command("zflytoggle " + target + " off")&gt;
+  Fly &amp;cdisabled
+&lt;else&gt;
+  &lt;do mc.command("zflytoggle " + target)&gt;
+  Fly toggled
+&lt;/if&gt;</code></pre>
+                </section>
+
+                <hr>
+
+                <section id="template" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Template Engine</h2>
+
+                    <h3>Variables</h3>
+                    <table>
+                        <tr><th>Variable</th><th>Scope</th><th>Description</th></tr>
+                        <tr><td><code>args</code></td><td>always</td><td>List of arguments</td></tr>
+                        <tr><td><code>_args_raw</code></td><td>always</td><td>Raw argument string</td></tr>
+                        <tr><td><code>_cmd_name</code></td><td>always</td><td>Command name</td></tr>
+                        <tr><td><code>_lang</code></td><td>always</td><td>Language: ru/en</td></tr>
+                        <tr><td><code>mc_online</code></td><td>always</td><td>Online players</td></tr>
+                        <tr><td><code>mc_max_players</code></td><td>always</td><td>Max players</td></tr>
+                        <tr><td><code>mc_tps</code></td><td>always</td><td>TPS</td></tr>
+                        <tr><td><code>mc_motd</code></td><td>always</td><td>MOTD</td></tr>
+                        <tr><td><code>_player_name</code></td><td>Minecraft</td><td>Player name</td></tr>
+                        <tr><td><code>_player_uuid</code></td><td>Minecraft</td><td>UUID</td></tr>
+                        <tr><td><code>_player_world</code></td><td>Minecraft</td><td>World</td></tr>
+                        <tr><td><code>_discord_member_id</code></td><td>Discord</td><td>Member ID</td></tr>
+                        <tr><td><code>_discord_member_name</code></td><td>Discord</td><td>Member name</td></tr>
+                        <tr><td><code>_discord_member_nick</code></td><td>Discord</td><td>Nickname</td></tr>
+                        <tr><td><code>_discord_channel_id</code></td><td>Discord</td><td>Channel ID</td></tr>
+                        <tr><td><code>_discord_channel_name</code></td><td>Discord</td><td>Channel name</td></tr>
+                        <tr><td><code>_discord_guild_id</code></td><td>Discord</td><td>Guild ID</td></tr>
+                        <tr><td><code>_discord_guild_name</code></td><td>Discord</td><td>Guild name</td></tr>
+                        <tr><td><code>_mentioned_user_id</code></td><td>Discord</td><td>Mentioned user ID</td></tr>
+                        <tr><td><code>_mentioned_user_name</code></td><td>Discord</td><td>Mentioned user name</td></tr>
+                    </table>
+
+                    <h3>Tags</h3>
+                    <table>
+                        <tr><th>Tag</th><th>Description</th></tr>
+                        <tr><td><code>&lt;~ expr ~&gt;</code></td><td>Print expression value</td></tr>
+                        <tr><td><code>&lt;set var = expr&gt;</code></td><td>Assign variable</td></tr>
+                        <tr><td><code>&lt;if cond&gt;...&lt;else&gt;...&lt;/if&gt;</code></td><td>Condition</td></tr>
+                        <tr><td><code>&lt;for var in list&gt;...&lt;/for&gt;</code></td><td>Loop</td></tr>
+                        <tr><td><code>&lt;do action(...)&gt;</code></td><td>Execute action</td></tr>
+                        <tr><td><code>&lt;require cond return "msg"&gt;</code></td><td>Guard with error</td></tr>
+                        <tr><td><code>&lt;return "msg"&gt;</code></td><td>Early return</td></tr>
+                        <tr><td><code>&lt;global var = expr&gt;</code></td><td>Global variable</td></tr>
+                        <tr><td><code>&lt;# comment #&gt;</code></td><td>Comment</td></tr>
+                    </table>
+
+                    <h3>Functions</h3>
+                    <p><strong>String:</strong> <code>lower</code>, <code>upper</code>, <code>capitalize</code>, <code>trim</code>, <code>title</code>, <code>replace(a,b,s)</code>, <code>split(sep,s)</code>, <code>length</code>, <code>format</code>, <code>after(N)</code></p>
+                    <p><strong>Checks:</strong> <code>defined</code>, <code>empty</code>, <code>not</code>, <code>number</code>, <code>iterable</code>, <code>even</code>, <code>odd</code>, <code>contains</code>, <code>startsWith</code>, <code>endsWith</code>, <code>typeof</code></p>
+                    <p><strong>Math:</strong> <code>abs</code>, <code>round</code>, <code>number_format</code>, <code>random(min,max)</code>, <code>random_hex</code>, <code>random_uuid</code></p>
+                    <p><strong>Collections:</strong> <code>first</code>, <code>last</code>, <code>reverse</code>, <code>slice</code>, <code>sort</code>, <code>shuffle</code>, <code>batch</code>, <code>concat</code>, <code>join</code>, <code>keys</code>, <code>values</code>, <code>default</code></p>
+                    <p><strong>PAPI:</strong> <code>papi("placeholder" [, player])</code></p>
+                    <p><strong>DataStore:</strong> <code>getattribute(key)</code>, <code>member.getattribute(key)</code>, <code>player.getattribute(key)</code>, <code>bot.getattribute(key)</code>, <code>find_player_by_session(id)</code></p>
+                    <p><strong>HTTP:</strong> <code>http_get(url)</code>, <code>http_post(url, body|key,val...)</code>, <code>http_put</code>, <code>http_delete</code>, <code>http_patch</code>, <code>http_code(resp)</code>, <code>http_body(resp)</code>, <code>http_header(name,val)</code>, <code>http_bearer(token)</code>, <code>json_parse(str)</code></p>
+
+                    <h3>Actions (&lt;do&gt;)</h3>
+                    <table>
+                        <tr><th>Action</th><th>Description</th></tr>
+                        <tr><td><code>mc.command("cmd")</code></td><td>Execute command (console/player)</td></tr>
+                        <tr><td><code>mc.broadcast("msg")</code></td><td>Broadcast (&amp; for colors)</td></tr>
+                        <tr><td><code>mc.give("player","item")</code></td><td>Give item</td></tr>
+                        <tr><td><code>discord.send(channelId,"text")</code></td><td>Send to Discord</td></tr>
+                        <tr><td><code>discord.embed(...)</code></td><td>Embed with fields, buttons, reactions</td></tr>
+                        <tr><td><code>discord.role_add/give(memberId, roleId)</code></td><td>Add role</td></tr>
+                        <tr><td><code>discord.role_remove/delete(memberId, roleId)</code></td><td>Remove role</td></tr>
+                        <tr><td><code>bot.setstatus("online/dnd/idle")</code></td><td>Bot status</td></tr>
+                        <tr><td><code>bot.setstatustext("text")</code></td><td>Bot status text</td></tr>
+                    </table>
+
+                    <h4>Chain API</h4>
+                    <pre><code>guild.getChannel("id").createEmbed().withTitle("...").withColor("#hex").withField("n","v",true).send()</code></pre>
+
+                    <h3>Bot Status</h3>
+                    <p>File <code>bot_status.yml</code>:</p>
+                    <pre><code class="language-yaml">enabled: true
+type: "playing"     # playing / watching / listening / competing / custom
+text: "with the server"</code></pre>
+                </section>
+
+                <hr>
+
+                <section id="longpoll" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>LongPoll Bot API</h2>
+                    <p>Node.js bot at <code>http://localhost:17523</code>. Auth: <code>Authorization: Bearer secret</code>.</p>
+                    <table>
+                        <tr><th>Method</th><th>Endpoint</th><th>Body</th></tr>
+                        <tr><td>POST</td><td><code>/event</code></td><td><code>{"type":"...", ...}</code></td></tr>
+                        <tr><td>POST</td><td><code>/api/config</code></td><td><code>{"key":"value"}</code></td></tr>
+                        <tr><td>GET</td><td><code>/api/script?type=X</code></td><td>—</td></tr>
+                        <tr><td>POST</td><td><code>/api/script?type=X</code></td><td><code>{"script":"..."}</code></td></tr>
+                    </table>
+
+                    <h3>LongPoll Scripts</h3>
+                    <p>Path: <code>longpoll/papca/&lt;connection&gt;/&lt;type&gt;.yml</code></p>
+                    <table>
+                        <tr><th>Variable</th><th>Description</th></tr>
+                        <tr><td><code>_event</code></td><td>Map with all fields</td></tr>
+                        <tr><td><code>_event.type</code></td><td>Event type</td></tr>
+                        <tr><td><code>_event.player</code>, ...</td><td>Fields from JSON</td></tr>
+                        <tr><td><code>_conn_name</code></td><td>Connection name</td></tr>
+                    </table>
+                    <p><span class="tag red">Important</span> Use <code>&lt;do action(...)&gt;</code>, NOT <code>&lt;action(...)&gt;</code>.</p>
+
+                    <h4>donate.yml example</h4>
+                    <pre><code class="language-yaml">&lt;if !defined(_event.nickname)&gt;
+  &lt;do mc.command("say", "Donate: no nickname in event")&gt;
+&lt;else&gt;
+  &lt;set _nick = _event.nickname&gt;
+  &lt;set _amount = _event.amount&gt;
+  &lt;do mc.command("give " + _nick + " diamond " + (_amount / 100))&gt;
+  &lt;if _lang == "ru"&gt;
+    &lt;do mc.broadcast("&amp;a🎉 Player " + _nick + " donated &amp;e" + _amount + " &amp;aand got " + (_amount / 100) + " diamonds!")&gt;
+  &lt;else&gt;
+    &lt;do mc.broadcast("&amp;a🎉 Player " + _nick + " donated &amp;e" + _amount + " &amp;aand got " + (_amount / 100) + " diamonds!")&gt;
+  &lt;/if&gt;
+  &lt;do player.getAttribute("donations").increment(_amount)&gt;
+&lt;/if&gt;</code></pre>
+                </section>
+
+                <hr>
+
+                <section id="placeholders" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>PlaceholderAPI</h2>
+                    <ul>
+                        <li><span class="tag green">Player</span> — resolves for command sender</li>
+                        <li><span class="tag orange">Console</span> — resolves for first online player</li>
+                        <li><span class="tag green">papi("x", "Nick")</span> — target any player by name</li>
+                    </ul>
+                    <table>
+                        <tr><th>Placeholder</th><th>Description</th></tr>
+                        <tr><td><code>%zoliryzik_in_vc%</code></td><td>Voice channel status: "In a voice channel" / "Not in a voice channel" / "Not linked"</td></tr>
+                        <tr><td><code>%zoliryzik_attr_member_&lt;key&gt;%</code></td><td>Discord member attribute from DataStore by key</td></tr>
+                        <tr><td><code>%zoliryzik_attr_player_&lt;key&gt;%</code></td><td>Player attribute from DataStore by key</td></tr>
+                        <tr><td><code>%zoliryzik_attr_bot_&lt;key&gt;%</code></td><td>Global bot attribute from DataStore by key</td></tr>
+                    </table>
+                </section>
+
+                <hr>
+
+                <section id="config" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Configuration</h2>
+                    <pre><code class="language-yml" id="config-code">Loading...</code></pre>
+
+                    <h3>Environment Variables</h3>
+                    <table>
+                        <tr><th>Variable</th><th>Description</th></tr>
+                        <tr><td><code>DISCORD_TOKEN</code></td><td>Discord bot token</td></tr>
+                        <tr><td><code>LONGPOLL_KEY</code></td><td>API key (default: secret)</td></tr>
+                        <tr><td><code>LONGPOLL_PORT</code></td><td>Port (default: 17523)</td></tr>
+                    </table>
+                </section>
+
+                <hr>
+
+                <section id="scripts" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Script Examples</h2>
+                    <p>Examples for sending events to the LongPoll bot from external scripts.</p>
+
+                    <h3>Python</h3>
+                    <pre><code class="language-python">import requests, json
+
+URL = "http://localhost:17523/event"
+HEADERS = {
+    "Authorization": "Bearer secret",
+    "Content-Type": "application/json"
+}
+
+# Send donate event
+event = {
+    "type": "donate",
+    "nickname": "Player123",
+    "amount": 1500,
+    "product": "Diamond Pack"
+}
+r = requests.post(URL, headers=HEADERS, json=event)
+print("Status:", r.status_code, r.json())
+
+# Send kick event
+event = {
+    "type": "kick",
+    "nickname": "Griefer",
+    "reason": "Spam",
+    "moderator": "Admin"
+}
+r = requests.post(URL, headers=HEADERS, json=event)
+print("Status:", r.status_code, r.json())</code></pre>
+
+                    <h3>Node.js</h3>
+                    <pre><code class="language-javascript">const URL = "http://localhost:17523/event";
+const HEADERS = {
+    "Authorization": "Bearer secret",
+    "Content-Type": "application/json"
+};
+
+// Send donate event
+fetch(URL, {
+    method: "POST",
+    headers: HEADERS,
+    body: JSON.stringify({
+        type: "donate",
+        nickname: "Player123",
+        amount: 1500,
+        product: "Diamond Pack"
+    })
+}).then(r => r.json()).then(console.log);
+
+// Send kick event
+fetch(URL, {
+    method: "POST",
+    headers: HEADERS,
+    body: JSON.stringify({
+        type: "kick",
+        nickname: "Griefer",
+        reason: "Spam",
+        moderator: "Admin"
+    })
+}).then(r => r.json()).then(console.log);</code></pre>
+
+                    <h3>curl</h3>
+                    <pre><code>curl http://localhost:17523/event -X POST \
+  -H "Authorization: Bearer secret" \
+  -H "Content-Type: application/json" \
+  -d '{"type":"donate","nickname":"Player123","amount":1500}'
+
+curl http://localhost:17523/event -X POST \
+  -H "Authorization: Bearer secret" \
+  -H "Content-Type: application/json" \
+  -d '{"type":"kick","nickname":"Griefer","reason":"Spam","moderator":"Admin"}'</code></pre>
+                </section>
+
+                <hr>
+
+                <section id="examples" class="docs-section">
+                    <div class="probel"></div>
+                    <h2>Examples</h2>
+
+                    <h3>LP command from Minecraft</h3>
+                    <pre><code class="language-yaml">&lt;set _ = http_header("Authorization", "Bearer secret")&gt;
+&lt;set _type = args[0]&gt;
+&lt;set _resp = http_post("http://localhost:17523/event",
+  "type", _type, "player", _player_name, "world", _player_world,
+  "cmd", _cmd_name, "args", _args_raw)&gt;
+&lt;do mc.broadcast("&amp;a[LP] &amp;f" + _type + " &amp;a✓")&gt;</code></pre>
+
+                    <h3>Donate notification</h3>
+                    <pre><code class="language-yaml">&lt;if _event.amount &gt;= 5000&gt;
+  &lt;do mc.broadcast("&amp;a&amp;l⭐ Mega-donate from &amp;e" + _event.nickname)&gt;
+&lt;else&gt;
+  &lt;do mc.broadcast("&amp;a❤ " + _event.nickname + " donated &amp;e" + _event.amount)&gt;
+&lt;/if&gt;</code></pre>
+
+                    <h3>Player Info (info.yml)</h3>
+                    <pre><code class="language-yaml">&lt;set target = args[0]&gt;
+&lt;if target == null or target == ""&gt;
+  &lt;set target = _player_name&gt;
+&lt;/if&gt;
+📊 Info about &lt;~ target ~&gt;
+├ Level: &lt;~ papi("%level%", target) ~&gt;
+├ Health: &lt;~ papi("%player_health%", target) ~&gt;
+├ World: &lt;~ papi("%player_world%", target) ~&gt;
+└ Online: &lt;~ mc_online ~&gt;/&lt;~ mc_max_players ~&gt;</code></pre>
+
+                    <h3>Report (Discord command)</h3>
+                    <pre><code class="language-yaml">&lt;set target = args[0]&gt;
+&lt;set reason = after(1)&gt;
+&lt;require target != null and reason != "" return "Specify offender ID/mention and reason"&gt;
+Report on &lt;~ target ~&gt;:
+&lt;~ reason ~&gt;
+&lt;do discord.send(_discord_channel_id, format("%s, Your report has been submitted!", _discord_member_nick))&gt;</code></pre>
+
+                    <h3>Diagnostics</h3>
+                    <p><code>/zdiag</code> (ZDiag) — 12 system tests: bot, channels, roles, LongPoll, attributes, HTTP, templates, PAPI, permissions.</p>
+                </section>
+            </div>
+        </main>
+
+        <!-- Mobile navigation -->
+        <button class="mobile-nav-btn google-font" id="mobileNavBtn" aria-label="Navigation">☰</button>
+        <div class="mobile-nav-overlay" id="mobileNavOverlay">
+            <div class="mobile-nav-panel">
+                <a href="#intro">Introduction</a>
+                <a href="#install">Installation</a>
+                <a href="#commands">Commands</a>
+                <a href="#cc">Custom Commands</a>
+                <a href="#template">Templates</a>
+                <a href="#longpoll">LongPoll</a>
+                <a href="#placeholders">Placeholders</a>
+                <a href="#config">Configuration</a>
+                <a href="#scripts">Scripts</a>
+                <a href="#examples">Examples</a>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="/assets/img/ava.png" alt="Logo">
+                    <h2>ZLDiscord</h2>
+                </div>
+                <div class="footer-links">
+                    <a href="#">Home</a>
+                    <a href="/releases">Releases</a>
+                    <a href="#">Documentation</a>
+                    <a href="#">Support</a>
+                    <a href="#">Contacts</a>
+                </div>
+                <div class="copyright">
+                    <p>&copy; <span id="current-year"></span> ZLDiscord.</p>
+                    <p>Plugin version: 1.2 | Support: Paper 1.16.5 – 1.21.x</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/menu-toggle.js"></script>
+
+</body>
+<script>
+    const configCodeElement = document.getElementById('config-code');
+    fetch('/project/resources/config.yml')
+        .then(response => {
+            if (!response.ok) throw new Error('Failed to load config.yml.');
+            return response.text();
+        })
+        .then(text => {
+            configCodeElement.textContent = text;
+            hljs.highlightAll();
+        })
+        .catch(error => {
+            configCodeElement.textContent = 'Error loading: ' + error.message;
+        });
+
+    const sections = document.querySelectorAll('.docs-section');
+    const navLinks = document.querySelectorAll('.sidebar a');
+
+    function setActiveLink() {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (window.scrollY >= sectionTop - 150) {
+                current = section.getAttribute('id');
+            }
+        });
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.href.includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    function smoothScroll(event) {
+        event.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        if (targetSection) {
+            window.scrollTo({
+                top: targetSection.offsetTop - 90,
+                behavior: 'smooth'
+            });
+            window.history.pushState(null, null, targetId);
+        }
+    }
+
+    window.addEventListener('scroll', setActiveLink);
+    navLinks.forEach(link => {
+        link.addEventListener('click', smoothScroll);
+    });
+
+    window.addEventListener('load', () => {
+        const hash = window.location.hash;
+        if (hash) {
+            const targetSection = document.querySelector(hash);
+            if (targetSection) {
+                window.scrollTo({
+                    top: targetSection.offsetTop - 90,
+                    behavior: 'smooth'
+                });
+            }
+        }
+        setActiveLink();
+    });
+
+    // Mobile nav toggle
+    const mobileBtn = document.getElementById('mobileNavBtn');
+    const mobileOverlay = document.getElementById('mobileNavOverlay');
+    if (mobileBtn && mobileOverlay) {
+        mobileBtn.addEventListener('click', () => {
+            mobileOverlay.classList.toggle('show');
+        });
+        mobileOverlay.addEventListener('click', (e) => {
+            if (e.target === mobileOverlay) {
+                mobileOverlay.classList.remove('show');
+            }
+        });
+        mobileOverlay.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+                mobileOverlay.classList.remove('show');
+            });
+        });
+    }
+</script>
+
+</html>
