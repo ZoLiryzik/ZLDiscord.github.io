@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сервер-конструктор | Возможности</title>
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --card: #12121a;
+            --border: #1e1e2e;
+            --text: #c0c0d0;
+            --accent: #7b5cff;
+            --accent2: #ff4d8c;
+            --green: #3df0a0;
+            --yellow: #ffc640;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.5;
+            padding: 20px;
+        }
+        .container { max-width: 700px; margin: 0 auto; }
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        .card h2 {
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .badge-unlim { background: #ff4d8c22; color: var(--accent2); }
+        .badge-host { background: #7b5cff22; color: var(--accent); }
+        .badge-sync { background: #3df0a022; color: var(--green); }
+        .badge-txt { background: #ffc64022; color: var(--yellow); }
+        ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 8px;
+        }
+        li {
+            background: #1a1a25;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: #999;
+            border: 1px solid #222;
+        }
+        .highlight { color: var(--green); font-weight: 600; }
+        .section-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #555;
+            margin: 20px 0 10px;
+            padding-left: 4px;
+        }
+        code {
+            background: #1a1a25;
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: var(--accent2);
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #444;
+            font-size: 0.75rem;
+        }
+        .big-num {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>Сервер-конструктор</h1>
+    <p class="subtitle">Что может сделать хост · Никаких ограничений · Всё через .txt</p>
+
+    <div class="card" style="text-align:center; border-color: #7b5cff44;">
+        <span class="big-num">∞</span>
+        <p style="color:#888;">комбинаций оружия, врагов, комнат</p>
+    </div>
+
+    <!-- ПЕРСОНАЖ -->
+    <div class="card">
+        <h2>🧑 Персонаж <span class="badge badge-host">Хост создаёт</span></h2>
+        <ul>
+            <li>Спрайт / анимации</li>
+            <li>Здоровье / скорость / хитбокс</li>
+            <li>Перекат: дальность, кулдаун, фаза сквозь стены</li>
+            <li>До 3 способностей</li>
+            <li>Пассивный эффект</li>
+            <li>Реакция на урон</li>
+            <li>Реакция на смерть</li>
+            <li>Стартовое оружие</li>
+            <li class="highlight">Любые свои ключи</li>
+        </ul>
+    </div>
+
+    <!-- ОРУЖИЕ -->
+    <div class="card">
+        <h2>🔫 Оружие <span class="badge badge-unlim">Без ограничений</span></h2>
+        <ul>
+            <li>Спрайт / звук выстрела</li>
+            <li>Скорострельность / магазин / перезарядка</li>
+            <li>Тип ствола (залп, веер, кольцо, змейка…)</li>
+            <li>Снаряд (пуля, луч, крюк, волна, мина…)</li>
+            <li>Траектория (прямо, дуга, синус, спираль, бумеранг…)</li>
+            <li>Скорость / время жизни / пробивание</li>
+            <li>Отскок / прилипание / самонавод</li>
+            <li>Разделение в полёте</li>
+            <li>Цепь между снарядами</li>
+            <li class="highlight">Триггеры: при_выстреле / при_попадании / при_убийстве / при_промахе / при_перезарядке / при_отскоке / каждые_N_секунд</li>
+            <li class="highlight">Действия: спавн / урон / телепорт / щит / лечение / невидимость / замедление / притяжение / обмен / взрыв / стена / кража / отражение / полёт / призыв</li>
+            <li class="highlight">Хост придумывает свои действия → кладёт .txt скрипт в папку</li>
+        </ul>
+    </div>
+
+    <!-- ВРАГ -->
+    <div class="card">
+        <h2>👾 Враг / Босс <span class="badge badge-unlim">Без ограничений</span></h2>
+        <ul>
+            <li>Спрайт / звуки</li>
+            <li>Здоровье / скорость / хитбокс</li>
+            <li>ИИ: преследование, патруль, засада, убегание, хаос</li>
+            <li>Ближняя атака (таран, захват, отскок)</li>
+            <li>Дальняя атака (свой снаряд, кд, тип)</li>
+            <li>Элитность (аура, множитель хп)</li>
+            <li>Призыв подкрепления при хп%</li>
+            <li>Дроп (предмет, шанс, количество)</li>
+            <li>Реакция на попадание</li>
+            <li>Реакция на смерть (взрыв, разделение, облако)</li>
+            <li class="highlight">Босс: фазы, ультимейт, смена поведения, арена</li>
+            <li class="highlight">Любые кастомные действия хоста</li>
+        </ul>
+    </div>
+
+    <!-- КОМНАТА -->
+    <div class="card">
+        <h2>🚪 Комната <span class="badge badge-txt">.txt файл</span></h2>
+        <ul>
+            <li>Тайлсет (пол, стены, двери)</li>
+            <li>Размер (любой)</li>
+            <li>Враги: список, количество</li>
+            <li>Волны: состав, задержка</li>
+            <li>Ловушки: шипы, огонь, ямы, исчезающий пол</li>
+            <li>Препятствия: ящики, бочки</li>
+            <li>Алтари: цена → награда</li>
+            <li>Правило: эхо / тишина / мираж / жертва / темнота / лабиринт / падение / дискотека / <span class="highlight">своё</span></li>
+            <li>Погода: дождь, ветер, молния</li>
+            <li>При входе / при зачистке: действия</li>
+            <li class="highlight">Свои правила через .txt скрипт</li>
+        </ul>
+    </div>
+
+    <!-- КАРТА -->
+    <div class="card">
+        <h2>🗺️ Карта (забег) <span class="badge badge-host">Хост настраивает</span></h2>
+        <ul>
+            <li>Тема: подземелье, лес, пустыня, космос, <span class="highlight">своё</span></li>
+            <li>Количество этажей</li>
+            <li>Комнат на этаж (мин–макс)</li>
+            <li>Секретные комнаты</li>
+            <li>Финальный босс</li>
+            <li>Музыка фона</li>
+            <li>Глобальные модификаторы забега</li>
+        </ul>
+    </div>
+
+    <!-- МОДИФИКАТОРЫ ЗАБЕГА -->
+    <div class="card">
+        <h2>🎲 Модификаторы забега</h2>
+        <ul>
+            <li>Хрупкость (1 хп у всех)</li>
+            <li>Щедрость (только боссы, х3 дроп)</li>
+            <li>Торопливость (таймер на этаж)</li>
+            <li>Тишина в эфире (звуки отключены)</li>
+            <li>Невидимки (видны только тени)</li>
+            <li>Зеркальный мир (лево/право меняются)</li>
+            <li>Друзья-враги (огонь по своим)</li>
+            <li>Музыка влияет на мир</li>
+            <li class="highlight">Свои модификаторы</li>
+        </ul>
+    </div>
+
+    <!-- ПРЕДМЕТЫ / БАФФЫ -->
+    <div class="card">
+        <h2>💎 Предметы / Баффы / Дебаффы</h2>
+        <ul>
+            <li>Спрайт / название</li>
+            <li>Тип: хилка, валюта, бафф, щит, ловушка</li>
+            <li>Значение / длительность</li>
+            <li>Автосбор</li>
+            <li>Эффект при подборе</li>
+            <li>Заражение / распространение</li>
+            <li class="highlight">Свои эффекты</li>
+        </ul>
+    </div>
+
+    <!-- ВЗАИМОДЕЙСТВИЯ -->
+    <div class="card">
+        <h2>🤝 Взаимодействия между игроками</h2>
+        <ul>
+            <li>Цепь жизни (урон делится)</li>
+            <li>Якорь (один неподвижен, второй летает)</li>
+            <li>Обмен телами</li>
+            <li>Слияние (супер-персонаж на 5с)</li>
+            <li>Жертва (отдать хп, воскресить позже)</li>
+            <li>Торг (обмен хп на оружие)</li>
+            <li>Суд (выживет один)</li>
+            <li class="highlight">Свои механики</li>
+        </ul>
+    </div>
+
+    <!-- СИНХРОНИЗАЦИЯ -->
+    <div class="card">
+        <h2>🔄 Синхронизация с клиентами <span class="badge badge-sync">Авто</span></h2>
+        <ul>
+            <li>Клиент заходит → получает все .txt конфиги</li>
+            <li>Получает все спрайты и звуки</li>
+            <li>Получает все скрипты хоста</li>
+            <li>Сверка хэшей папки mods</li>
+            <li>Клиент только: ввод + рендер</li>
+            <li>Вся логика на хосте</li>
+        </ul>
+    </div>
+
+    <!-- ФОРМАТ -->
+    <div class="card" style="border-color: #ffc64044;">
+        <h2>📝 Формат .txt <span class="badge badge-txt">Простота</span></h2>
+        <p style="font-size:0.85rem; color:#888; margin-bottom:8px;">
+            Одна строка = один параметр. Хост пишет что хочет:
+        </p>
+        <code>ключ: значение</code><br>
+        <code>триггер: действие параметр=число</code><br>
+        <code>мой_выдуманный_ключ: да</code>
+        <p style="font-size:0.8rem; color:#555; margin-top:8px;">
+            Неизвестные движку ключи → поиск .txt скрипта с таким именем в папке.<br>
+            Нет скрипта → запись в лог, игра не падает.
+        </p>
+    </div>
+
+    <div class="footer">
+        Движок — исполнитель. Фантазия хоста — контент. Ограничений нет.
+    </div>
+
+</div>
+</body>
+</html>
