@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сервер-конструктор | Полный список .txt</title>
+    <style>
+        :root {
+            --bg: #07070d;
+            --card: #0e0e18;
+            --border: #1a1a2e;
+            --text: #b0b0c0;
+            --accent: #7b5cff;
+            --accent2: #ff4d8c;
+            --green: #3df0a0;
+            --yellow: #ffc640;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.5;
+            padding: 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 4px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #555;
+            margin-bottom: 6px;
+            font-size: 0.8rem;
+        }
+        .big-num {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+        }
+        .card h2 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 14px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+        .badge-all { background: #ff4d8c22; color: var(--accent2); }
+        .badge-txt { background: #ffc64022; color: var(--yellow); }
+        .badge-core { background: #7b5cff22; color: var(--accent); }
+        .badge-world { background: #3df0a022; color: var(--green); }
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 4px;
+        }
+        .tag {
+            background: #13131f;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 0.72rem;
+            color: #888;
+            border: 1px solid #1e1e2e;
+        }
+        .tag.hl { color: var(--green); border-color: #3df0a033; }
+        code {
+            background: #13131f;
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-size: 0.78rem;
+            color: var(--accent2);
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #3a3a4a;
+            font-size: 0.75rem;
+        }
+        .section-title {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #3a3a4a;
+            margin: 24px 0 8px;
+            padding-left: 4px;
+        }
+        .reload-box {
+            background: #0a0a12;
+            border: 1px solid #7b5cff44;
+            border-radius: 10px;
+            padding: 12px 16px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .reload-box code {
+            font-size: 1.2rem;
+            color: var(--accent);
+            background: transparent;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>Сервер-конструктор</h1>
+    <p class="subtitle">Хост пишет .txt → сохраняет → жмёт /reload → игра пересобрана без вылета</p>
+    <div class="big-num">∞</div>
+
+    <div class="reload-box">
+        <p style="color:#888; margin-bottom:4px;">Единственная команда в игре:</p>
+        <code>/reload</code>
+        <p style="color:#555; font-size:0.7rem; margin-top:4px;">Вся магия — в правке файлов. Чат-команд больше нет.</p>
+    </div>
+
+    <!-- ========== ЯДРО ========== -->
+    <p class="section-title">Ядро</p>
+
+    <div class="card">
+        <h2>🧑 Персонаж <span class="badge badge-core">.txt</span></h2>
+        <div class="tags">
+            <span class="tag hl">спрайт</span><span class="tag hl">анимации все</span><span class="tag">хп</span><span class="tag">реген</span><span class="tag">скорость</span><span class="tag">масса</span><span class="tag">хитбокс</span>
+            <span class="tag">прыжок</span><span class="tag">перекат</span><span class="tag hl">способности 1-5</span><span class="tag hl">пассивы 1-3</span><span class="tag">аура</span><span class="tag">цвет</span><span class="tag">размер</span>
+            <span class="tag">звуки</span><span class="tag">голос</span><span class="tag">следы</span><span class="tag">характер</span><span class="tag">голод</span><span class="tag">жажда</span><span class="tag">усталость</span>
+            <span class="tag">навыки 8</span><span class="tag">сопротивления 13</span><span class="tag">иммунитет</span><span class="tag">форма 18</span><span class="tag">фракция</span><span class="tag">биография</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🔫 Оружие <span class="badge badge-all">ВСЁ</span></h2>
+        <div class="tags">
+            <span class="tag hl">имя</span><span class="tag hl">спрайты</span><span class="tag hl">звуки</span><span class="tag">скорострельность</span><span class="tag">магазин</span><span class="tag">перезарядка 6 типов</span>
+            <span class="tag">разброс</span><span class="tag">отдача</span><span class="tag hl">ствол 35 типов</span><span class="tag hl">снаряд 65 типов</span><span class="tag hl">траектория 45 типов</span>
+            <span class="tag">скорость</span><span class="tag">размер</span><span class="tag">цвет</span><span class="tag">время жизни</span><span class="tag">отскок</span><span class="tag">пробивание</span>
+            <span class="tag">прилипание</span><span class="tag">самонавод</span><span class="tag">разделение</span><span class="tag">цепь</span><span class="tag">слияние</span>
+            <span class="tag hl">урон 22 типа</span><span class="tag">крит</span><span class="tag">площадь</span><span class="tag hl">эффекты 55+</span><span class="tag">спавн</span><span class="tag">телепорт</span><span class="tag">смена всего</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>👾 Враг / Босс <span class="badge badge-all">ВСЁ</span></h2>
+        <div class="tags">
+            <span class="tag hl">спрайт</span><span class="tag hl">звуки</span><span class="tag">хп</span><span class="tag">щит</span><span class="tag">броня</span><span class="tag">скорость</span>
+            <span class="tag hl">ИИ 45 типов</span><span class="tag">ближняя атака</span><span class="tag">дальняя атака</span><span class="tag">особые атаки</span>
+            <span class="tag">элитность</span><span class="tag">фазы</span><span class="tag">призыв</span><span class="tag">дроп</span><span class="tag">реакции</span><span class="tag">диалоги</span>
+            <span class="tag hl">босс: арена</span><span class="tag hl">ультимейт</span><span class="tag hl">катсцены</span><span class="tag">энрейдж</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🚪 Комната <span class="badge badge-txt">.txt</span></h2>
+        <div class="tags">
+            <span class="tag">тайлсет</span><span class="tag">размер</span><span class="tag">форма</span><span class="tag">враги/волны</span>
+            <span class="tag hl">ловушки 18 типов</span><span class="tag">препятствия</span><span class="tag">алтари</span>
+            <span class="tag hl">правило 45 типов</span><span class="tag">погода</span><span class="tag">музыка</span><span class="tag">гравитация</span>
+            <span class="tag">время</span><span class="tag">освещение</span><span class="tag">при входе</span><span class="tag">при зачистке</span><span class="tag">при выходе</span>
+            <span class="tag">каждые N сек</span><span class="tag hl">секретные стены</span><span class="tag hl">живые стены</span><span class="tag">полы 8 типов</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🗺️ Карта <span class="badge badge-world">.txt</span></h2>
+        <div class="tags">
+            <span class="tag hl">тема 55+</span><span class="tag">этажи</span><span class="tag">комнаты</span><span class="tag">секретки</span>
+            <span class="tag">старт/отдых/магазин/кузница/алтарь/портал</span>
+            <span class="tag">боссы</span><span class="tag">музыка</span><span class="tag">фон</span><span class="tag">форма</span><span class="tag">соединения</span>
+        </div>
+    </div>
+
+    <!-- ========== МИР ========== -->
+    <p class="section-title">Мир</p>
+
+    <div class="card">
+        <h2>🌍 Погода <span class="badge badge-world">.txt</span></h2>
+        <div class="tags">
+            <span class="tag hl">осадки 18 типов</span><span class="tag hl">ветер 10 направлений</span>
+            <span class="tag">молнии</span><span class="tag">радуга</span><span class="tag">туман</span><span class="tag">температура</span>
+            <span class="tag">влажность</span><span class="tag">затмение</span><span class="tag">сияние</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>⏱️ Время / Сезоны <span class="badge badge-world">.txt</span></h2>
+        <div class="tags">
+            <span class="tag">утро/день/вечер/ночь</span><span class="tag">весна/лето/осень/зима</span>
+            <span class="tag">праздники по датам</span><span class="tag">эффекты</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🧪 Физика <span class="badge badge-core">.txt</span></h2>
+        <div class="tags">
+            <span class="tag">гравитация</span><span class="tag">трение</span><span class="tag">отскок</span><span class="tag">масса</span>
+            <span class="tag">столкновения</span><span class="tag">толкание</span><span class="tag">разрушаемость</span>
+            <span class="tag">ветер на снаряды</span><span class="tag">плавучесть</span><span class="tag">сопротивление</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📷 Камера <span class="badge badge-core">.txt</span></h2>
+        <div class="tags">
+            <span class="tag">тип</span><span class="tag">плавность</span><span class="tag">зум</span><span class="tag">тряска</span>
+            <span class="tag">поворот</span><span class="tag">границы</span><span class="tag">режим</span><span class="tag">эффекты</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🔊 Звук <span class="badge badge-core">.txt</span></h2>
+        <div class="tags">
+            <span class="tag">громкость по 10 категориям</span><span class="tag">баланс</span>
+            <span class="tag">эффекты 8</span><span class="tag">музыка по ситуациям</span><span class="tag">плейлист</span>
+        </div>
+    </div>
+
+    <!-- ========== ГЕЙМПЛЕЙ ========== -->
+    <p class="section-title">Геймплей</p>
+
+    <div class="card">
+        <h2>🎲 Модификаторы забега <span class="badge badge-all">ВСЁ</span></h2>
+        <div class="tags">
+            <span class="tag hl">хрупкость</span><span class="tag hl">щедрость</span><span class="tag hl">торопливость</span>
+            <span class="tag hl">тишина</span><span class="tag hl">невидимки</span><span class="tag hl">зеркальный мир</span>
+            <span class="tag hl">друзья-враги</span><span class="tag">музыка влияет</span><span class="tag">эмоции как оружие</span>
+            <span class="tag">оружие меняется</span><span class="tag">без оружия</span><span class="tag">бесконечные патроны</span>
+            <span class="tag">все боссы/элита</span><span class="tag">дроп х10/нет</span><span class="tag">лечение запрещено</span>
+            <span class="tag">хп скрыто</span><span class="tag">интерфейс выкл</span><span class="tag">камера любая</span>
+            <span class="tag">управление инвертировано</span><span class="tag">одна/бесконечные жизни</span>
+            <span class="tag">скорость х2/х0.5</span><span class="tag">размер х2/х0.5</span>
+            <span class="tag">ч/б/пиксель/комикс/рыбий глаз/пьяный</span>
+            <span class="tag">всё вверх ногами</span><span class="tag">метеориты/лава/деньги/враги с неба</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🤝 Взаимодействия игроков</h2>
+        <div class="tags">
+            <span class="tag hl">цепь жизни</span><span class="tag hl">якорь</span><span class="tag hl">обмен телами</span>
+            <span class="tag hl">слияние</span><span class="tag hl">жертва</span><span class="tag">торг</span><span class="tag">дуэль</span>
+            <span class="tag">воскрешение</span><span class="tag">передача всего</span><span class="tag">телепорты</span>
+            <span class="tag">притянуть/оттолкнуть/подбросить</span><span class="tag">использовать как оружие/щит</span>
+            <span class="tag">общий инвентарь/здоровье/валюта</span><span class="tag">дружественный огонь</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>💎 Предметы</h2>
+        <div class="tags">
+            <span class="tag hl">тип 45+</span><span class="tag">значение</span><span class="tag">длительность</span>
+            <span class="tag">стакается</span><span class="tag">автосбор</span><span class="tag">магнит</span>
+            <span class="tag">заражение</span><span class="tag">эффекты при 8 действиях</span><span class="tag">обмен/кража</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>✨ Баффы / Дебаффы</h2>
+        <div class="tags">
+            <span class="tag hl">эффект 45+</span><span class="tag">длительность</span><span class="tag">стакается</span>
+            <span class="tag">заражение</span><span class="tag">распространение</span><span class="tag">снятие</span>
+            <span class="tag">невосприимчивость</span><span class="tag">визуал</span><span class="tag">звук</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>😀 Эмоции и жесты</h2>
+        <div class="tags">
+            <span class="tag hl">20+ жестов</span><span class="tag">эффект на мир</span><span class="tag">радиус</span>
+            <span class="tag">время</span><span class="tag">кд</span><span class="tag">условие</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>⚖️ Сложность</h2>
+        <div class="tags">
+            <span class="tag">множители всего</span><span class="tag">дружественный огонь</span>
+            <span class="tag">возрождение</span><span class="tag">рост по этажам/времени</span><span class="tag">адаптивность</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🎮 Режимы игры</h2>
+        <div class="tags">
+            <span class="tag">забег</span><span class="tag">арена</span><span class="tag">выживание</span>
+            <span class="tag">гонка</span><span class="tag">защита</span><span class="tag">охота</span>
+            <span class="tag">песочница</span><span class="tag hl">свой</span>
+        </div>
+    </div>
+
+    <!-- ========== СИСТЕМЫ ========== -->
+    <p class="section-title">Системы</p>
+
+    <div class="card">
+        <h2>📜 Сюжет / Диалоги</h2>
+        <div class="tags">
+            <span class="tag">вступление</span><span class="tag">диалоги всех</span><span class="tag">концовки</span>
+            <span class="tag">дневник</span><span class="tag">лор предметов</span><span class="tag">секретные фразы</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📋 Квесты</h2>
+        <div class="tags">
+            <span class="tag">основные</span><span class="tag">побочные</span><span class="tag">ежедневные</span>
+            <span class="tag">скрытые</span><span class="tag">цели</span><span class="tag">награды</span><span class="tag">прогресс</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🔨 Крафт</h2>
+        <div class="tags">
+            <span class="tag">рецепты</span><span class="tag">компоненты</span><span class="tag">кузница</span>
+            <span class="tag">улучшение</span><span class="tag">разбор</span><span class="tag">случайный</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🛒 Магазин / Торговля</h2>
+        <div class="tags">
+            <span class="tag">ассортимент</span><span class="tag">цены</span><span class="tag">скидки</span>
+            <span class="tag">обмен между игроками</span><span class="tag">подарки</span><span class="tag">кража</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>💰 Экономика</h2>
+        <div class="tags">
+            <span class="tag">валюты 3+</span><span class="tag">обмен</span><span class="tag">инфляция</span>
+            <span class="tag">налоги</span><span class="tag">долги</span><span class="tag">банкротство</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🐾 Питомцы</h2>
+        <div class="tags">
+            <span class="tag">тип</span><span class="tag">хп</span><span class="tag">урон</span><span class="tag">ИИ</span>
+            <span class="tag">кормёжка</span><span class="tag">эволюция</span><span class="tag">потеря</span><span class="tag">разговор</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🚗 Транспорт</h2>
+        <div class="tags">
+            <span class="tag">тип 8+</span><span class="tag">скорость</span><span class="tag">урон</span>
+            <span class="tag">призыв</span><span class="tag">ремонт</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🎲 Мини-игры</h2>
+        <div class="tags">
+            <span class="tag">кости</span><span class="tag">викторина</span><span class="tag">прятки</span>
+            <span class="tag">дуэль</span><span class="tag">гонка</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🎨 Кастомизация</h2>
+        <div class="tags">
+            <span class="tag">скины</span><span class="tag">шляпы</span><span class="tag">плащи</span>
+            <span class="tag">следы</span><span class="tag">свечение</span><span class="tag">рамка ника</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🔮 Секреты</h2>
+        <div class="tags">
+            <span class="tag">стена</span><span class="tag">пол</span><span class="tag">рычаги</span>
+            <span class="tag">мелодия</span><span class="tag">предмет</span><span class="tag">время</span>
+            <span class="tag">пропасть</span><span class="tag">эмоция</span><span class="tag">ожидание</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>👃 Запахи</h2>
+        <div class="tags">
+            <span class="tag">врага</span><span class="tag">ловушки</span><span class="tag">секрета</span>
+            <span class="tag">след</span><span class="tag">газ</span><span class="tag">духи</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>😵 Галлюцинации</h2>
+        <div class="tags">
+            <span class="tag">ложные враги/стены/предметы</span><span class="tag">шёпот</span>
+            <span class="tag">тени</span><span class="tag">надписи</span><span class="tag">скримеры</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🎵 Музыкальные инструменты</h2>
+        <div class="tags">
+            <span class="tag">лютня</span><span class="tag">барабан</span><span class="tag">флейта</span>
+            <span class="tag">колокол</span><span class="tag">голос</span><span class="tag">концерт</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>😡 Эмоции персонажа</h2>
+        <div class="tags">
+            <span class="tag">храбрость</span><span class="tag">страх</span><span class="tag">усталость</span>
+            <span class="tag">ярость</span><span class="tag">спокойствие</span><span class="tag">безумие</span>
+            <span class="tag">влияние на статы</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>⚡ Наказания</h2>
+        <div class="tags">
+            <span class="tag">за убийство торговца/союзника</span><span class="tag">бездействие</span>
+            <span class="tag">жадность</span><span class="tag">трусость</span><span class="tag">афк</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🎯 Случайность</h2>
+        <div class="tags">
+            <span class="tag">генератор</span><span class="tag">ползунок хаоса</span>
+            <span class="tag">кости</span><span class="tag">колесо фортуны</span><span class="tag">гадание</span>
+        </div>
+    </div>
+
+    <!-- ========== ИНТЕРФЕЙС И СЕТЬ ========== -->
+    <p class="section-title">Интерфейс и сеть</p>
+
+    <div class="card">
+        <h2>🖥️ Интерфейс</h2>
+        <div class="tags">
+            <span class="tag hl">всё: цвет, размер, позиция, шрифт, прозрачность, анимация, вкл/выкл, стиль</span>
+            <span class="tag">хп-бар</span><span class="tag">мана-бар</span><span class="tag">щит-бар</span>
+            <span class="tag">миникарта</span><span class="tag">счётчики все</span><span class="tag">инвентарь</span>
+            <span class="tag">колесо эмоций</span><span class="tag">чат</span><span class="tag">окна все</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🌐 Сетевое</h2>
+        <div class="tags">
+            <span class="tag">порт</span><span class="tag">пароль</span><span class="tag">макс игроков</span>
+            <span class="tag">пинг</span><span class="tag">сжатие</span><span class="tag">синхронизация</span>
+            <span class="tag">передача файлов</span><span class="tag">кеширование</span><span class="tag">бан-лист</span>
+        </div>
+    </div>
+
+    <!-- ========== СЛУЖЕБНОЕ ========== -->
+    <p class="section-title">Служебное</p>
+
+    <div class="card">
+        <h2>🌍 Локализация</h2>
+        <div class="tags">
+            <span class="tag">язык</span><span class="tag">шрифт</span><span class="tag">перевод всего</span>
+            <span class="tag">озвучка</span><span class="tag">субтитры</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📊 Мета</h2>
+        <div class="tags">
+            <span class="tag">прогресс</span><span class="tag">валюта</span><span class="tag">опыт</span>
+            <span class="tag">разблокировка</span><span class="tag">статистика</span><span class="tag">достижения</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🐛 Отладка</h2>
+        <div class="tags">
+            <span class="tag">логи</span><span class="tag">fps</span><span class="tag">пинг</span>
+            <span class="tag">хитбоксы</span><span class="tag">режим бога</span><span class="tag">спавн чего угодно</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🥚 Пасхалки</h2>
+        <div class="tags">
+            <span class="tag">коды</span><span class="tag">даты</span><span class="tag">имена</span>
+            <span class="tag">секретные слова</span><span class="tag">комбинации</span>
+        </div>
+    </div>
+
+    <!-- ========== ФОРМАТ ========== -->
+    <div class="card" style="border-color: #ffc64044;">
+        <h2>📄 Формат .txt <span class="badge badge-txt">Предельно просто</span></h2>
+        <code>ключ: значение</code><br>
+        <code>триггер: действие параметр=число</code><br>
+        <code>мой_выдуманный_ключ: моё_значение</code>
+        <p style="font-size:0.75rem; color:#555; margin-top:6px;">
+            Неизвестный движку ключ → поиск .txt скрипта с таким именем → нет → лог, игра не падает.
+        </p>
+    </div>
+
+    <div class="footer">
+        Хост открыл блокнот → написал → сохранил → /reload → игра пересобрана. Без ограничений.
+    </div>
+
+</div>
+</body>
+</html>
