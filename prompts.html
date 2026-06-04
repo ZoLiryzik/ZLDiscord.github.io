@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Промпты для OpenCode — Пошаговый план</title>
+    <style>
+        :root {
+            --bg: #07070d;
+            --card: #0e0e18;
+            --border: #1a1a2e;
+            --text: #b0b0c0;
+            --accent: #7b5cff;
+            --accent2: #ff4d8c;
+            --green: #3df0a0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.5;
+            padding: 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+        .prompt-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        .prompt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .prompt-header h2 {
+            font-size: 1.1rem;
+            color: #fff;
+            margin: 0;
+        }
+        .step-badge {
+            background: #7b5cff22;
+            color: var(--accent);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        pre {
+            background: #0a0a12;
+            border: 1px solid #2a2a3e;
+            border-radius: 8px;
+            padding: 14px;
+            font-size: 0.8rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: #ccc;
+            margin-bottom: 10px;
+        }
+        button.copy-btn {
+            background: #7b5cff;
+            border: none;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background 0.2s;
+        }
+        button.copy-btn:hover { background: #5a3fd4; }
+        .info {
+            text-align: center;
+            margin: 30px 0;
+            padding: 14px;
+            background: #3df0a011;
+            border: 1px solid #3df0a033;
+            border-radius: 10px;
+            color: var(--green);
+        }
+        .warning {
+            text-align: center;
+            margin: 20px 0;
+            padding: 14px;
+            background: #ff4d8c11;
+            border: 1px solid #ff4d8c33;
+            border-radius: 10px;
+            color: var(--accent2);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>📋 Пошаговые промпты для OpenCode</h1>
+
+    <div class="info">
+        ✅ Каждый промпт отправлять строго по очереди. Проверить работу → следующий.
+    </div>
+
+    <!-- Промпт 1 -->
+    <div class="prompt-card">
+        <div class="prompt-header">
+            <h2>1. Фундамент и архитектура</h2>
+            <span class="step-badge">Шаг 1</span>
+        </div>
+        <pre>Создай основу проекта на Unity (C#) или Godot (C#) — выбери Godot 4 C# для кроссплатформенности.
+
+Реализуй центральные интерфейсы и DI-контейнер (ручной Service Locator или через конструкторы). Структура папок: Core, Gameplay, Network, UI, Data.
+
+Сделай интерфейсы:
+- IInputProvider (получение ввода)
+- IGameState (текущее состояние игры)
+- IModLoader (загрузка/перезагрузка .txt конфигов)
+- INetworkService (абстракция над LiteNetLib)
+- IAssetProvider (загрузка спрайтов/звуков)
+
+Создай пустые заглушки для этих сервисов.
+
+Цель: получить компилируемый проект с внедрёнными зависимостями и готовой архитектурой для следующих шагов.</pre>
+        <button class="copy-btn" onclick="copyText(this.previousElementSibling.innerText)">📋 Скопировать</button>
+    </div>
+
+    <!-- Промпт 2 -->
+    <div class="prompt-card">
+        <div class="prompt-header">
+            <h2>2. Парсер .txt и горячая перезагрузка</h2>
+            <span class="step-badge">Шаг 2</span>
+        </div>
+        <pre>На основе интерфейса IModLoader реализуй:
+- Чтение .txt файлов из папки mods/ в Dictionary<string, string> (ключ-значение)
+- Поддержка триггеров вида `триггер: действие параметр=значение`
+- Кеширование загруженных данных
+- Команда /reload: очистка кеша, перезагрузка всех .txt, событие OnModsReloaded
+- Валидация: неизвестные ключи логируются, но не ломают игру
+
+SOLID: парсер, кеш, логгер — отдельные классы, внедряются через интерфейсы.</pre>
+        <button class="copy-btn" onclick="copyText(this.previousElementSibling.innerText)">📋 Скопировать</button>
+    </div>
+
+    <!-- Промпт 3 -->
+    <div class="prompt-card">
+        <div class="prompt-header">
+            <h2>3. Персонаж и управление</h2>
+            <span class="step-badge">Шаг 3</span>
+        </div>
+        <pre>Реализуй класс Player на основе IInputProvider.
+- Компоненты: HealthComponent, MovementComponent, DodgeComponent, AbilityComponent (3 способности)
+- Статы загружаются из персонаж.txt через IModLoader
+- Перекат с неуязвимостью, прыжок, приседание
+- Анимации через AnimationComponent (заглушки)
+
+Зависимости: IInputProvider, IModLoader, IAssetProvider.
+Всё разбито на мелкие компоненты (по Single Responsibility).</pre>
+        <button class="copy-btn" onclick="copyText(this.previousElementSibling.innerText)">📋 Скопировать</button>
+    </div>
+
+    <!-- Промпт 4 -->
+    <div class="prompt-card">
+        <div class="prompt-header">
+            <h2>4. Оружие (компонентная система)</h2>
+            <span class="step-badge">Шаг 4</span>
+        </div>
+        <pre>Создай систему оружия на основе композиции:
+- Интерфейс IWeaponComponent (FireLogic, Projectile, Trajectory, HitEffect)
+- Базовые реализации: SingleShot, Burst, Shotgun (FireLogic); Bullet, Hook, Wave (Projectile); Linear, Sine, Boomerang (Trajectory); Burn, Freeze (HitEffect)
+- Сборка оружия из .txt: ствол, снаряд, траектория, эффекты
+- Класс WeaponData загружается через IModLoader
+- Оружие прикрепляется к игроку, стрельба через IInputProvider
+
+Используй фабрику для создания оружия по конфигу.</pre>
+        <button class="copy-btn" onclick="copyText(this.previousElementSibling.innerText)">📋 Скопировать</button>
+    </div>
+
+    <!-- Промпт 5 -->
+    <div class="prompt-card">
+        <div class="prompt-header">
+            <h2>5. Враги и ИИ</h2>
+            <span class="step-badge">Шаг 5</span>
+        </div>
+        <pre>Реализуй систему врагов:
+- Базовый класс Enemy с компонентами: HealthComponent, MovementComponent, AIComponent
+- AIComponent – интерфейс IEnemyAI с методами UpdateBehavior, методы: Chase, Patrol, Ambush, Flee, Dance и др.
+- Загрузка параметров из враг.txt, босс.txt
+- Фазы босса, элитность, дроп
+- Реакции на попадание/смерть через события
+
+Абстракции позволяют легко добавлять новые типы ИИ.</pre>
+        <button class="copy-btn" onclick="copyText(this.previousElementSibling.innerText)">📋 Скопировать</button>
+    </div>
+
+    <!-- Промпт 6 -->
+    <div class="prompt-card">
+        <div class="prompt-header">
+            <h2>6. Комнаты и генерация карт</h2>
+            <span class="step-badge">Шаг 6</span>
+        </div>
+        <pre>Создай DungeonGenerator:
+- Чтение карта.txt: тема, этажи, комнаты, секретки
+- Генерация сетки комнат, соединение коридорами
+- Комнаты: RoomData из комната.txt (тайлы, ловушки, враги, правило)
+- Правила комнат реализованы через интерфейс IRoomRule (EchoRule, SilenceRule, MirrorRule, SacrificeRule и т.д.)
+- Загрузка через фабрику правил
+
+Поддержка seed и фиксированной раскладки.</pre>
+        <button class="copy-btn" onclick="copyText(this.previousElementSibling.innerText)">📋 Скопировать</button>
+    </div>
+
+    <!-- Промпт 7 -->
+    <div class="prompt-card">
+        <div class="prompt-header">
+            <h2>7. Сеть (P2P хост-клиент)</h2>
+            <span class="step-badge">Шаг 7</span>
+        </div>
+        <pre>Интегрируй LiteNetLib (или Mirror) через INetworkService.
+- Хост: запуск сервера на указанном порту, загрузка текущих .txt конфигов
+- Клиент: подключение по IP:порт
+- При подключении клиента хост автоматически отправляет все файлы из папки mods/ и необходимые ассеты (через IAssetProvider)
+- Синхронизация: хост авторитарно управляет игровым состоянием, клиенты шлют только ввод
+- Команда /reload на хосте вызывает перезагрузку модов и рассылает обновлённые файлы всем клиентам
+- Сетевые сообщения строго типизированы, свои классы для каждого типа</pre>
+        <button class="copy-btn" onclick="copyText(this.previousElementSibling.innerText)">📋 Скопировать</button>
+    </div>
+
+    <!-- Промпт 8 -->
+    <div class="prompt-card">
+        <div class="prompt-header">
+            <h2>8. Мультиплеерные механики</h2>
+            <span class="step-badge">Шаг 8</span>
+        </div>
+        <pre>Реализуй взаимодействия игроков (кооператив):
+- Цепь жизни (LifeLinkComponent)
+- Якорь (AnchorComponent)
+- Обмен телами (BodySwapComponent)
+- Слияние (MergeComponent)
+- Жертва, торговля, дуэль
+- Все механики работают через интерфейс IMultiplayerInteraction, регистрируются в InteractionManager
+
+Каждая механика – отдельный класс, активируется по команде из .txt или через контекстное меню.</pre>
+        <button class="copy-btn" onclick="copyText(this.previousElementSibling.innerText)">📋 Скопировать</button>
+    </div>
+
+    <!-- Промпт 9 -->
+    <div class="prompt-card">
+        <div class="prompt-header">
+            <h2>9. Интерфейс, звук, визуал</h2>
+            <span class="step-badge">Шаг 9</span>
+        </div>
+        <pre>Создай UI-систему, настраиваемую через интерфейс.txt:
+- Хп-бар, мана-бар, миникарта, счётчики, инвентарь
+- Цифры урона, индикаторы баффов/дебаффов
+- Адаптивный UI под разрешения
+
+Звуковая система:
+- Интерфейс IAudioService: громкость по категориям, эффекты (эхо, под водой), музыка по ситуациям
+- Загрузка настроек из звук.txt
+
+Визуал:
+- Пост-обработка, освещение, погода из соответствующих .txt</pre>
+        <button class="copy-btn" onclick="copyText(this.previousElementSibling.innerText)">📋 Скопировать</button>
+    </div>
+
+    <!-- Промпт 10 -->
+    <div class="prompt-card">
+        <div class="prompt-header">
+            <h2>10. Остальные системы</h2>
+            <span class="step-badge">Шаг 10</span>
+        </div>
+        <pre>Последовательно добавь:
+- Систему предметов (интерфейс IItem, загрузка из предмет.txt)
+- Баффы/дебаффы (IBuff) с таймерами, стаканием, заражением
+- Крафт (рецепты из крафт.txt)
+- Магазин, экономику, квесты, диалоги
+- Питомцы, транспорт, мини-игры, секреты, пасхалки
+
+Каждая система реализуется через отдельный интерфейс и сервис, внедряется в GameManager.</pre>
+        <button class="copy-btn" onclick="copyText(this.previousElementSibling.innerText)">📋 Скопировать</button>
+    </div>
+
+    <!-- Промпт 11 -->
+    <div class="prompt-card">
+        <div class="prompt-header">
+            <h2>11. Редактор модов (Avalonia)</h2>
+            <span class="step-badge">Шаг 11</span>
+        </div>
+        <pre>Создай отдельное десктопное приложение на Avalonia для визуального редактирования .txt конфигов.
+- Вкладки: Персонаж, Оружие, Враг, Комната, Карта, Погода, Предметы, Баффы и т.д.
+- Формы с динамической генерацией полей на основе schema.json
+- Валидация, автодополнение, предпросмотр спрайтов
+- Сохранение в папку mods/
+- Приложение не зависит от игры, но может запускать игру для теста
+
+Используй MVVM, все зависимости через DI.</pre>
+        <button class="copy-btn" onclick="copyText(this.previousElementSibling.innerText)">📋 Скопировать</button>
+    </div>
+
+    <!-- Промпт 12 -->
+    <div class="prompt-card">
+        <div class="prompt-header">
+            <h2>12. Финальная сборка и тесты</h2>
+            <span class="step-badge">Шаг 12</span>
+        </div>
+        <pre>Настрой мультиплатформенную сборку под Windows, Linux, macOS (Godot).
+- Убедись, что пути к файлам используют OS-независимые API
+- Протестируй все системы на двух ПК в локальной сети
+- Исправь баги, добавь обработку исключений
+- Создай README с инструкцией по запуску, созданию модов, подключению через Hamachi/Radmin/белый IP</pre>
+        <button class="copy-btn" onclick="copyText(this.previousElementSibling.innerText)">📋 Скопировать</button>
+    </div>
+
+    <div class="warning">
+        ⚠️ Важно: каждый следующий промпт отправлять только после завершения предыдущего и проверки работоспособности.<br>
+        Вероятность успеха при соблюдении порядка — 95-100%.
+    </div>
+
+</div>
+
+<script>
+    function copyText(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            alert('Промпт скопирован!');
+        });
+    }
+</script>
+</body>
+</html>
