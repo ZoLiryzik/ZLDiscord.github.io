@@ -1,12 +1,16 @@
 # ================================================================= #
-#                ZoLiryzik Plugin Configuration                     #
+#                ZLDiscord Configuration                            #
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
 #   This file contains all customizable parameters for              #
-#   the ZoLiryzik plugin. Please read the comments carefully.       #
+#   the ZLDiscord plugin. Please read the comments carefully.       #
 # ================================================================= #
 
 # Select the language for plugin messages. Available options: ru, en
 language: "en"
+
+# Auto-extract example command templates and LongPoll scripts on first startup.
+# Set to false if you don't want default examples.
+save-examples: true
 
 # Discord server ID (Guild ID) to which the bot will connect.
 # This MUST be the ID of your Discord server.
@@ -27,3 +31,44 @@ embed-creator-role-ids:
 # You can use HEX codes (e.g., #FF0000 for red)
 # or hexadecimal values with the 0x prefix (e.g., 0xFF0000 for red).
 embed-color: "0xFFAA00"
+
+# Discord command prefix for text-based commands (e.g., "z!help").
+# Set to "" to disable text commands (slash-only mode).
+discord-command-prefix: "z!"
+
+# Server name in the network (e.g. "lobby", "survival", "creative").
+# Used in longpoll/config.yml -> route for routing events
+# to a specific server. If empty, auto-detected via
+# system property "bungee.server_name" or defaults to "main".
+server-name: ""
+
+# Link storage configuration
+# type: "yaml" (links.yml) or "mysql" (MySQL database)
+# MySQL requires a running MySQL/MariaDB server.
+storage:
+  type: "yaml"
+  mysql:
+    host: "localhost"
+    port: 3306
+    database: "zldiscord"
+    user: "root"
+    password: ""
+    table: "zldiscord_links"
+    linking_session_table: "zldiscord_linking_sessions"
+    event_tracker_table: "zldiscord_event_tracker"
+    template_table: "zldiscord_templates"
+    cross_command_table: "zldiscord_cross_commands"
+    table_prefix: "zldiscord_"
+    use-ssl: false
+
+# Synchronization settings.
+# When using MySQL, controls which data is shared across servers.
+#   true        = all data of this type is shared across servers
+#   false       = data is isolated per server
+#   [key1, ...] = only specified keys are synchronized (for attributes)
+sync:
+  links: true
+  attributes:
+    bot: true
+    member: true
+    player: true
