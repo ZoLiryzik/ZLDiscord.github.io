@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Документация: ZLDiscord v1.2</title>
+    <title>Документация: ZLDiscord</title>
     <link rel="icon" href="/assets/img/ava.png" type="image/png">
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/features.css">
@@ -125,7 +125,7 @@
                     </div>
                 </div>
                 <a class="google-font" href="/">Главная</a>
-                <a class="google-font" href="#">Релизы</a>
+                <a class="google-font" href="/releases">Релизы</a>
                 <a class="active google-font" href="#">Документация</a>
                 <a class="google-font" href="#">Контакты</a>
                 <a class="download google-font" href="/project/ZoLiryzik.jar">Скачать</a>
@@ -153,7 +153,7 @@
             </aside>
 
             <div class="docs-content">
-                <h1>ZLDiscord v1.2 — Документация</h1>
+                <h1>ZLDiscord v<span class="plugin-version"></span> — Документация</h1>
                 <hr>
 
                 <section id="intro" class="docs-section">
@@ -194,6 +194,7 @@
 
                     <h3>/zcc — Кастомные команды</h3>
                     <pre><code>/zcc list             — список команд
+/zcc info &lt;name&gt;      — инфо о команде (шаблон, кулдаун)
 /zcc run &lt;name&gt;       — выполнить
 /zcc create &lt;name&gt;    — создать (\n для новой строки)
 /zcc remove &lt;name&gt;    — удалить
@@ -225,7 +226,7 @@
 /zlongpoll reload</code></pre>
 
                     <h3>Команды в Discord</h3>
-                    <p><span class="tag orange">Prefix</span> Текстовые команды в Discord имеют фиксированный префикс <code>z!</code> (например, <code>z!hello</code>, <code>z!info</code>). Поменять его нельзя.</p>
+                    <p><span class="tag orange">Prefix</span> Текстовые команды в Discord используют префикс <code>z!</code> по умолчанию. Меняется в <code>config.yml</code> → <code>discord-command-prefix</code>.</p>
                     <ul>
                         <li><code>/zevent</code> — создать голосование (роли embed-creator)</li>
                         <li><code>!embed</code> — кнопка для создания Embed</li>
@@ -252,7 +253,7 @@
     permission: zoliryzik.hello
     permission-message: "&cНет прав"
     command_mc: hello        # имя в майнкрафте
-    command_ds: hello        # имя в дискорде (префикс z! — z!hello, изменить нельзя)
+    command_ds: hello        # имя в дискорде
     aliases_mc: ["h"]
     aliases_ds: ["h"]
     discord-roles: ["role_id_1", "role_id_2"]</code></pre>
@@ -409,6 +410,7 @@ text: "с сервером"</code></pre>
                         <li><span class="tag green">Игрок</span> — от имени отправителя</li>
                         <li><span class="tag orange">Консоль</span> — от первого онлайн</li>
                         <li><span class="tag green">papi("x", "Nick")</span> — для любого игрока</li>
+                        <li><span class="tag green">lang_*.yml</span> — <code>%placeholder%</code> работает напрямую в сообщениях команд (<code>getMessage(path, sender)</code>)</li>
                     </ul>
                     <table>
                         <tr><th>Плейсхолдер</th><th>Описание</th></tr>
@@ -584,15 +586,15 @@ curl http://localhost:17523/event -X POST \
                     <h2>ZLDiscord</h2>
                 </div>
                 <div class="footer-links">
-                    <a href="#">Главная</a>
+                    <a href="/">Главная</a>
                     <a href="/releases">Релизы</a>
-                    <a href="#">Документация</a>
+                    <a href="/docs">Документация</a>
                     <a href="#">Поддержка</a>
                     <a href="#">Контакты</a>
                 </div>
                 <div class="copyright">
                     <p>&copy; <span id="current-year"></span> ZLDiscord.</p>
-                    <p>Версия плагина: 1.2 | Поддержка: Paper 1.16.5 – 1.21.x</p>
+                    <p>Версия плагина: <span class="plugin-version"></span> | Поддержка: Paper 1.16.5 – 1.21.x</p>
                 </div>
             </div>
         </footer>

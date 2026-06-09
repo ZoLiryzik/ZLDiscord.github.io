@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZLDiscord — Релизы</title>
+    <link rel="icon" href="/assets/img/ava.png" type="image/png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/features.css">
+    <link rel="stylesheet" href="/assets/css/docs.css">
+</head>
+<style>
+.language-select {
+    position: relative;
+    z-index: 999;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.language-label {
+    background-color: transparent;
+    color: var(--text-color-light);
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 18px;
+    line-height: 25px;
+    font-weight: 400;
+    font-family: "Onest", sans-serif;
+    display: inline-block;
+}
+.language-label:hover {
+    background-color: var(--color-hover-active);
+    color: var(--text-color-white);
+}
+.language-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #0b0b0b;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    z-index: 998;
+    width: auto;
+    min-width: 120px;
+}
+.language-option {
+    display: block;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    border-radius: 0;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.3s, box-shadow 0.3s;
+}
+.language-option:hover {
+    background-color: var(--color-hover-active);
+}
+.releases-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.release-card {
+    background: #1a2f26;
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid #2b5641;
+}
+.release-card h3 {
+    margin: 0 0 8px 0;
+    font-size: 22px;
+    color: #fff;
+}
+.release-card .version {
+    color: #4CAF50;
+    font-weight: 600;
+}
+
+.release-card ul {
+    margin: 8px 0;
+    padding-left: 20px;
+    color: #ccc;
+    font-family: "Onest", sans-serif;
+}
+.release-card ul li {
+    margin-bottom: 4px;
+}
+.release-card .download-link {
+    display: inline-block;
+    margin-top: 12px;
+    background: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: "Onest", sans-serif;
+}
+.release-card .download-link:hover {
+    background: #45a049;
+}
+@media (max-width: 768px) {
+    .shapka-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: left;
+        margin-top: 10px;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: var(--color-shapka);
+        border-top: 1px solid #333;
+        padding: 10px 20px;
+        z-index: 99;
+    }
+    .shapka-links.show { display: flex; }
+    .shapka-links a, .language-select {
+        padding: 10px 0;
+        border-bottom: 1px solid #333;
+        width: 100%;
+        text-align: center;
+        margin-right: 0;
+    }
+    .language-dropdown {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+        background-color: transparent;
+        padding-left: 20px;
+    }
+    .language-label {
+        width: 100%;
+        padding: 10px 0;
+    }
+}
+</style>
+<body>
+    <div class="frame">
+        <header class="shapka">
+            <div class="shapka-logo">
+                <img src="/assets/img/ava.png" alt="Логотип">
+                <div class="shapka-title"><a href="/">ZLDiscord</a></div>
+            </div>
+            <div class="shapka-links" id="navLinks">
+                <div class="language-select">
+                    <span class="language-label google-font">Язык</span>
+                    <div class="language-dropdown">
+                        <a href="#" class="language-option google-font">Русский</a>
+                        <a href="/en/releases" class="language-option google-font">English</a>
+                    </div>
+                </div>
+                <a class="google-font" href="/">Главная</a>
+                <a class="active google-font" href="#">Релизы</a>
+                <a class="google-font" href="/docs">Документация</a>
+                <a class="google-font" href="#">Контакты</a>
+                <a class="download google-font" href="/project/ZoLiryzik.jar">Скачать</a>
+            </div>
+            <button class="menu-toggle google-font" id="menuToggle">☰</button>
+        </header>
+
+        <main class="docs-container">
+            <div class="probel"></div>
+            <div class="docs-content">
+                <h1>Релизы</h1>
+                <hr>
+
+                <div class="releases-list">
+                    <div class="release-card">
+                        <h3><span class="version">v1.3</span></h3>
+                        <div style="color:#888;font-size:14px;">Jun 9, 2026</div>
+                        <ul>
+                            <li>Атрибуты /zattr с разделением по серверам</li>
+                            <li>Очередь команд между серверами</li>
+                            <li>Per-key синхронизация ссылок и атрибутов между серверами</li>
+                            <li>LongPoll маршрутизация (player/main/server-name) + дедупликация</li>
+                            <li>Шаблоны LongPoll скриптов и сессии привязки в БД</li>
+                            <li>Исправлена стабильность LongPoll — переподключение и обработка событий</li>
+                            <li>Новый config.yml: server-name, sync</li>
+                            <li>PlaceholderAPI в сообщениях команд</li>
+                        </ul>
+                        <a class="download-link" href="/project/1.3/ZoLiryzik.jar">Скачать v1.3</a>
+                    </div>
+
+                    <div class="release-card">
+                        <h3><span class="version">v1.2</span></h3>
+                        <div style="color:#888;font-size:14px;">May 25, 2026</div>
+                        <ul>
+                            <li>Исправлен баг, из-за которого плагин крашил сервер при первом запуске</li>
+                            <li>Кастомные команды /zcc с шаблонизатором</li>
+                            <li>DataStore /zattr для bot, member и player атрибутов</li>
+                            <li>LongPoll подключения /zlongpoll с авто-реконнектом</li>
+                            <li>_lang переменная (ru/en) в шаблонах и LongPoll скриптах</li>
+                            <li>Управление ролями (discord.role_add/give/remove/delete)</li>
+                            <li>save-examples: true/false в config.yml</li>
+                            <li>Двуязычные примеры (RU/EN)</li>
+                            <li>LongPoll скрипты теперь используют &lt;do action(...)&gt;</li>
+                        </ul>
+                        <a class="download-link" href="/project/1.2/ZoLiryzik.jar">Скачать v1.2</a>
+                    </div>
+
+                    <div class="release-card">
+                        <h3><span class="version">v1.1</span></h3>
+                        <div style="color:#888;font-size:14px;">Aug 10, 2025</div>
+                        <ul>
+                            <li>Добавлены русский и английский языки</li>
+                            <li>Команды /zembed и /zembedmanage</li>
+                            <li>Плейсхолдеры добавлены в /zevent, /zembed, /zembedmanage</li>
+                        </ul>
+                        <a class="download-link" href="/project/1.1/ZoLiryzik.jar">Скачать v1.1</a>
+                    </div>
+
+                    <div class="release-card">
+                        <h3><span class="version">v1.0</span></h3>
+                        <div style="color:#888;font-size:14px;">Aug 4, 2025</div>
+                        <ul>
+                            <li>Создание голосования ивента на сервере</li>
+                            <li>Отображение в войсе или нет</li>
+                            <li>Создание embed сообщения</li>
+                        </ul>
+                        <a class="download-link" href="/project/1.0/ZoLiryzik.jar">Скачать v1.0</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div class="probel probel-footer"></div>
+        <footer>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="/assets/img/ava.png" alt="Логотип">
+                    <h2>ZLDiscord</h2>
+                </div>
+                <div class="footer-links">
+                    <a href="/">Главная</a>
+                    <a href="/releases">Релизы</a>
+                    <a href="/docs">Документация</a>
+                    <a href="#">Поддержка</a>
+                    <a href="#">Контакты</a>
+                </div>
+                <div class="copyright">
+                    <p>&copy; <span id="current-year"></span> ZLDiscord.</p>
+                    <p>Версия плагина: <span class="plugin-version"></span> | Поддержка: Paper 1.16.x - 1.21.x</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/menu-toggle.js"></script>
+</body>
+</html>

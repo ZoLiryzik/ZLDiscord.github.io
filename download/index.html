@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZLDiscord — Скачать</title>
+    <link rel="icon" href="/assets/img/ava.png" type="image/png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/features.css">
+</head>
+<style>
+.language-select {
+    position: relative;
+    z-index: 999;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.language-label {
+    background-color: transparent;
+    color: var(--text-color-light);
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 18px;
+    line-height: 25px;
+    font-weight: 400;
+    font-family: "Onest", sans-serif;
+    display: inline-block;
+}
+.language-label:hover {
+    background-color: var(--color-hover-active);
+    color: var(--text-color-white);
+}
+.language-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #0b0b0b;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    min-width: 120px;
+}
+.language-dropdown a {
+    display: block;
+    padding: 10px 16px;
+    color: var(--text-color-light);
+    text-decoration: none;
+    font-size: 14px;
+}
+.language-dropdown a:hover {
+    background-color: var(--color-hover-active);
+    color: var(--text-color-white);
+}
+.redirect-msg {
+    text-align: center;
+    padding: 80px 20px;
+}
+.redirect-msg h1 {
+    font-size: 36px;
+    margin-bottom: 16px;
+}
+.redirect-msg p {
+    font-size: 18px;
+    color: var(--text-color-light);
+    margin-bottom: 32px;
+}
+.redirect-msg .btns-primary {
+    display: inline-block;
+}
+.loader-ring {
+    display: inline-block;
+    width: 56px;
+    height: 56px;
+    border: 5px solid #2b5641;
+    border-top-color: #4CAF50;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 28px;
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.15);
+}
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+</style>
+
+<body>
+    <div class="frame">
+        <header class="shapka">
+            <div class="shapka-logo">
+                <img src="/assets/img/ava.png" alt="Логотип">
+                <div class="shapka-title"><a href="/">ZLDiscord</a></div>
+            </div>
+            <div class="shapka-links" id="navLinks">
+                <div class="language-select">
+                    <span class="language-label google-font">Язык</span>
+                    <div class="language-dropdown">
+                        <a href="#" class="language-option google-font">Русский</a>
+                        <a href="/en" class="language-option google-font">English</a>
+                    </div>
+                </div>
+                <a class="google-font" href="/">Главная</a>
+                <a class="google-font" href="/releases">Релизы</a>
+                <a class="google-font" href="/docs">Документация</a>
+                <a class="download google-font" href="/project/ZoLiryzik.jar" id="download">Скачать</a>
+            </div>
+            <button class="menu-toggle google-font" id="menuToggle">☰</button>
+        </header>
+
+        <section class="content">
+            <div class="content-title redirect-msg">
+                <h1>Скачать ZLDiscord</h1>
+                <div class="loader-ring"></div>
+                <p class="google-font">Если загрузка не началась автоматически, нажмите кнопку ниже.</p>
+                <div class="content-btns">
+                    <a href="/project/ZoLiryzik.jar" class="btns-primary btns-download google-font">Скачать сейчас</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var start = Date.now();
+        fetch('/project/version.txt?' + Date.now())
+            .then(function(r) { return r.text().then(function(t) { return t.trim(); }); })
+            .then(function(ver) {
+                if (!ver) return;
+                document.querySelectorAll('a[href*="ZoLiryzik.jar"]').forEach(function(a) {
+                    var url = a.getAttribute('href');
+                    if (url && url.indexOf('/project/ZoLiryzik.jar') !== -1) {
+                        a.setAttribute('href', '/project/' + ver + '/ZoLiryzik.jar');
+                    }
+                });
+                var elapsed = Date.now() - start;
+                var remaining = Math.max(0, 600 - elapsed);
+                setTimeout(function() { window.location.href = '/project/' + ver + '/ZoLiryzik.jar'; }, remaining);
+            })
+            .catch(function() {});
+    });
+    </script>
+</body>
+</html>

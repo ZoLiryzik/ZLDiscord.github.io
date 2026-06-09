@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentation: ZLDiscord v1.2</title>
+    <title>Documentation: ZLDiscord</title>
     <link rel="icon" href="/assets/img/ava.png" type="image/png">
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/features.css">
@@ -124,10 +124,10 @@
                     </div>
                 </div>
                 <a class="google-font" href="/en">Main</a>
-                <a class="google-font" href="#">Releases</a>
+                <a class="google-font" href="/en/releases">Releases</a>
                 <a class="active google-font" href="#">Documentation</a>
                 <a class="google-font" href="#">Contacts</a>
-                <a class="download google-font" href="/project/1.2/ZoLiryzik.jar">Download</a>
+                <a class="download google-font" href="/project/ZoLiryzik.jar">Download</a>
             </div>
             <button class="menu-toggle google-font" id="menuToggle">☰</button>
         </header>
@@ -152,7 +152,7 @@
             </aside>
 
             <div class="docs-content">
-                <h1>ZLDiscord v1.2 — Documentation</h1>
+                <h1>ZLDiscord v<span class="plugin-version"></span> — Documentation</h1>
                 <hr>
 
                 <section id="intro" class="docs-section">
@@ -193,6 +193,7 @@
 
                     <h3>/zcc — Custom Commands</h3>
                     <pre><code>/zcc list             — list commands
+/zcc info &lt;name&gt;      — command info (template, cooldown)
 /zcc run &lt;name&gt;       — execute
 /zcc create &lt;name&gt;    — create (\n for newline)
 /zcc remove &lt;name&gt;    — remove
@@ -224,7 +225,7 @@
 /zlongpoll reload</code></pre>
 
                     <h3>Discord Commands</h3>
-                    <p><span class="tag orange">Prefix</span> Text commands in Discord use the fixed prefix <code>z!</code> (e.g. <code>z!hello</code>, <code>z!info</code>). It cannot be changed.</p>
+                    <p><span class="tag orange">Prefix</span> Text commands in Discord use <code>z!</code> prefix by default. Configurable in <code>config.yml</code> → <code>discord-command-prefix</code>.</p>
                     <ul>
                         <li><code>/zevent</code> — create a vote (embed-creator roles)</li>
                         <li><code>!embed</code> — button to create Embed</li>
@@ -251,7 +252,7 @@
     permission: zoliryzik.hello
     permission-message: "&cNo permission"
     command_mc: hello
-    command_ds: hello        # Discord prefix z! is fixed — z!hello, cannot be changed
+    command_ds: hello        # Discord command name
     aliases_mc: ["h"]
     aliases_ds: ["h"]
     discord-roles: ["role_id_1", "role_id_2"]</code></pre>
@@ -408,6 +409,7 @@ text: "with the server"</code></pre>
                         <li><span class="tag green">Player</span> — resolves for command sender</li>
                         <li><span class="tag orange">Console</span> — resolves for first online player</li>
                         <li><span class="tag green">papi("x", "Nick")</span> — target any player by name</li>
+                        <li><span class="tag green">lang_*.yml</span> — <code>%placeholder%</code> works directly in command messages (<code>getMessage(path, sender)</code>)</li>
                     </ul>
                     <table>
                         <tr><th>Placeholder</th><th>Description</th></tr>
@@ -583,15 +585,15 @@ Report on &lt;~ target ~&gt;:
                     <h2>ZLDiscord</h2>
                 </div>
                 <div class="footer-links">
-                    <a href="#">Home</a>
-                    <a href="/releases">Releases</a>
-                    <a href="#">Documentation</a>
+                    <a href="/en">Home</a>
+                    <a href="/en/releases">Releases</a>
+                    <a href="/en/docs">Documentation</a>
                     <a href="#">Support</a>
                     <a href="#">Contacts</a>
                 </div>
                 <div class="copyright">
                     <p>&copy; <span id="current-year"></span> ZLDiscord.</p>
-                    <p>Plugin version: 1.2 | Support: Paper 1.16.5 – 1.21.x</p>
+                    <p>Plugin version: <span class="plugin-version"></span> | Support: Paper 1.16.5 – 1.21.x</p>
                 </div>
             </div>
         </footer>
