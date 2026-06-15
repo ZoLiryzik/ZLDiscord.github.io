@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Документация: ZLDiscord v1.4</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #0d1117;
+            color: #e6edf3;
+            line-height: 1.7
+        }
+
+        a {
+            color: #58a6ff;
+            text-decoration: none
+        }
+
+        a:hover {
+            text-decoration: underline
+        }
+
+        .frame {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px
+        }
+
+        .probel {
+            height: 30px
+        }
+
+        /* header */
+        .shapka {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+            border-bottom: 1px solid #21262d
+        }
+
+        .shapka-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .shapka-logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px
+        }
+
+        .shapka-title a {
+            font-size: 20px;
+            font-weight: 700;
+            color: #f0f6fc
+        }
+
+        .shapka-links {
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .shapka-links a {
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #8b949e
+        }
+
+        .shapka-links a:hover,
+        .shapka-links a.active {
+            background: #161b22;
+            color: #f0f6fc
+        }
+
+        .shapka-links a.download {
+            background: #238636;
+            color: #fff
+        }
+
+        .shapka-links a.download:hover {
+            background: #2ea043
+        }
+
+        /* docs layout */
+        .docs-container {
+            display: flex;
+            gap: 32px;
+            margin-top: 24px
+        }
+
+        .sidebar {
+            width: 260px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 24px;
+            align-self: flex-start;
+            max-height: calc(100vh - 80px);
+            overflow-y: auto
+        }
+
+        .sidebar nav ul {
+            list-style: none
+        }
+
+        .sidebar nav li {
+            margin-bottom: 2px
+        }
+
+        .sidebar nav a {
+            display: block;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #8b949e;
+            border-left: 3px solid transparent
+        }
+
+        .sidebar nav a:hover,
+        .sidebar nav a.active {
+            background: #161b22;
+            color: #f0f6fc;
+            border-left-color: #58a6ff
+        }
+
+        .docs-content {
+            flex: 1;
+            min-width: 0
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #f0f6fc
+        }
+
+        h2 {
+            font-size: 22px;
+            font-weight: 600;
+            margin: 32px 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #21262d;
+            color: #f0f6fc
+        }
+
+        h3 {
+            font-size: 17px;
+            font-weight: 600;
+            margin: 24px 0 12px;
+            color: #f0f6fc
+        }
+
+        h4 {
+            font-size: 15px;
+            font-weight: 600;
+            margin: 16px 0 8px;
+            color: #f0f6fc
+        }
+
+        p {
+            margin-bottom: 12px;
+            color: #c9d1d9;
+            font-size: 15px
+        }
+
+        pre {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 16px;
+            overflow-x: auto;
+            margin: 12px 0;
+            font-size: 13px;
+            line-height: 1.5
+        }
+
+        code {
+            font-family: 'Courier New', monospace;
+            background: #161b22;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #f0f6fc
+        }
+
+        pre code {
+            background: none;
+            padding: 0
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #21262d;
+            margin: 32px 0
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0 20px;
+            font-size: 14px
+        }
+
+        th {
+            text-align: left;
+            padding: 8px 12px;
+            background: #161b22;
+            border: 1px solid #30363d;
+            font-weight: 600;
+            color: #f0f6fc;
+            font-size: 13px
+        }
+
+        td {
+            padding: 8px 12px;
+            border: 1px solid #21262d;
+            color: #c9d1d9
+        }
+
+        tr:hover td {
+            background: #161b22
+        }
+
+        ol,
+        ul {
+            margin: 8px 0 12px 20px;
+            color: #c9d1d9;
+            font-size: 15px
+        }
+
+        li {
+            margin-bottom: 4px
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 2px 4px 2px 0
+        }
+
+        .tag.blue {
+            background: #5865F2;
+            color: #fff
+        }
+
+        .tag.green {
+            background: #238636;
+            color: #fff
+        }
+
+        .tag.orange {
+            background: #fe640b;
+            color: #fff
+        }
+
+        .tag.red {
+            background: #d20f39;
+            color: #fff
+        }
+
+        .tag.purple {
+            background: #bc8cff;
+            color: #0d1117
+        }
+
+        footer {
+            padding: 32px 0;
+            border-top: 1px solid #21262d;
+            margin-top: 48px;
+            text-align: center;
+            color: #8b949e;
+            font-size: 13px
+        }
+
+        footer a {
+            color: #8b949e
+        }
+
+        footer a:hover {
+            color: #f0f6fc
+        }
+
+        .mobile-nav-btn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #238636;
+            color: #fff;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, .4)
+        }
+
+        .mobile-nav-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .7);
+            z-index: 99;
+            backdrop-filter: blur(4px)
+        }
+
+        .mobile-nav-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 280px;
+            height: 100%;
+            background: #0d1117;
+            padding: 24px;
+            overflow-y: auto
+        }
+
+        .mobile-nav-panel a {
+            display: block;
+            padding: 12px;
+            color: #c9d1d9;
+            font-size: 15px;
+            border-bottom: 1px solid #21262d
+        }
+
+        .mobile-nav-overlay.show {
+            display: block
+        }
+
+        @media(max-width:900px) {
+            .sidebar {
+                display: none
+            }
+
+            .mobile-nav-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center
+            }
+
+            .shapka-links {
+                display: none
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="frame">
+        <header class="shapka">
+            <div class="shapka-logo">
+                <img src="https://plugin.zoliryzik.su/assets/img/ava.png" alt="Лого">
+                <div class="shapka-title"><a href="/">ZLDiscord</a></div>
+            </div>
+            <div class="shapka-links">
+                <a href="/">Главная</a>
+                <a href="/releases">Релизы</a>
+                <a href="/docs" class="active">Документация</a>
+                <a href="/en/docs">English</a>
+                <a href="#" class="download">Скачать</a>
+            </div>
+        </header>
+
+        <main class="docs-container">
+            <aside class="sidebar">
+                <nav>
+                    <ul>
+                        <li><a href="#intro">Введение</a></li>
+                        <li><a href="#install">Установка</a></li>
+                        <li><a href="#commands">Команды</a></li>
+                        <li><a href="#cc">Кастомные команды</a></li>
+                        <li><a href="#template">Шаблоны</a></li>
+                        <li><a href="#modals">Модальные окна</a></li>
+                        <li><a href="#reactions">Реакции</a></li>
+                        <li><a href="#selectmenu">SelectMenu</a></li>
+                        <li><a href="#placeholders">Placeholders</a></li>
+                        <li><a href="#longpoll">LongPoll</a></li>
+                        <li><a href="#roles">Discord-роли</a></li>
+                        <li><a href="#config">Конфигурация</a></li>
+                        <li><a href="#permissions">Permissions</a></li>
+                        <li><a href="#storage">Хранилище</a></li>
+                        <li><a href="#scripts">Скрипты</a></li>
+                        <li><a href="#examples">Примеры</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <div class="docs-content">
+
+                <h1>ZLDiscord v1.4 — Документация</h1>
+                <hr>
+
+                <!-- ВВЕДЕНИЕ -->
+                <section id="intro">
+                    <div class="probel"></div>
+                    <h2>Введение</h2>
+                    <p><b>ZLDiscord</b> — универсальный плагин для Paper 1.16.5–1.21.x (и выше), интегрирующий Minecraft
+                        с Discord. Встроенный шаблонизатор с функциями-чейнами, HTTP LongPoll для внешних скриптов,
+                        кастомные команды с двойным scope (Minecraft + Discord), голосования с таймером, DataStore,
+                        модалки, реакции, SelectMenu, кастомные PAPI-плейсхолдеры, Discod-роли и многое другое.</p>
+                    <p><span class="tag blue">JDA 5.x</span> <span class="tag green">Java 17+</span> <span
+                            class="tag orange">Paper 1.16–1.21+</span> <span class="tag purple">MySQL / YAML</span></p>
+                </section>
+                <hr>
+
+                <!-- УСТАНОВКА -->
+                <section id="install">
+                    <div class="probel"></div>
+                    <h2>Установка</h2>
+                    <ol>
+                        <li>Скопировать <code>ZoLiryzik.jar</code> в <code>plugins/</code></li>
+                        <li>Запустить LongPoll-бота: <code>node longpoll-server.js &</code></li>
+                        <li>Перезапустить сервер (<span class="tag red">stop → start, НЕ /reload</span>)</li>
+                        <li>Настроить <code>config.yml</code>: токен бота, Guild ID, роли</li>
+                        <li>Подключить LongPoll:
+                            <code>/zlongpoll create demo http://localhost:17523/poll secret 25</code></li>
+                        <li>Настроить дополнительные YAML (modals.yml, reactions.yml, placeholders.yml) по желанию</li>
+                    </ol>
+                </section>
+                <hr>
+
+                <!-- КОМАНДЫ -->
+                <section id="commands">
+                    <div class="probel"></div>
+                    <h2>Команды</h2>
+
+                    <h3>/zevent — Голосование</h3>
+
+                    <p><b>Minecraft:</b></p>
+                    <pre>/zevent "Название" "команда" "время" channel_id [true|false]</pre>
+                    <p><b>Discord (slash-команда):</b></p>
+                    <pre>/zevent title: command: duration: channel: [route:] [resolve-now:]</pre>
+
+                    <p>Создаёт Discord-голосование ✅/❌ с таймером. При победе ✅ выполняется консольная команда.</p>
+
+                    <table>
+                        <tr>
+                            <th>Параметр</th>
+                            <th>Описание</th>
+                        </tr>
+                        <tr>
+                            <td><b>title</b> / Название</td>
+                            <td>Заголовок embed (поддерживает <code>%placeholder%</code>)</td>
+                        </tr>
+                        <tr>
+                            <td><b>command</b> / команда</td>
+                            <td>Minecraft-команда консоли при победе ✅</td>
+                        </tr>
+                        <tr>
+                            <td><b>duration</b> / время</td>
+                            <td>Длительность: <code>5s</code>, <code>10m</code>, <code>1h</code></td>
+                        </tr>
+                        <tr>
+                            <td><b>channel</b> / channel_id</td>
+                            <td>Текстовый канал Discord</td>
+                        </tr>
+                        <tr>
+                            <td><b>route</b></td>
+                            <td>Целевой сервер сети (например survival, creative)</td>
+                        </tr>
+                        <tr>
+                            <td><b>resolve-now</b> [true|false]</td>
+                            <td>Резолвить PAPI плейсхолдеры сразу (true) или только при выполнении команды (false)</td>
+                        </tr>
+                    </table>
+
+                    <p>После таймера подсчитываются ✅ / ❌. При победе ✅ выполняется команда. Discord-версия также
+                        поддерживает route и resolve-now как опциональные параметры.</p>
+
+                    <h3>/zlink / /zunlink — Привязка Discord</h3>
+                    <p><code>/zlink</code> — получить код в Minecraft<br>
+                        <code>/zunlink</code> — отвязать в Discord (ЛС бота)
+                    </p>
+
+                    <h3>/zembed — Embed</h3>
+                    <pre>/zembed "имя" "заголовок" "описание" "channel_id" [картинка] [миниатюра] [футер] [иконка_футера]</pre>
+                    <p><span class="tag green">PAPI</span></p>
+
+                    <h3>/zembedmanage — Управление embed</h3>
+                    <pre>/zembedmanage delete &lt;имя&gt;
+/zembedmanage edit_title &lt;имя&gt; "новый заголовок"
+/zembedmanage edit_description &lt;имя&gt; "новое описание"</pre>
+
+                    <h3>/zcc — Кастомные команды</h3>
+                    <pre>/zcc list             — список команд
+/zcc info &lt;name&gt;      — инфо (шаблон, кулдаун)
+/zcc run &lt;name&gt;       — выполнить
+/zcc create &lt;name&gt;    — создать
+/zcc remove &lt;name&gt;    — удалить
+/zcc reload           — перезагрузить</pre>
+
+                    <h3>/zattr — DataStore</h3>
+                    <pre>/zattr get &lt;bot|member|player&gt; &lt;key&gt; [player]
+/zattr set &lt;bot|member|player&gt; &lt;key&gt; &lt;value&gt; [player]
+/zattr inc|dec &lt;...&gt; &lt;key&gt; &lt;amount&gt; [player]
+/zattr list &lt;bot|member|player&gt; [player]</pre>
+
+                    <h3>/zlongpoll — LongPoll</h3>
+                    <pre>/zlongpoll create &lt;name&gt; &lt;url&gt; &lt;key&gt; [wait]
+/zlongpoll list
+/zlongpoll remove &lt;name&gt;
+/zlongpoll reload</pre>
+
+                    <h3>Управление Discord-ролями <span class="tag purple">NEW v1.4</span></h3>
+                    <pre>/rolegive &lt;member&gt; &lt;role&gt;       — выдать роль
+/roleremove &lt;member&gt; &lt;role&gt;     — снять роль
+/rolemenu                        — меню выбора ролей
+/role_toggle [member] [role]     — переключить роль</pre>
+
+                    <h3>Команды в Discord</h3>
+                    <p>Префикс текстовых команд: <code>z!</code> (меняется в
+                        <code>config.yml → discord-command-prefix</code>).</p>
+                    <ul>
+                        <li><code>/zevent</code> — голосование (роли embed-creator)</li>
+                        <li><code>/link &lt;code&gt;</code> — привязать (ЛС)</li>
+                        <li><code>/unlink</code> — отвязать (ЛС)</li>
+                        <li>Slash-команды из <code>custom_commands.yml</code> — авторегистрация</li>
+                        <li>Текстовые через префикс: <code>z!warn</code>, <code>z!report</code></li>
+                    </ul>
+                </section>
+                <hr>
+
+                <!-- КАСТОМНЫЕ КОМАНДЫ -->
+                <section id="cc">
+                    <div class="probel"></div>
+                    <h2>Кастомные команды</h2>
+                    <p>Файл <code>custom_commands.yml</code>:</p>
+                    <pre><code>commands:
+  hello:
+    file: "commands/hello.yml"
+    description: "Приветствие"
+    cooldown: 10
+    enabled: true
+    scope: all              # all / minecraft / discord
+    permission: zoliryzik.hello
+    permission-message: "&cНет прав"
+    command_mc: hello
+    command_ds: hello
+    aliases_mc: ["h"]
+    aliases_ds: ["h"]
+    discord-roles: ["role_id_1", "role_id_2"]</code></pre>
+                    <p>Вложенность папок: <code>commands/lp/lp.yml</code></p>
+                </section>
+                <hr>
+
+                <!-- ШАБЛОНЫ -->
+                <section id="template">
+                    <div class="probel"></div>
+                    <h2>Система шаблонов</h2>
+                    <p>Мощный шаблонизатор с синтаксисом <code>&lt;~ ~&gt;</code>. Работает в кастомных командах, embed,
+                        LongPoll-скриптах.</p>
+
+                    <h3>Переменные</h3>
+                    <table>
+                        <tr>
+                            <th>Переменная</th>
+                            <th>Где</th>
+                            <th>Описание</th>
+                        </tr>
+                        <tr>
+                            <td><code>args</code></td>
+                            <td>всегда</td>
+                            <td>List аргументов</td>
+                        </tr>
+                        <tr>
+                            <td><code>_args_raw</code></td>
+                            <td>всегда</td>
+                            <td>Строка аргументов</td>
+                        </tr>
+                        <tr>
+                            <td><code>_cmd_name</code></td>
+                            <td>всегда</td>
+                            <td>Имя команды</td>
+                        </tr>
+                        <tr>
+                            <td><code>_lang</code></td>
+                            <td>всегда</td>
+                            <td>Язык: ru/en</td>
+                        </tr>
+                        <tr>
+                            <td><code>mc_online</code></td>
+                            <td>всегда</td>
+                            <td>Онлайн</td>
+                        </tr>
+                        <tr>
+                            <td><code>mc_max_players</code></td>
+                            <td>всегда</td>
+                            <td>Макс. игроков</td>
+                        </tr>
+                        <tr>
+                            <td><code>mc_tps</code></td>
+                            <td>всегда</td>
+                            <td>TPS</td>
+                        </tr>
+                        <tr>
+                            <td><code>mc_motd</code></td>
+                            <td>всегда</td>
+                            <td>MOTD</td>
+                        </tr>
+                        <tr>
+                            <td><code>_player_name</code></td>
+                            <td>Minecraft</td>
+                            <td>Имя</td>
+                        </tr>
+                        <tr>
+                            <td><code>_player_uuid</code></td>
+                            <td>Minecraft</td>
+                            <td>UUID</td>
+                        </tr>
+                        <tr>
+                            <td><code>_player_world</code></td>
+                            <td>Minecraft</td>
+                            <td>Мир</td>
+                        </tr>
+                        <tr>
+                            <td><code>_discord_member_id</code></td>
+                            <td>Discord</td>
+                            <td>ID участника</td>
+                        </tr>
+                        <tr>
+                            <td><code>_discord_member_name</code></td>
+                            <td>Discord</td>
+                            <td>Имя</td>
+                        </tr>
+                        <tr>
+                            <td><code>_discord_member_nick</code></td>
+                            <td>Discord</td>
+                            <td>Никнейм</td>
+                        </tr>
+                    </table>
+
+                    <h3>Теги</h3>
+                    <table>
+                        <tr>
+                            <th>Тег</th>
+                            <th>Описание</th>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;~ expr ~&gt;</code></td>
+                            <td>Вывести значение</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;set var = expr&gt;</code></td>
+                            <td>Присвоить</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;if&gt;...&lt;elseif&gt;...&lt;else&gt;...&lt;/if&gt;</code></td>
+                            <td>Условие</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;for var in list&gt;...&lt;/for&gt;</code></td>
+                            <td>Цикл</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;do action(...)&gt;</code></td>
+                            <td>Действие</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;require cond return "msg"&gt;</code></td>
+                            <td>Проверка</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;return "msg"&gt;</code></td>
+                            <td>Выход</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;global var = expr&gt;</code></td>
+                            <td>Глобальная</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;# comment #&gt;</code></td>
+                            <td>Комментарий</td>
+                        </tr>
+                    </table>
+
+                    <h3>Функции</h3>
+                    <p><b>Строки:</b> <code>lower</code>, <code>upper</code>, <code>capitalize</code>,
+                        <code>trim</code>, <code>title</code>, <code>replace(a,b,s)</code>, <code>split(sep,s)</code>,
+                        <code>length</code>, <code>format</code>, <code>after(N)</code></p>
+                    <p><b>Проверки:</b> <code>defined</code>, <code>empty</code>, <code>not</code>, <code>number</code>,
+                        <code>iterable</code>, <code>even</code>, <code>odd</code>, <code>contains</code>,
+                        <code>startsWith</code>, <code>endsWith</code>, <code>typeof</code></p>
+                    <p><b>Математика:</b> <code>abs</code>, <code>round</code>, <code>number_format</code>,
+                        <code>random(min,max)</code>, <code>random_hex</code>, <code>random_uuid</code></p>
+                    <p><b>Коллекции:</b> <code>first</code>, <code>last</code>, <code>reverse</code>,
+                        <code>slice</code>, <code>sort</code>, <code>shuffle</code>, <code>batch</code>,
+                        <code>concat</code>, <code>join</code>, <code>keys</code>, <code>values</code>,
+                        <code>default</code></p>
+                    <p><b>PAPI:</b> <code>papi("placeholder" [, player])</code></p>
+                    <p><b>DataStore:</b> <code>getattribute(key)</code>, <code>member.getattribute(key)</code>,
+                        <code>player.getattribute(key)</code>, <code>bot.getattribute(key)</code>,
+                        <code>find_player_by_session(id)</code></p>
+                    <p><b>HTTP:</b> <code>http_get(url)</code>, <code>http_post(url, body|k,v...)</code>,
+                        <code>http_put</code>, <code>http_delete</code>, <code>http_patch</code>,
+                        <code>http_code(resp)</code>, <code>http_body(resp)</code>, <code>http_header(n,v)</code>,
+                        <code>http_bearer(tok)</code>, <code>json_parse(str)</code></p>
+
+                    <h3>Действия (&lt;do&gt;)</h3>
+                    <table>
+                        <tr>
+                            <th>Действие</th>
+                            <th>Описание</th>
+                        </tr>
+                        <tr>
+                            <td><code>mc.command("cmd")</code></td>
+                            <td>Выполнить команду</td>
+                        </tr>
+                        <tr>
+                            <td><code>mc.broadcast("msg")</code></td>
+                            <td>В чат</td>
+                        </tr>
+                        <tr>
+                            <td><code>mc.give("p","item")</code></td>
+                            <td>Выдать предмет</td>
+                        </tr>
+                        <tr>
+                            <td><code>discord.send(channelId,"text")</code></td>
+                            <td>Сообщение</td>
+                        </tr>
+                        <tr>
+                            <td><code>discord.embed(...)</code></td>
+                            <td>Embed</td>
+                        </tr>
+                        <tr>
+                            <td><code>discord.role_add/give(mID, rID)</code></td>
+                            <td>Роль +</td>
+                        </tr>
+                        <tr>
+                            <td><code>discord.role_remove/delete(mID, rID)</code></td>
+                            <td>Роль −</td>
+                        </tr>
+                        <tr>
+                            <td><code>bot.setstatus("online/dnd/idle")</code></td>
+                            <td>Статус</td>
+                        </tr>
+                        <tr>
+                            <td><code>bot.setstatustext("text")</code></td>
+                            <td>Текст статуса</td>
+                        </tr>
+                    </table>
+
+                    <h3>Chain API</h3>
+                    <pre>guild.getChannel("id").createEmbed().withTitle("...").withColor("#hex").withField("n","v",true).send()</pre>
+
+                    <h3>Статус бота</h3>
+                    <pre><code># bot_status.yml
+enabled: true
+type: "playing"     # playing / watching / listening / competing / custom
+text: "с сервером"</code></pre>
+                </section>
+                <hr>
+
+                <!-- МОДАЛКИ -->
+                <section id="modals">
+                    <div class="probel"></div>
+                    <h2>Модальные окна <span class="tag purple">NEW v1.4</span></h2>
+                    <p>Файл <code>modals.yml</code> — настройка Discord Modal UI-компонентов, вызываемых из Minecraft
+                        или Discord команд.</p>
+                    <pre><code>modals:
+  report:
+    title: "Отправить репорт"
+    command: "zreport {player} {reason}"
+    fields:
+      - label: "Ник игрока"
+        style: "short"         # short / paragraph
+        placeholder: "Введите ник"
+        required: true
+        min_length: 1
+        max_length: 32
+        default: ""
+      - label: "Причина"
+        style: "paragraph"
+        placeholder: "Опишите причину"
+        required: true
+        min_length: 10
+        max_length: 500</code></pre>
+                    <p><b>Параметры поля:</b></p>
+                    <table>
+                        <tr>
+                            <th>Параметр</th>
+                            <th>Описание</th>
+                        </tr>
+                        <tr>
+                            <td><code>label</code></td>
+                            <td>Заголовок поля</td>
+                        </tr>
+                        <tr>
+                            <td><code>style</code></td>
+                            <td><code>short</code> (одна строка) / <code>paragraph</code> (много строк)</td>
+                        </tr>
+                        <tr>
+                            <td><code>placeholder</code></td>
+                            <td>Подсказка</td>
+                        </tr>
+                        <tr>
+                            <td><code>required</code></td>
+                            <td><code>true</code> / <code>false</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>min_length</code> / <code>max_length</code></td>
+                            <td>Мин./макс. длина</td>
+                        </tr>
+                        <tr>
+                            <td><code>default</code></td>
+                            <td>Значение по умолчанию</td>
+                        </tr>
+                    </table>
+                    <p>В команде <code>command</code> используются плейсхолдеры <code>{field_label}</code>, передающие
+                        значения из модалки.</p>
+                </section>
+                <hr>
+
+                <!-- РЕАКЦИИ -->
+                <section id="reactions">
+                    <div class="probel"></div>
+                    <h2>Реакции <span class="tag purple">NEW v1.4</span></h2>
+                    <p>Файл <code>reactions.yml</code> — настройка автоматических реакций на сообщения.</p>
+                    <pre><code>reactions:
+  # Реакция-триггер: игрок ставит реакцию → получает роль
+  welcome:
+    type: "reaction_add"      # reaction_add / reaction_remove
+    channel_id: "000000000000000000"
+    message_id: "000000000000000000"    # ID сообщения (или "any")
+    emoji: "✅"
+    role_id: "000000000000000000"       # ID выдаваемой/снимаемой роли
+    remove_on_unreact: true             # снять роль при снятии реакции
+
+  # Реакция-триггер на любое сообщение
+  upvote:
+    type: "reaction_add"
+    channel_id: "any"
+    message_id: "any"
+    emoji: "⭐"
+    command: "mc.command('say '+_discord_member_name+' поставил звезду')"</code></pre>
+                    <p><b>Параметры:</b></p>
+                    <table>
+                        <tr>
+                            <th>Параметр</th>
+                            <th>Описание</th>
+                        </tr>
+                        <tr>
+                            <td><code>type</code></td>
+                            <td><code>reaction_add</code> (добавление) / <code>reaction_remove</code> (удаление)</td>
+                        </tr>
+                        <tr>
+                            <td><code>channel_id</code></td>
+                            <td>ID канала (или <code>"any"</code>)</td>
+                        </tr>
+                        <tr>
+                            <td><code>message_id</code></td>
+                            <td>ID сообщения (или <code>"any"</code>)</td>
+                        </tr>
+                        <tr>
+                            <td><code>emoji</code></td>
+                            <td>Эмодзи (Unicode или ID кастомного)</td>
+                        </tr>
+                        <tr>
+                            <td><code>role_id</code></td>
+                            <td>Роль для выдачи/снятия (опционально)</td>
+                        </tr>
+                        <tr>
+                            <td><code>remove_on_unreact</code></td>
+                            <td>Снимать роль при отмене реакции</td>
+                        </tr>
+                        <tr>
+                            <td><code>command</code></td>
+                            <td>Команда шаблонизатора при срабатывании (опционально)</td>
+                        </tr>
+                    </table>
+                </section>
+                <hr>
+
+                <!-- SELECTMENU -->
+                <section id="selectmenu">
+                    <div class="probel"></div>
+                    <h2>SelectMenu <span class="tag purple">NEW v1.4</span></h2>
+                    <p>Discord SelectMenu (выпадающий список), настраиваемый в кастомных командах через
+                        <code>&lt;do&gt;</code>.</p>
+                    <pre><code>&lt;do discord.embed(_discord_channel_id)
+  .withTitle("Выбери роль")
+  .withDescription("Нажми на кнопку или выбери из списка")
+  .withColor("#5865F2")
+  .withSelectMenu({
+    "custom_id": "role_select",
+    "placeholder": "Выбери роль...",
+    "min_values": 1,
+    "max_values": 1,
+    "options": [
+      {"label": "Админ", "value": "role_admin", "description": "Админ", "emoji": "👑"},
+      {"label": "Модератор", "value": "role_mod", "description": "Модер", "emoji": "🛡"},
+      {"label": "Игрок", "value": "role_player", "description": "Обычный игрок", "emoji": "🎮"}
+    ]
+  })
+  .send()&gt;</code></pre>
+                    <p>Обработка выбора настраивается в <code>custom_commands.yml</code> через Discord-команды,
+                        реагирующие на custom_id.</p>
+                </section>
+                <hr>
+
+                <!-- ПЛЕЙСХОЛДЕРЫ -->
+                <section id="placeholders">
+                    <div class="probel"></div>
+                    <h2>PlaceholderAPI <span class="tag purple">NEW v1.4</span></h2>
+                    <p><b>Кастомные плейсхолдеры</b> — файл <code>placeholders.yml</code>:</p>
+                    <pre><code>placeholders:
+  # Статический плейсхолдер
+  server_type:
+    description: "Тип сервера"
+    value: "Выживание"
+
+  # Динамический — запускает шаблон
+  online_info:
+    description: "Информация об онлайне"
+    template: "&a❤ &f<~ mc_online ~>/<~ mc_max_players ~>"
+
+  # С привязкой к игроку
+  player_guild_name:
+    description: "Название гильдии игрока"
+    template: "<~ papi('%some_plugin_guild%', _player_name) ~>"
+    requires_player: true   # true — подставляет игрока из контекста</code></pre>
+                    <p><b>Встроенные плейсхолдеры:</b></p>
+                    <table>
+                        <tr>
+                            <th>Плейсхолдер</th>
+                            <th>Описание</th>
+                        </tr>
+                        <tr>
+                            <td><code>%zoliryzik_in_vc%</code></td>
+                            <td>Статус в голосовом канале</td>
+                        </tr>
+                        <tr>
+                            <td><code>%zoliryzik_attr_member_&lt;key&gt;%</code></td>
+                            <td>Атрибут Discord-участника</td>
+                        </tr>
+                        <tr>
+                            <td><code>%zoliryzik_attr_player_&lt;key&gt;%</code></td>
+                            <td>Атрибут игрока</td>
+                        </tr>
+                        <tr>
+                            <td><code>%zoliryzik_attr_bot_&lt;key&gt;%</code></td>
+                            <td>Глобальный атрибут бота</td>
+                        </tr>
+                        <tr>
+                            <td><code>%zoliryzik_&lt;name&gt;%</code></td>
+                            <td>Кастомный из placeholders.yml</td>
+                        </tr>
+                    </table>
+                </section>
+                <hr>
+
+                <!-- LONGPOLL -->
+                <section id="longpoll">
+                    <div class="probel"></div>
+                    <h2>LongPoll Bot API</h2>
+                    <p>Node.js-бот на <code>http://localhost:17523</code>. Аутентификация:
+                        <code>Authorization: Bearer secret</code>.</p>
+                    <table>
+                        <tr>
+                            <th>Метод</th>
+                            <th>Endpoint</th>
+                            <th>Тело</th>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/event</code></td>
+                            <td><code>{"type":"...", ...}</code></td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/config</code></td>
+                            <td><code>{"key":"value"}</code></td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/script?type=X</code></td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/script?type=X</code></td>
+                            <td><code>{"script":"..."}</code></td>
+                        </tr>
+                    </table>
+                </section>
+                <hr>
+
+                <!-- РОЛИ -->
+                <section id="roles">
+                    <div class="probel"></div>
+                    <h2>Управление Discord-ролями <span class="tag purple">NEW v1.4</span></h2>
+                    <p>В v1.4 добавлены 4 команды для управления ролями в Discord прямо из Minecraft:</p>
+                    <table>
+                        <tr>
+                            <th>Команда</th>
+                            <th>Описание</th>
+                            <th>Разрешение</th>
+                        </tr>
+                        <tr>
+                            <td><code>/rolegive &lt;member&gt; &lt;role&gt;</code></td>
+                            <td>Выдать роль участнику Discord</td>
+                            <td><code>zoliryzik.rolegive</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>/roleremove &lt;member&gt; &lt;role&gt;</code></td>
+                            <td>Снять роль с участника</td>
+                            <td><code>zoliryzik.roleremove</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>/rolemenu</code></td>
+                            <td>Показать меню выбора ролей в Discord</td>
+                            <td><code>zoliryzik.rolemenu</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>/role_toggle [member] [role]</code></td>
+                            <td>Переключить роль (дать/забрать)</td>
+                            <td><code>zoliryzik.roletoggle</code></td>
+                        </tr>
+                    </table>
+                    <p>Параметры <code>member</code> и <code>role</code> принимают ID или упоминание (Discord).</p>
+                </section>
+                <hr>
+
+                <!-- КОНФИГ -->
+                <section id="config">
+                    <div class="probel"></div>
+                    <h2>Конфигурация</h2>
+                    <h3>config.yml</h3>
+                    <pre><code>language: "en"
+debug: false
+save-examples: true
+main-discord-guild-id: "0000000000000000000000"
+discord-bot-token: "BOT_TOKEN"
+embed-creator-role-ids:
+  - "0000000000000000000"
+embed-color: "0xFFAA00"
+discord-command-prefix: "z!"
+server-name: ""
+storage:
+  type: "yaml"
+  mysql:
+    host: "localhost"
+    port: 3306
+    database: "zldiscord"
+    user: "root"
+    password: ""
+    table: "zldiscord_links"
+    linking_session_table: "zldiscord_linking_sessions"
+    event_tracker_table: "zldiscord_event_tracker"
+    template_table: "zldiscord_templates"
+    cross_command_table: "zldiscord_cross_commands"
+    table_prefix: "zldiscord_"
+    use-ssl: false
+sync:
+  links: true
+  attributes:
+    bot: true
+    member: true
+    player: true</code></pre>
+
+                    <h3>Переменные окружения</h3>
+                    <table>
+                        <tr>
+                            <th>Переменная</th>
+                            <th>Описание</th>
+                        </tr>
+                        <tr>
+                            <td><code>DISCORD_TOKEN</code></td>
+                            <td>Токен Discord бота</td>
+                        </tr>
+                        <tr>
+                            <td><code>LONGPOLL_KEY</code></td>
+                            <td>Ключ LongPoll API (умолч. secret)</td>
+                        </tr>
+                        <tr>
+                            <td><code>LONGPOLL_PORT</code></td>
+                            <td>Порт (умолч. 17523)</td>
+                        </tr>
+                    </table>
+                </section>
+                <hr>
+
+                <!-- PERMISSIONS -->
+                <section id="permissions">
+                    <div class="probel"></div>
+                    <h2>Permissions</h2>
+                    <table>
+                        <tr>
+                            <th>Право</th>
+                            <th>Команда</th>
+                            <th>По умолчанию</th>
+                        </tr>
+                        <tr>
+                            <td><code>zoliryzik.use</code></td>
+                            <td>/zevent</td>
+                            <td>op</td>
+                        </tr>
+                        <tr>
+                            <td><code>zoliryzik.zlink</code></td>
+                            <td>/zlink</td>
+                            <td>true</td>
+                        </tr>
+                        <tr>
+                            <td><code>zoliryzik.zunlink</code></td>
+                            <td>/zunlink</td>
+                            <td>true</td>
+                        </tr>
+                        <tr>
+                            <td><code>zoliryzik.zembed</code></td>
+                            <td>/zembed</td>
+                            <td>op</td>
+                        </tr>
+                        <tr>
+                            <td><code>zoliryzik.zembed_manage</code></td>
+                            <td>/zembedmanage</td>
+                            <td>op</td>
+                        </tr>
+                        <tr>
+                            <td><code>zoliryzik.cc</code></td>
+                            <td>/zcc</td>
+                            <td>op</td>
+                        </tr>
+                        <tr>
+                            <td><code>zoliryzik.attr.get</code></td>
+                            <td>/zattr</td>
+                            <td>op</td>
+                        </tr>
+                        <tr>
+                            <td><code>zoliryzik.longpoll</code></td>
+                            <td>/zlongpoll</td>
+                            <td>op</td>
+                        </tr>
+                        <tr>
+                            <td><code>zoliryzik.status</code></td>
+                            <td>/zstatus</td>
+                            <td>op</td>
+                        </tr>
+                        <tr>
+                            <td><code>zoliryzik.rolegive</code></td>
+                            <td>/rolegive</td>
+                            <td>op</td>
+                        </tr>
+                        <tr>
+                            <td><code>zoliryzik.roleremove</code></td>
+                            <td>/roleremove</td>
+                            <td>op</td>
+                        </tr>
+                        <tr>
+                            <td><code>zoliryzik.rolemenu</code></td>
+                            <td>/rolemenu</td>
+                            <td>op</td>
+                        </tr>
+                        <tr>
+                            <td><code>zoliryzik.roletoggle</code></td>
+                            <td>/role_toggle</td>
+                            <td>op</td>
+                        </tr>
+                        <tr>
+                            <td><code>zoliryzik.admin</code></td>
+                            <td>все команды</td>
+                            <td>op</td>
+                        </tr>
+                    </table>
+                </section>
+                <hr>
+
+                <!-- ХРАНИЛИЩЕ -->
+                <section id="storage">
+                    <div class="probel"></div>
+                    <h2>Хранилище</h2>
+                    <p>Поддерживается два типа: <b>YAML</b> (файлы на диске) и <b>MySQL</b> (реляционная БД). Настройка
+                        в <code>config.yml → storage</code>.</p>
+                    <table>
+                        <tr>
+                            <th>Таблица</th>
+                            <th>Назначение</th>
+                        </tr>
+                        <tr>
+                            <td><code>zldiscord_links</code></td>
+                            <td>Привязка Discord-аккаунтов к Minecraft</td>
+                        </tr>
+                        <tr>
+                            <td><code>zldiscord_linking_sessions</code></td>
+                            <td>Сессии привязки (код подтверждения)</td>
+                        </tr>
+                        <tr>
+                            <td><code>zldiscord_event_tracker</code></td>
+                            <td>Голосования (/zevent)</td>
+                        </tr>
+                        <tr>
+                            <td><code>zldiscord_templates</code></td>
+                            <td>Сохранённые embed-шаблоны</td>
+                        </tr>
+                        <tr>
+                            <td><code>zldiscord_cross_commands</code></td>
+                            <td>Очередь кросс-серверных команд</td>
+                        </tr>
+                        <tr>
+                            <td><code>zldiscord_*</code></td>
+                            <td>Префикс таблиц (меняется в config)</td>
+                        </tr>
+                    </table>
+                    <p>MySQL: HikariCP + MySQL Connector 8.x (встроен в JAR, не требует внешней установки).</p>
+                </section>
+                <hr>
+
+                <!-- СКРИПТЫ -->
+                <section id="scripts">
+                    <div class="probel"></div>
+                    <h2>Примеры скриптов</h2>
+
+                    <h3>Python</h3>
+                    <pre><code>import requests, json
+
+URL = "http://localhost:17523/event"
+HEADERS = {"Authorization": "Bearer secret", "Content-Type": "application/json"}
+
+# Отправить событие donate
+event = {"type": "donate", "nickname": "Player123", "amount": 1500, "product": "Diamond Pack"}
+r = requests.post(URL, headers=HEADERS, json=event)
+print("Status:", r.status_code, r.json())</code></pre>
+
+                    <h3>Node.js</h3>
+                    <pre><code>const URL = "http://localhost:17523/event";
+const HEADERS = {"Authorization": "Bearer secret", "Content-Type": "application/json"};
+
+fetch(URL, {
+  method: "POST",
+  headers: HEADERS,
+  body: JSON.stringify({type: "donate", nickname: "Player123", amount: 1500})
+}).then(r => r.json()).then(console.log);</code></pre>
+
+                    <h3>curl</h3>
+                    <pre>curl http://localhost:17523/event -X POST \
+  -H "Authorization: Bearer secret" \
+  -H "Content-Type: application/json" \
+  -d '{"type":"donate","nickname":"Player123","amount":1500}'</pre>
+                </section>
+                <hr>
+
+                <!-- ПРИМЕРЫ -->
+                <section id="examples">
+                    <div class="probel"></div>
+                    <h2>Примеры</h2>
+
+                    <h3>Donate-уведомление (LongPoll)</h3>
+                    <pre><code>&lt;if _event.amount >= 5000&gt;
+  &lt;do mc.broadcast("&a🎉 Мега-донат от &e" + _event.nickname)&gt;
+&lt;else&gt;
+  &lt;do mc.broadcast("&a❤ " + _event.nickname + " задонатил &e" + _event.amount)&gt;
+&lt;/if&gt;</code></pre>
+
+                    <h3>Информация об игроке (info.yml)</h3>
+                    <pre><code>&lt;set target = args[0]&gt;
+&lt;if target == null or target == ""&gt;
+  &lt;set target = _player_name&gt;
+&lt;/if&gt;
+📊 Информация о &lt;~ target ~&gt;
+├ Уровень: &lt;~ papi("%level%", target) ~&gt;
+├ Здоровье: &lt;~ papi("%player_health%", target) ~&gt;
+├ Мир: &lt;~ papi("%player_world%", target) ~&gt;
+└ Онлайн: &lt;~ mc_online ~&gt;/&lt;~ mc_max_players ~&gt;</code></pre>
+                </section>
+                <hr>
+
+                <!-- FAQ -->
+                <section id="faq">
+                    <div class="probel"></div>
+                    <h2>FAQ / Частые вопросы</h2>
+
+                    <h3>Плагин не запускается, пишет «NoClassDefFoundError»</h3>
+                    <p>Убедитесь, что используете Java 17+. Проверьте <code>java -version</code>.</p>
+
+                    <h3>Discord бот не подключается</h3>
+                    <p>Проверьте токен в <code>config.yml</code> или переменной окружения <code>DISCORD_TOKEN</code>.
+                        Убедитесь, что бот имеет намерения (Intents): Server Members, Message Content, Guild Messages,
+                        Message Reactions.</p>
+
+                    <h3>LongPoll не отвечает</h3>
+                    <p>Запущен ли Node.js-бот? Проверьте <code>ps aux | grep longpoll</code>. Совпадает ли порт и
+                        ключ?<br>
+                        Проверка: <code>curl http://localhost:17523/poll -H "Authorization: Bearer secret"</code></p>
+
+                    <h3>Как обновить с v1.3 на v1.4?</h3>
+                    <ol>
+                        <li><span class="tag red">stop</span> сервер</li>
+                        <li>Заменить <code>ZoLiryzik.jar</code></li>
+                        <li><span class="tag red">start</span> сервер</li>
+                        <li>Проверить <code>config.yml</code> (появилось поле <code>debug</code>)</li>
+                        <li>Новые YAML (modals.yml, reactions.yml, placeholders.yml) создадутся автоматически с
+                            примерами</li>
+                    </ol>
+
+                    <h3>Не работают кастомные плейсхолдеры</h3>
+                    <p>Убедитесь, что PlaceholderAPI установлен. Проверьте, что в <code>placeholders.yml</code> нет
+                        синтаксических ошибок. Перезагрузите: <code>/zcc reload</code>.</p>
+
+                    <h3>Поддерживается ли Folia?</h3>
+                    <p>Да. Плагин корректно работает на Folia (регионы, асинхронные задачи).</p>
+
+                    <h3>Как перенести данные с YAML на MySQL?</h3>
+                    <ol>
+                        <li>Создать БД и пользователя MySQL</li>
+                        <li>Настроить <code>config.yml → storage → mysql</code></li>
+                        <li>Поменять <code>storage → type</code> на <code>"mysql"</code></li>
+                        <li>Перезапустить сервер — данные скопируются автоматически</li>
+                    </ol>
+                </section>
+
+            </div><!-- /docs-content -->
+        </main>
+
+        <!-- Mobile nav -->
+        <button class="mobile-nav-btn" id="mobileNavBtn">☰</button>
+        <div class="mobile-nav-overlay" id="mobileNavOverlay">
+            <div class="mobile-nav-panel">
+                <a href="#intro">Введение</a>
+                <a href="#install">Установка</a>
+                <a href="#commands">Команды</a>
+                <a href="#cc">Кастомные команды</a>
+                <a href="#template">Шаблоны</a>
+                <a href="#modals">Модальные окна</a>
+                <a href="#reactions">Реакции</a>
+                <a href="#selectmenu">SelectMenu</a>
+                <a href="#placeholders">Плейсхолдеры</a>
+                <a href="#longpoll">LongPoll</a>
+                <a href="#roles">Discord-роли</a>
+                <a href="#config">Конфигурация</a>
+                <a href="#permissions">Permissions</a>
+                <a href="#storage">Хранилище</a>
+                <a href="#scripts">Скрипты</a>
+                <a href="#examples">Примеры</a>
+                <a href="#faq">FAQ</a>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 ZLDiscord. Версия 1.4 | Paper 1.16.5–1.21.x</p>
+        </footer>
+    </div>
+
+    <script>
+        const navOverlay = document.getElementById('mobileNavOverlay');
+        document.getElementById('mobileNavBtn').addEventListener('click', () => navOverlay.classList.toggle('show'));
+        navOverlay.addEventListener('click', e => { if (e.target === navOverlay) navOverlay.classList.remove('show'); });
+        navOverlay.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navOverlay.classList.remove('show')));
+
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.sidebar a');
+        function setActive() {
+            let cur = '';
+            sections.forEach(s => { if (window.scrollY >= s.offsetTop - 150) cur = s.id; });
+            navLinks.forEach(l => { l.classList.toggle('active', l.hash === '#' + cur); });
+        }
+        window.addEventListener('scroll', setActive);
+        navLinks.forEach(l => l.addEventListener('click', e => {
+            e.preventDefault();
+            const el = document.querySelector(l.hash);
+            if (el) { window.scrollTo({ top: el.offsetTop - 90, behavior: 'smooth' }); window.history.pushState(null, null, l.hash); }
+        }));
+        if (window.location.hash) {
+            const el = document.querySelector(window.location.hash);
+            if (el) setTimeout(() => window.scrollTo({ top: el.offsetTop - 90 }), 100);
+        }
+    </script>
+</body>
+
+</html>
