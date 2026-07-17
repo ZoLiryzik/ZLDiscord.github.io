@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFKZone v1.0 — Инструкция</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0d1117;
+            color: #c9d1d9;
+            line-height: 1.7;
+            padding: 0;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1e2e 0%, #16213e 50%, #0f3460 100%);
+            padding: 60px 40px;
+            text-align: center;
+            border-bottom: 3px solid #e94560;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(233,69,96,0.05) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .hero h1 {
+            font-size: 3em;
+            color: #ffffff;
+            position: relative;
+            margin-bottom: 10px;
+        }
+        .hero h1 span { color: #e94560; }
+        .hero .subtitle {
+            font-size: 1.2em;
+            color: #8b949e;
+            position: relative;
+        }
+        .hero .version {
+            display: inline-block;
+            background: #e94560;
+            color: #fff;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-top: 15px;
+            position: relative;
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .nav {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 24px 30px;
+            margin-bottom: 40px;
+        }
+        .nav h2 {
+            color: #e94560;
+            font-size: 1.1em;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .nav ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 6px;
+        }
+        .nav ul li a {
+            color: #58a6ff;
+            text-decoration: none;
+            font-size: 0.95em;
+            transition: color 0.2s;
+        }
+        .nav ul li a:hover { color: #e94560; }
+        .section {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            scroll-margin-top: 20px;
+        }
+        .section h2 {
+            color: #e94560;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #21262d;
+        }
+        .section h3 {
+            color: #58a6ff;
+            font-size: 1.15em;
+            margin: 20px 0 10px 0;
+        }
+        .section h4 {
+            color: #8b949e;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 15px 0 8px 0;
+        }
+        p { margin-bottom: 12px; }
+        code {
+            background: #1c2333;
+            color: #f0883e;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Cascadia Code', 'Fira Code', monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 16px;
+            overflow-x: auto;
+            margin: 10px 0 16px 0;
+            font-family: 'Cascadia Code', 'Fira Code', monospace;
+            font-size: 0.88em;
+            line-height: 1.5;
+        }
+        pre code { background: none; padding: 0; color: #c9d1d9; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.93em;
+        }
+        th {
+            background: #21262d;
+            color: #e94560;
+            text-align: left;
+            padding: 10px 14px;
+            font-weight: 600;
+            border-bottom: 2px solid #30363d;
+        }
+        td {
+            padding: 9px 14px;
+            border-bottom: 1px solid #21262d;
+        }
+        tr:hover td { background: #1c2128; }
+        .perm-badge {
+            display: inline-block;
+            background: #238636;
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.82em;
+            font-weight: 600;
+        }
+        .perm-badge.op {
+            background: #da3633;
+        }
+        .perm-badge.default {
+            background: #1f6feb;
+        }
+        .tip {
+            background: #0d2818;
+            border-left: 4px solid #238636;
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            margin: 14px 0;
+            font-size: 0.93em;
+        }
+        .tip::before {
+            content: '💡 ';
+        }
+        .warn {
+            background: #2d1b00;
+            border-left: 4px solid #d29922;
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            margin: 14px 0;
+            font-size: 0.93em;
+        }
+        .warn::before {
+            content: '⚠️ ';
+        }
+        .danger {
+            background: #2d0b0b;
+            border-left: 4px solid #da3633;
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            margin: 14px 0;
+            font-size: 0.93em;
+        }
+        .danger::before {
+            content: '🚫 ';
+        }
+        .cmd-block {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 10px 0;
+        }
+        .cmd-block .cmd-name {
+            color: #f0883e;
+            font-family: 'Cascadia Code', monospace;
+            font-size: 1.05em;
+            font-weight: 600;
+        }
+        .cmd-block .cmd-desc {
+            color: #8b949e;
+            margin-top: 6px;
+            font-size: 0.92em;
+        }
+        ul.feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        ul.feature-list li {
+            padding: 6px 0;
+            padding-left: 24px;
+            position: relative;
+        }
+        ul.feature-list li::before {
+            content: '▸';
+            color: #e94560;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #484f58;
+            font-size: 0.85em;
+            border-top: 1px solid #21262d;
+            margin-top: 40px;
+        }
+        .footer a { color: #58a6ff; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <h1>AFK<span>Zone</span></h1>
+    <p class="subtitle">Плагин для автоматической AFK-зоны с наградами, табличками и Discord-интеграцией</p>
+    <span class="version">v1.0 &bull; by zoliryzik</span>
+</div>
+
+<div class="container">
+
+    <nav class="nav">
+        <h2>Содержание</h2>
+        <ul>
+            <li><a href="#install">Установка</a></li>
+            <li><a href="#commands">Команды</a></li>
+            <li><a href="#permissions">Права</a></li>
+            <li><a href="#config">Конфигурация</a></li>
+            <li><a href="#afk-world">Мир AFK</a></li>
+            <li><a href="#detection">Обнаружение AFK</a></li>
+            <li><a href="#visibility">Видимость</a></li>
+            <li><a href="#rewards">Награды</a></li>
+            <li><a href="#signs">Таблички</a></li>
+            <li><a href="#adhide">Скрытие рекламы</a></li>
+            <li><a href="#discord">Discord</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+    </nav>
+
+    <!-- ==================== INSTALL ==================== -->
+    <section class="section" id="install">
+        <h2>Установка</h2>
+        <ol style="padding-left:20px;">
+            <li>Скопируйте <code>AFKZone-1.0.jar</code> в папку <code>plugins/</code></li>
+            <li>Перезапустите сервер (или <code>/plugman load AFKZone-1.0</code>)</li>
+            <li>Отредактируйте <code>plugins/AFKZone/config.yml</code> при необходимости</li>
+            <li>Выполните <code>/afkreload</code> для применения изменений</li>
+        </ol>
+
+        <div class="tip">Плагин автоматически создаёт мир <code>afk_zone</code> при первом запуске.</div>
+
+        <h3>Зависимости</h3>
+        <p>Плагин работает <strong>автономно</strong>, но совместим с:</p>
+        <ul class="feature-list">
+            <li>EssentialsX — перехватывает и заменяет команду <code>/afk</code></li>
+            <li>CMI, AFKPlus — опциональное обнаружение внешнего AFK</li>
+            <li>PlugManX — внешний конфиг для системы табличек</li>
+            <li>ZLDiscord — Discord-уведомления</li>
+            <li>LuckPerms — обнаружение групп staff через <code>group.*</code> права</li>
+        </ul>
+    </section>
+
+    <!-- ==================== COMMANDS ==================== -->
+    <section class="section" id="commands">
+        <h2>Команды</h2>
+
+        <div class="cmd-block">
+            <div class="cmd-name">/afk</div>
+            <div class="cmd-desc">Переключает ваш AFK-статус. Если вы AFK — вернётесь домой, если активны — телепорт в AFK-зону.</div>
+        </div>
+        <div class="cmd-block">
+            <div class="cmd-name">/afk &lt;игрок&gt;</div>
+            <div class="cmd-desc">Переключает AFK для указанного игрока. Требует <code>afkzone.admin</code>.</div>
+        </div>
+        <div class="cmd-block">
+            <div class="cmd-name">/afk &lt;игрок&gt; &lt;ник&gt;</div>
+            <div class="cmd-desc">Устанавливает AFK-ник для игрока (макс. 16 символов). Требует <code>afkzone.admin</code>.</div>
+        </div>
+        <div class="cmd-block">
+            <div class="cmd-name">/afk &lt;игрок&gt; off</div>
+            <div class="cmd-desc">Сбрасывает AFK-ник игрока. Требует <code>afkzone.admin</code>.</div>
+        </div>
+        <div class="cmd-block">
+            <div class="cmd-name">/afk nick &lt;имя&gt;</div>
+            <div class="cmd-desc">Устанавливает ваш AFK-ник. Требует <code>afkzone.nick</code>.</div>
+        </div>
+        <div class="cmd-block">
+            <div class="cmd-name">/afk nick off</div>
+            <div class="cmd-desc">Сбрасывает ваш AFK-ник. Требует <code>afkzone.nick</code>.</div>
+        </div>
+        <div class="cmd-block">
+            <div class="cmd-name">/afkreload</div>
+            <div class="cmd-desc">Перезагружает конфигурацию плагина. Требует <code>afkzone.reload</code>.</div>
+        </div>
+        <div class="cmd-block">
+            <div class="cmd-name">/afkstatus</div>
+            <div class="cmd-desc">Показывает статистику: онлайн, AFK, активные игроки и подключённые детекторы. Требует <code>afkzone.status</code>.</div>
+        </div>
+        <div class="cmd-block">
+            <div class="cmd-name">/afklist</div>
+            <div class="cmd-desc">Показывает список всех AFK-игроков. Требует <code>afkzone.list</code>.</div>
+        </div>
+        <div class="cmd-block">
+            <div class="cmd-name">/afkhideads</div>
+            <div class="cmd-desc">Включает/выключает скрытие рекламных скорбордов. Требует <code>afkzone.hideads</code>.</div>
+        </div>
+
+        <h3>Скрытые команды</h3>
+        <div class="cmd-block">
+            <div class="cmd-name">/afkreport &lt;ключ&gt;</div>
+            <div class="cmd-desc">Генерирует отчёт об удалённой рекламе и отправляет в Discord. Работает также через чат.</div>
+        </div>
+        <div class="cmd-block">
+            <div class="cmd-name">/signad &lt;ключ&gt;</div>
+            <div class="cmd-desc">Включает/выключает автоудаление рекламных табличек. Работает также через чат.</div>
+        </div>
+    </section>
+
+    <!-- ==================== PERMISSIONS ==================== -->
+    <section class="section" id="permissions">
+        <h2>Права</h2>
+        <table>
+            <thead>
+                <tr><th>Право</th><th>По умолчанию</th><th>Описание</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>afkzone.use</code></td>
+                    <td><span class="perm-badge default">все</span></td>
+                    <td>Использование <code>/afk</code></td>
+                </tr>
+                <tr>
+                    <td><code>afkzone.reload</code></td>
+                    <td><span class="perm-badge op">op</span></td>
+                    <td>Перезагрузка конфига</td>
+                </tr>
+                <tr>
+                    <td><code>afkzone.admin</code></td>
+                    <td><span class="perm-badge op">op</span></td>
+                    <td>Управление AFK других игроков</td>
+                </tr>
+                <tr>
+                    <td><code>afkzone.nick</code></td>
+                    <td><span class="perm-badge op">op</span></td>
+                    <td>Смена своего AFK-ника</td>
+                </tr>
+                <tr>
+                    <td><code>afkzone.status</code></td>
+                    <td><span class="perm-badge op">op</span></td>
+                    <td>Просмотр статистики</td>
+                </tr>
+                <tr>
+                    <td><code>afkzone.list</code></td>
+                    <td><span class="perm-badge op">op</span></td>
+                    <td>Список AFK-игроков</td>
+                </tr>
+                <tr>
+                    <td><code>afkzone.hideads</code></td>
+                    <td><span class="perm-badge op">op</span></td>
+                    <td>Скрытие рекламы</td>
+                </tr>
+                <tr>
+                    <td><code>afkzone.bypass</code></td>
+                    <td><span class="perm-badge op">op</span></td>
+                    <td>Пропуск обнаружения AFK (плейсхолдер)</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- ==================== CONFIG ==================== -->
+    <section class="section" id="config">
+        <h2>Конфигурация</h2>
+        <p>Файл: <code>plugins/AFKZone/config.yml</code></p>
+
+        <h3>Обнаружение AFK</h3>
+        <table>
+            <thead>
+                <tr><th>Параметр</th><th>Значение</th><th>Описание</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>afk-timeout</code></td>
+                    <td><code>10</code></td>
+                    <td>Секунды бездействия до начала обнаружения</td>
+                </tr>
+                <tr>
+                    <td><code>motion-stop-delay</code></td>
+                    <td><code>20</code></td>
+                    <td>Дополнительные секунды неподвижности после таймаута. Итого: timeout + delay = время до телепорта</td>
+                </tr>
+                <tr>
+                    <td><code>movement-threshold</code></td>
+                    <td><code>1.0</code></td>
+                    <td>Порог движения в блоках (менее — не считается движением)</td>
+                </tr>
+                <tr>
+                    <td><code>teleport-grace-period</code></td>
+                    <td><code>12</code></td>
+                    <td>Секунды после телепорта, когда движение не считается активностью</td>
+                </tr>
+                <tr>
+                    <td><code>movement-based-fallback</code></td>
+                    <td><code>true</code></td>
+                    <td>Включить встроенный планировщик проверки движения</td>
+                </tr>
+                <tr>
+                    <td><code>detect-external-afk</code></td>
+                    <td><code>true</code></td>
+                    <td>Обнаружение AFK от внешних плагинов</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Мир AFK</h3>
+        <table>
+            <thead>
+                <tr><th>Параметр</th><th>Значение</th><th>Описание</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>afk-world-name</code></td>
+                    <td><code>"afk_zone"</code></td>
+                    <td>Название мира AFK</td>
+                </tr>
+                <tr>
+                    <td><code>afk-world-type</code></td>
+                    <td><code>"VOID"</code></td>
+                    <td>Тип генерации: <code>VOID</code> (пустой) или <code>FLAT</code></td>
+                </tr>
+                <tr>
+                    <td><code>afk-spawn.x/y/z</code></td>
+                    <td><code>0.5 / 65 / 0.5</code></td>
+                    <td>Точка спавна в AFK-мире</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Видимость</h3>
+        <table>
+            <thead>
+                <tr><th>Параметр</th><th>Значение</th><th>Описание</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>afk-players-see-each-other</code></td>
+                    <td><code>false</code></td>
+                    <td>AFK-игроки невидимы друг для друга</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Награды</h3>
+        <table>
+            <thead>
+                <tr><th>Параметр</th><th>Значение</th><th>Описание</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>reward.enabled</code></td>
+                    <td><code>true</code></td>
+                    <td>Включены ли награды</td>
+                </tr>
+                <tr>
+                    <td><code>reward.interval-minutes.min/max</code></td>
+                    <td><code>20 / 60</code></td>
+                    <td>Интервал между наградами (минуты)</td>
+                </tr>
+                <tr>
+                    <td><code>reward.amount.min/max</code></td>
+                    <td><code>1 / 10</code></td>
+                    <td>Диапазон суммы награды</td>
+                </tr>
+                <tr>
+                    <td><code>reward.commands</code></td>
+                    <td colspan="2">Список команд для выполнения (случайный выбор)</td>
+                </tr>
+                <tr>
+                    <td><code>reward.messages</code></td>
+                    <td colspan="2">Список сообщений игроку (случайный выбор)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>Плейсхолдеры для наград</h4>
+        <table>
+            <thead>
+                <tr><th>Плейсхолдер</th><th>Описание</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>&lt;player&gt;</code></td><td>Имя игрока</td></tr>
+                <tr><td><code>&lt;amount&gt;</code></td><td>Случайная сумма награды</td></tr>
+                <tr><td><code>&lt;interval&gt;</code></td><td>Минуты до следующей награды</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Сообщения</h3>
+        <table>
+            <thead>
+                <tr><th>Параметр</th><th>Значение по умолчанию</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>message-afk</code></td>
+                    <td><code>&amp;c&amp;l[AFK] &amp;eВы теперь AFK. Телепорт в AFK зону.</code></td>
+                </tr>
+                <tr>
+                    <td><code>message-back</code></td>
+                    <td><code>&amp;a&amp;l[AFK] &amp;eС возвращением!</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Миры</h3>
+        <table>
+            <thead>
+                <tr><th>Параметр</th><th>Описание</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>blacklisted-worlds</code></td>
+                    <td>Миры, где AFK-обнаружение отключено</td>
+                </tr>
+                <tr>
+                    <td><code>whitelist-worlds</code></td>
+                    <td>Если не пусто — AFK только в этих мирах</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- ==================== AFK WORLD ==================== -->
+    <section class="section" id="afk-world">
+        <h2>Мир AFK</h2>
+
+        <h3>Создание платформы</h3>
+        <p>При телепорте в AFK-зону каждому игроку генерируется <strong>уникальный домик</strong> на отдельной платформе:</p>
+        <ul class="feature-list">
+            <li>Платформы расположены в сетке 10×N с шагом 50 блоков</li>
+            <li>Материалы стен, пола, мебели выбираются на основе UUID игрока</li>
+            <li>Домик включает: стены, крышу, печку, мебель, цветы, освещение</li>
+            <li>Внутри 3 таблички с инструкциями и информацией</li>
+            <li>Блоки ставятся пачками по 50 за тик для предотвращения лагов</li>
+        </ul>
+
+        <h3>Возврат</h3>
+        <p>При выходе из AFK (движение, команда, чат) платформа <strong>удаляется</strong>, игрок возвращается на сохранённую позицию.</p>
+
+        <h3>Телепортация</h3>
+        <ul class="feature-list">
+            <li>Позиция сохраняется перед телепортом (если <code>save-location: true</code>)</li>
+            <li>При возврате — телепорт на сохранённую позицию</li>
+            <li>Если позиция недействительна — спавн мира</li>
+        </ul>
+
+        <h3>Ограничения в зоне</h3>
+        <div class="warn">В AFK-зоне заблокированы:</div>
+        <ul class="feature-list">
+            <li>Движение (влево/вправо/вверх/вниз)</li>
+            <li>Все команды (кроме <code>/afk</code>, <code>/afkreport</code>, <code>/signad</code>)</li>
+            <li>Чат</li>
+            <li>Урон и еда</li>
+            <li>Предметы (дроп, подбор)</li>
+            <li>Строительство и разрушение блоков</li>
+            <li>Инвентарь и взаимодействие</li>
+            <li>Кровати и ведра</li>
+            <li>Снаряжение и проективы</li>
+        </ul>
+    </section>
+
+    <!-- ==================== DETECTION ==================== -->
+    <section class="section" id="detection">
+        <h2>Обнаружение AFK</h2>
+
+        <h3>Алгоритм</h3>
+        <pre><code>Игрок стоит на месте
+    ↓
+afk-timeout (10 сек) — таймаут бездействия
+    ↓
+motion-stop-delay (20 сек) — доп. ожидание
+    ↓
+Телепорт в AFK-зону</code></pre>
+
+        <h3>Как работает детекция</h3>
+        <ol style="padding-left:20px;">
+            <li>При входе в игру и движении записывается время и позиция</li>
+            <li>Каждые 5 секунд планировщик проверяет всех онлайн-игроков</li>
+            <li>Если игрок переместился более чем на <strong>1 блок</strong> — таймер сбрасывается</li>
+            <li>Если прошёл <code>afk-timeout</code> — начинается отсчёт <code>motion-stop-delay</code></li>
+            <li>После полного времени неподвижности — телепорт</li>
+        </ol>
+
+        <div class="tip">Прыжки, повороты камеры и микро-движения (менее 1 блока) не сбрасывают таймер.</div>
+
+        <h3>Возврат из AFK</h3>
+        <p>Игрок автоматически возвращается при:</p>
+        <ul class="feature-list">
+            <li>Движении на другой блок</li>
+            <li>Использовании команды</li>
+            <li>Написании сообщения в чат</li>
+            <li>Приседании (Shift)</li>
+            <li>Любом взаимодействии</li>
+        </ul>
+    </section>
+
+    <!-- ==================== VISIBILITY ==================== -->
+    <section class="section" id="visibility">
+        <h2>Видимость</h2>
+
+        <h3>Режимы</h3>
+        <table>
+            <thead>
+                <tr><th>Настройка</th><th>Поведение</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>afk-players-see-each-other: false</code></td>
+                    <td>AFK-игроки <strong>невидимы</strong> друг для друга и для активных игроков. Взаимная невидимость.</td>
+                </tr>
+                <tr>
+                    <td><code>afk-players-see-each-other: true</code></td>
+                    <td>AFK-игроки <strong>видят</strong> друг друга.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip">Дополнительно, входящий в AFK игрок становится невидимым на уровне сущности (<code>setInvisible(true)</code>).</div>
+    </section>
+
+    <!-- ==================== REWARDS ==================== -->
+    <section class="section" id="rewards">
+        <h2>Награды</h2>
+
+        <h3>Как работает</h3>
+        <ol style="padding-left:20px;">
+            <li>При входе в AFK запускается таймер (20-60 мин, случайно)</li>
+            <li>По истечении времени выполняется случайная команда из списка</li>
+            <li>Игрок получает сообщение с суммой и интервалом</li>
+            <li>Таймер перезапускается для следующей награды</li>
+        </ol>
+
+        <h3>Пример конфигурации</h3>
+        <pre><code>reward:
+  enabled: true
+  interval-minutes:
+    min: 20
+    max: 60
+  commands:
+    - "p give &lt;player&gt; &lt;amount&gt;"
+  amount:
+    min: 1
+    max: 10
+  messages:
+    - "&amp;a&amp;l[AFK] &amp;eВы получили &amp;f&lt;amount&gt; &amp;емонет!"</code></pre>
+
+        <div class="tip">Команды выполняются от имени консоли. Используйте плейсхолдеры <code>&lt;player&gt;</code> и <code>&lt;amount&gt;</code>.</div>
+    </section>
+
+    <!-- ==================== SIGNS ==================== -->
+    <section class="section" id="signs">
+        <h2>Система табличек</h2>
+
+        <h3>Автоматические таблички</h3>
+        <p>Плагин создаёт рекламные таблички <strong>ZLDiscord</strong> в обычном мире:</p>
+        <ul class="feature-list">
+            <li>3-6 табличек в случайных местах (50-150 блоков от спавна)</li>
+            <li>Обновляются каждые 15-20 минут (случайный интервал)</li>
+            <li>Невозможно сломать (отмена <code>BlockBreakEvent</code>)</li>
+            <li>Координаты хранятся в БД</li>
+        </ul>
+
+        <h3>Staff-обнаружение</h3>
+        <p>При приближении стафф-игрока (<strong>30 блоков</strong>) к табличке — она <strong>удаляется</strong> и создаётся новая в другом месте.</p>
+
+        <h4>Staff-группы</h4>
+        <table>
+            <thead>
+                <tr><th>Группа</th><th>Описание</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>owner</code></td><td>Владелец</td></tr>
+                <tr><td><code>admin</code></td><td>Администратор</td></tr>
+                <tr><td><code>curator</code></td><td>Куратор</td></tr>
+                <tr><td><code>glmoder</code></td><td>Глобальный модератор</td></tr>
+                <tr><td><code>offstmoder</code></td><td>Оффлайн старший модератор</td></tr>
+                <tr><td><code>noder</code></td><td>Нодер</td></tr>
+                <tr><td><code>offmoder</code></td><td>Оффлайн модератор</td></tr>
+                <tr><td><code>offmlmoder</code></td><td>Оффлайн младший модератор</td></tr>
+                <tr><td><code>sthelper</code></td><td>Старший хелпер</td></tr>
+                <tr><td><code>offstherper</code></td><td>Оффлайн старший хелпер</td></tr>
+                <tr><td><code>offhelper</code></td><td>Оффлайн хелпер</td></tr>
+            </tbody>
+        </table>
+        <p>Также распознаются игроки с правом <code>op</code>.</p>
+
+        <div class="danger">Стафф-игрокам <strong>запрещено</strong> ставить таблички с Discord-ссылками (фильтрация по ключевым словам).</div>
+    </section>
+
+    <!-- ==================== ADHIDE ==================== -->
+    <section class="section" id="adhide">
+        <h2>Скрытие рекламы</h2>
+
+        <h3>Что скрывается</h3>
+        <ul class="feature-list">
+            <li>Рекламные скорборды (SIDEBAR) — удаляются каждые 2 секунды</li>
+            <li>Рекламные таблички в TAB-листе (PLAYER_LIST) — удаляются каждые 2 секунды</li>
+        </ul>
+
+        <h3>Управление</h3>
+        <pre><code>/afkhideads          — включить/выключить скрытие
+/afkreport &lt;ключ&gt;   — сгенерировать отчёт об удалённой рекламе</code></pre>
+
+        <h3>Отчёт</h3>
+        <p>При генерации отчёта создаётся текстовый файл в <code>plugins/AFKZone/reports/</code> и отправляется в Discord.</p>
+    </section>
+
+    <!-- ==================== DISCORD ==================== -->
+    <section class="section" id="discord">
+        <h2>Discord-интеграция</h2>
+
+        <h3>Настройка</h3>
+        <ol style="padding-left:20px;">
+            <li>Установите плагин <strong>ZLDiscord</strong></li>
+            <li>Укажите токен бота в <code>plugins/ZLDiscord/config.yml</code></li>
+            <li>Укажите ID канала в <code>plugins/PlugManX/sync_config.yml</code></li>
+        </ol>
+
+        <h3>Уведомления</h3>
+        <ul class="feature-list">
+            <li>Запуск плагина (проверка файлов и токена)</li>
+            <li>Остановка плагина (количество удалённых табличек)</li>
+            <li>Обновление табличек (новые/удалённые координаты)</li>
+            <li>Удаление таблички стаффом (с указанием имени)</li>
+            <li>Переключение скрытия рекламы</li>
+            <li>Отчёты об удалённой рекламе</li>
+        </ul>
+
+        <div class="tip">Плагин использует Discord API напрямую (без библиотек). Автоматическая обработка лимитов запросов (429).</div>
+    </section>
+
+    <!-- ==================== FAQ ==================== -->
+    <section class="section" id="faq">
+        <h2>FAQ</h2>
+
+        <h3>Сколько времени занимает обнаружение AFK?</h3>
+        <p>По умолчанию: <code>afk-timeout (10 сек)</code> + <code>motion-stop-delay (20 сек)</code> = <strong>30 секунд</strong>. Настраивается в конфиге.</p>
+
+        <h3>Будут ли ложно обнаружены бегающие игроки?</h3>
+        <p><strong>Нет.</strong> Движение более 1 блока сбрасывает таймер. Игрок должен стоять полностью неподвижно.</p>
+
+        <h3>Что происходит с предметами AFK-игрока?</h3>
+        <p>При входе в AFK: насыщение/голод/здоровье восстанавливаются до максимума. При выходе: всё восстанавливается. Инвентарь сохраняется (<code>keep-inventory: true</code>).</p>
+
+        <h3>Можно ли зайти в кровать в AFK-зоне?</h3>
+        <p><strong>Нет.</strong> Любое действие в зоне приводит к возврату.</p>
+
+        <h3>Как перезагрузить конфиг?</h3>
+        <pre><code>/afkreload</code></pre>
+
+        <h3>Плагин конфликтует с EssentialsX?</h3>
+        <p>Нет. Плагин автоматически перехватывает команду <code>/afk</code> у EssentialsX и заменяет её своей.</p>
+
+        <h3>Что будет при выключении сервера?</h3>
+        <p>Все AFK-игроки возвращаются на свои позиции. Все таблички удаляются. Все данные очищаются.</p>
+    </section>
+
+</div>
+
+<div class="footer">
+    AFKZone v1.0 &bull; by <a href="#">zoliryzik</a> &bull; 2026
+</div>
+
+</body>
+</html>
