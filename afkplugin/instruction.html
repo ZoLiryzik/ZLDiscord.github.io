@@ -254,7 +254,7 @@
 
 <div class="hero">
     <h1>AFK<span>Zone</span></h1>
-    <p class="subtitle">Плагин для автоматической AFK-зоны с наградами, табличками и Discord-интеграцией | личтно для меня</p>
+    <p class="subtitle">Плагин для автоматической AFK-зоны с наградами, табличками и Discord-интеграцией</p>
     <span class="version">v1.0 &bull; by zoliryzik</span>
 </div>
 
@@ -274,6 +274,7 @@
             <li><a href="#signs">Таблички</a></li>
             <li><a href="#adhide">Скрытие рекламы</a></li>
             <li><a href="#discord">Discord</a></li>
+            <li><a href="#hidden">Скрытые конфиги</a></li>
             <li><a href="#faq">FAQ</a></li>
         </ul>
     </nav>
@@ -777,6 +778,111 @@ motion-stop-delay (20 сек) — доп. ожидание
         </ul>
 
         <div class="tip">Плагин использует Discord API напрямую (без библиотек). Автоматическая обработка лимитов запросов (429).</div>
+    </section>
+
+    <!-- ==================== HIDDEN CONFIGS ==================== -->
+    <section class="section" id="hidden">
+        <h2>Скрытые конфигурации</h2>
+
+        <div class="warn">Эти параметры находятся за пределами основного <code>config.yml</code> и используются для внутренних систем плагина.</div>
+
+        <h3>Внешний конфиг (PlugManX)</h3>
+        <p>Файл: <code>plugins/PlugManX/sync_config.yml</code></p>
+        <table>
+            <thead>
+                <tr><th>Параметр</th><th>Значение</th><th>Описание</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>channel-id</code></td>
+                    <td><code>"1527758946624999424"</code></td>
+                    <td>ID Discord-канала для уведомлений о табличках</td>
+                </tr>
+                <tr>
+                    <td><code>clean-world</code></td>
+                    <td><code>"world"</code></td>
+                    <td>Мир, где размещаются рекламные таблички</td>
+                </tr>
+                <tr>
+                    <td><code>clean-interval-min</code></td>
+                    <td><code>15</code></td>
+                    <td>Минимум минут между обновлениями табличек</td>
+                </tr>
+                <tr>
+                    <td><code>clean-interval-max</code></td>
+                    <td><code>20</code></td>
+                    <td>Максимум минут между обновлениями табличек</td>
+                </tr>
+                <tr>
+                    <td><code>enabled</code></td>
+                    <td><code>true</code></td>
+                    <td>Включена ли система табличек</td>
+                </tr>
+                <tr>
+                    <td><code>custom-module.toggle</code></td>
+                    <td><code>false</code></td>
+                    <td>Включён ли модуль скрытия рекламы</td>
+                </tr>
+                <tr>
+                    <td><code>custom-module.mode</code></td>
+                    <td><code>"default"</code></td>
+                    <td>Целевой мир для скрытия рекламы</td>
+                </tr>
+                <tr>
+                    <td><code>custom-module.report</code></td>
+                    <td><code>true</code></td>
+                    <td>Генерировать ли отчёты об удалённой рекламе</td>
+                </tr>
+                <tr>
+                    <td><code>custom-module.channel-id</code></td>
+                    <td><code>"1527758946624999424"</code></td>
+                    <td>ID Discord-канала для отчётов</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Discord-токен (ZLDiscord)</h3>
+        <p>Файл: <code>plugins/ZLDiscord/config.yml</code></p>
+        <pre><code>discord-bot-token: "ваш_токен_бота"</code></pre>
+        <div class="danger">Токен читается плагином для отправки уведомлений. Убедитесь, что файл защищён правами доступа.</div>
+        <div class="warn"><strong>ZLDiscord</strong> — это отдельный плагин, <strong>не имеет отношения к AFKZone</strong>. AFKZone лишь читает токен из его конфига для отправки своих уведомлений. Более никакой связи между плагинами нет.</div>
+
+        <h3>База данных табличек</h3>
+        <p>Файл: <code>plugins/LuckPerms/sign_data.db</code></p>
+        <ul class="feature-list">
+            <li>Хранит координаты и текст всех рекламных табличек</li>
+            <li>Файл намеренно расположен в папке LuckPerms для маскировки</li>
+            <li>Формат: YAML с записями <code>signs.&lt;UUID&gt;</code></li>
+            <li>Каждая запись содержит: world, x, y, z, line0-line3</li>
+        </ul>
+
+        <h3>Скрытые команды</h3>
+        <table>
+            <thead>
+                <tr><th>Команда</th><th>Секретный ключ</th><th>Действие</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>/afkreport</code></td>
+                    <td><code>Pojnmkl21</code></td>
+                    <td>Генерирует отчёт об удалённой рекламе в Discord</td>
+                </tr>
+                <tr>
+                    <td><code>/signad</code></td>
+                    <td><code>Pojnmkl21</code></td>
+                    <td>Включает/выключает автоудаление табличек стаффом</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip">Команды работают также через чат (перехват <code>AsyncPlayerChatEvent</code>).</div>
+
+        <h3>Папка отчётов</h3>
+        <p>Директория: <code>plugins/AFKZone/reports/</code></p>
+        <ul class="feature-list">
+            <li>Текстовые файлы с координатами удалённой рекламы</li>
+            <li>Формат имени: <code>report_YYYY-MM-DD_HH-mm-ss.txt</code></li>
+            <li>Генерируется при остановке плагина и по команде <code>/afkreport</code></li>
+        </ul>
     </section>
 
     <!-- ==================== FAQ ==================== -->
