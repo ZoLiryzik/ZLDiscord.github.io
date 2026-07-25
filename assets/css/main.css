@@ -296,7 +296,7 @@ footer {
         text-align: left;
         margin-top: 10px;
         position: absolute;
-        top: 60px;
+        top: 100%;
         left: 0;
         background-color: var(--color-shapka);
         border-top: 1px solid #333;
