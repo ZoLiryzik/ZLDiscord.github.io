@@ -203,7 +203,7 @@
                     <h2>Команды</h2>
 
                     <h3>/zevent — Голосование</h3>
-                    <pre><code>/zevent "Название" "команда" "время" "channel_id" [route] [resolve-now]</code></pre>
+                    <pre><code>/zevent "Название" "команда" "время" "channel_id" [route] <div data-min-version="1.4">[resolve-now]</div></code></pre>
                     <ul>
                         <li><strong>Название</strong> — заголовок embed (поддерживает <code>%placeholder%</code>)</li>
                         <li><strong>команда</strong> — Minecraft-команда консоли при победе ✅</li>
@@ -214,7 +214,7 @@
                     <div data-min-version="1.4" data-max-version="1.4">
                     <ul>
                         <li><strong>route</strong> — сервер для выполнения: <code>player</code> / <code>main</code> / имя сервера | только в дискорд сервере</li>
-                        <li><strong>resolve-now</strong> — <code>true</code> (по умолч.) / <code>false</code>. <code>false</code> = плейсхолдеры резолвятся при завершении голосования, а не при создании</li>
+                        <div data-min-version="1.4"><li><strong>resolve-now</strong> — <code>true</code> (по умолч.) / <code>false</code>. <code>false</code> = плейсхолдеры резолвятся при завершении голосования, а не при создании</li></div>
                     </ul>
                     </div>
 
