@@ -59,6 +59,9 @@
 .language-option:hover {
     background-color: var(--color-hover-active);
 }
+.frame {
+    overflow-x: hidden;
+}
 .releases-list {
     display: flex;
     flex-direction: column;
@@ -79,7 +82,6 @@
     color: #4CAF50;
     font-weight: 600;
 }
-
 .release-card ul {
     margin: 8px 0;
     padding-left: 20px;
@@ -88,6 +90,8 @@
 }
 .release-card ul li {
     margin-bottom: 4px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 .release-card .download-link {
     display: inline-block;
@@ -103,6 +107,11 @@
     background: #45a049;
 }
 @media (max-width: 768px) {
+    .shapka {
+        height: auto;
+        flex-wrap: wrap;
+        padding: 12px 15px;
+    }
     .shapka-links {
         display: none;
         flex-direction: column;
@@ -110,7 +119,7 @@
         text-align: left;
         margin-top: 10px;
         position: absolute;
-        top: 60px;
+        top: 100%;
         left: 0;
         background-color: var(--color-shapka);
         border-top: 1px solid #333;
@@ -135,6 +144,49 @@
     .language-label {
         width: 100%;
         padding: 10px 0;
+    }
+    .docs-container {
+        margin-top: 80px;
+        padding: 0;
+    }
+    .docs-content {
+        padding: 12px;
+        border-radius: 0;
+    }
+    .release-card {
+        padding: 16px;
+    }
+    .release-card h3 {
+        font-size: 18px;
+    }
+    .release-card ul {
+        padding-left: 16px;
+        font-size: 14px;
+    }
+    .release-card ul li {
+        margin-bottom: 3px;
+    }
+    .probel-footer {
+        display: none;
+    }
+    footer {
+        border-top: none;
+        padding: 30px 15px 20px;
+    }
+}
+@media (max-width: 480px) {
+    .docs-content {
+        padding: 10px;
+    }
+    .release-card {
+        padding: 12px;
+    }
+    .release-card h3 {
+        font-size: 16px;
+    }
+    .release-card ul {
+        font-size: 13px;
+        padding-left: 14px;
     }
 }
 </style>
@@ -170,17 +222,42 @@
 
                 <div class="releases-list">
                     <div class="release-card">
+                        <h3><span class="version">v1.4</span></h3>
+                        <div style="color:#888;font-size:14px;">Jul 17, 2026</div>
+                        <ul>
+                            <li>SQLite база данных с авто-миграцией</li>
+                            <li>Кэш embed с MD5 хешем</li>
+                            <li>Настраиваемые префиксы: MC (<code>z</code>), Discord slash (<code>z</code>), Discord text (<code>z!</code>)</li>
+                            <li>Админ-роли Discord для /zcc, /zreaction</li>
+                            <li>Безопасная перезагрузка плагина без перезапуска сервера</li>
+                            <li>GroupSync — синхронизация ролей Discord ↔ LuckPerms</li>
+                            <li>Реакции — автоматические действия при реакциях на сообщения</li>
+                            <li>Модальные окна Discord (Modal API)</li>
+                            <li>Чёрный список команд (banned_commands.yml)</li>
+                            <li>Кастомные плейсхолдеры (placeholders.yml)</li>
+                            <li>Скобки в условиях, проверка ролей по массиву</li>
+                            <li>Команды: /zstatus, /zsync, /zprefix, /zreload, /rolegive, /roleremove, /rolemenu, /role_toggle</li>
+                            <li>Плейсхолдеры: %zoliryzik_role_&lt;id&gt;% (OR), %zoliryzik_roles_&lt;id&gt;% (AND)</li>
+                            <li>Шаблон: discord.auto_delete(), discord.open_modal(), selectmenu</li>
+                            <li>Переключение кэша участников: online/all (member-cache-policy)</li>
+                        </ul>
+                        <a class="download-link" href="/project/1.4/ZoLiryzik.jar">Скачать v1.4</a>
+                    </div>
+
+                    <div class="release-card">
                         <h3><span class="version">v1.3</span></h3>
                         <div style="color:#888;font-size:14px;">Jun 9, 2026</div>
                         <ul>
-                            <li>Атрибуты /zattr с разделением по серверам</li>
-                            <li>Очередь команд между серверами</li>
+                            <li>Атрибуты /zattr с разделением по серверам (bot/member/player)</li>
+                            <li>Очередь команд между серверами (cross_command_table)</li>
                             <li>Per-key синхронизация ссылок и атрибутов между серверами</li>
                             <li>LongPoll маршрутизация (player/main/server-name) + дедупликация</li>
                             <li>Шаблоны LongPoll скриптов и сессии привязки в БД</li>
                             <li>Исправлена стабильность LongPoll — переподключение и обработка событий</li>
-                            <li>Новый config.yml: server-name, sync</li>
+                            <li>Новый config.yml: server-name, sync (links, attributes)</li>
                             <li>PlaceholderAPI в сообщениях команд</li>
+                            <li>Кастомные команды /zcc с шаблонизатором</li>
+                            <li>Lang переменная (_lang: ru/en) в шаблонах</li>
                         </ul>
                         <a class="download-link" href="/project/1.3/ZoLiryzik.jar">Скачать v1.3</a>
                     </div>
