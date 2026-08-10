@@ -160,12 +160,14 @@ Custom Command Example
 Create commands/heal.yml:
 ```
 
-yaml
+```yaml
 <do mc.command('effect give ' + _player_name + ' regeneration 10 5')>
 <do mc.broadcast('&a' + _player_name + ' has been healed!')>
+```
+```bash
 Register in custom_commands.yml:
-
-
+```
+```yaml
 commands:
   heal:
     file: "commands/heal.yml"
@@ -174,9 +176,10 @@ commands:
     enabled: true
     command_mc: heal
     permission: zoliryzik.heal
+```
 🔐 Security Notes
 
-The plugin never stores or transmits user tokens.
-All command executions happen on the server with server-level permissions.
-LongPoll uses Bearer token authentication (Authorization: Bearer <secret>).
-Sensitive fields (token, DB passwords) should be kept out of version control.
+• The plugin never stores or transmits user tokens.
+• All command executions happen on the server with server-level permissions.
+• LongPoll uses Bearer token authentication (Authorization: Bearer <secret>).
+• Sensitive fields (token, DB passwords) should be kept out of version control.
