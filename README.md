@@ -1,57 +1,43 @@
 # ZLDiscord
 
-A Minecraft server plugin (Paper/Spigot/Purpur) for powerful Discord integration. Built by ZoLiryzik.  
+Minecraft server plugin (Paper/Spigot/Purpur) by ZoLiryzik.  
 🌐 Docs: [plugin.zoliryzik.su/docs](https://plugin.zoliryzik.su/docs)
 
-> 💡 This is a **Minecraft server plugin** (Java 17+), not a Discord client plugin. It runs on the server and bridges Minecraft with Discord for admins.
+> 💡 Server-side plugin (Java 17+), not a Discord client plugin.
 
-## ✨ Core Features (TL;DR)
+## ✨ Key features
 
-| Feature | What it does | Where to read |
-|---------|---------------|---------------|
-| **Discord Voting** | Create polls in Discord; when the vote passes, run Minecraft console commands safely. | `/zevent` + docs |
-| **Custom Commands** | Template engine with embeds, buttons, cooldowns, permissions, and conditional logic. | `/zcc` + docs |
-| **PlaceholderAPI** | Use `%zoliryzik_in_vc%`, `%zoliryzik_role_<role_id>%` in tablist, scoreboard, chat prefixes. | Placeholders docs |
-| **LuckPerms Sync** | Auto-assign Discord roles based on LuckPerms groups (and vice versa). | Sync docs |
-| **DataStore** | Store player data (donations, warnings, XP) and use it in templates. | DataStore docs |
-| **LongPoll** | Connect your own endpoint for custom events and triggers. | LongPoll docs |
+- **Discord voting** → auto-run Minecraft commands (`/zevent`)
+- **Custom commands** with embeds, buttons, cooldowns (`/zcc`)
+- **PlaceholderAPI** support: `%zoliryzik_in_vc%`, `%zoliryzik_role_<id>%`
+- **LuckPerms sync**: roles ↔ groups
+- **DataStore**: player data (XP, warnings, etc.)
+- **LongPoll**: custom triggers via your endpoint
 
-All logic runs on your server; no user tokens are collected.
+All logic runs on the server; no user tokens collected.
 
-## 📋 Compatibility & Requirements
+## 📋 Requirements
 
-| Platform | Status | Notes |
-|----------|--------|-------|
-| Paper | ✅ Yes | 1.16.5–1.21.x |
-| Spigot | ✅ Yes | Most features work |
-| Purpur | ✅ Yes | Fully supported |
-| Forge/Fabric | ❌ No | Not supported |
-
-**Requirements:**
-- Java 17 or higher
+- Java 17+
 - PlaceholderAPI (mandatory)
-- LuckPerms (optional, for role sync)
-- Basic admin knowledge
+- LuckPerms (optional)
+- Paper/Spigot/Purpur (1.16.5–1.21.x)
 
-## 🚀 Quick Start
+## 🚀 Quick install
 
-1. Download `ZoLiryzik.jar` from Releases.
-2. Drop it into `plugins/` on your server.
-3. Restart the server (avoid `/reload` for plugin load).
-4. Configure `config.yml` (token, guildId, etc.).
-5. Run `/zreload` to apply config.
-6. Check docs for advanced setup: [plugin.zoliryzik.su/docs](https://plugin.zoliryzik.su/docs).
+1. Drop `ZoLiryzik.jar` into `plugins/`.
+2. Restart server (no `/reload`).
+3. Edit `config.yml` (token, guildId).
+4. Run `/zreload`.
 
-## 🧪 Example Workflow (Admin Use Case)
-
-**Goal:** Let players vote for a map change; if majority agrees, execute a command.
+## 🧪 Example
 
 ```bash
 /zevent "Vote for new map" "map switch-to new_map" 10m 123456789012345678```
 
 What happens next:
 
-• Discord embed appears in the channel.
-• Players vote ✅/❌.
-• When timer ends, if ✅ wins, the server runs map switch-to new_map.
-• Use placeholders like %zoliryzik_in_vc% in chat prefixes or tablist.
+• A Discord embed appears in the configured channel.
+• Players vote with ✅/❌ reactions.
+• When the timer ends, if “yes” votes win, the server safely executes map switch-to new_map.
+• You can use placeholders like %zoliryzik_in_vc% in chat prefixes, tablist, or scoreboard.
