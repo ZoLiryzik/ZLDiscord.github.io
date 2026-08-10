@@ -40,6 +40,9 @@ All logic runs on the server; no user tokens collected.
 What happens next:
 
 • A Discord embed appears in the configured channel.
+
 • Players vote with ✅/❌ reactions.
+
 • When the timer ends, if “yes” votes win, the server safely executes map switch-to new_map.
+
 • You can use placeholders like %zoliryzik_in_vc% in chat prefixes, tablist, or scoreboard.
