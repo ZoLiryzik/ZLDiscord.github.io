@@ -33,7 +33,8 @@ All logic runs on the server; no user tokens collected.
 ## 🧪 Example
 
 
-```/zevent "Vote for new map" "map switch-to new_map" 10m 123456789012345678```
+```bash
+/zevent "Vote for new map" "map switch-to new_map" 10m 123456789012345678```
 
 What happens next:
 
