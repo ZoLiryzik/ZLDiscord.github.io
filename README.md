@@ -179,7 +179,7 @@ commands:
 ```
 🔐 Security Notes
 
-• The plugin never stores or transmits user tokens.
-• All command executions happen on the server with server-level permissions.
-• LongPoll uses Bearer token authentication (Authorization: Bearer <secret>).
-• Sensitive fields (token, DB passwords) should be kept out of version control.
+- The plugin never stores or transmits user tokens.
+- All command executions happen on the server with server-level permissions.
+- LongPoll uses Bearer token authentication (Authorization: Bearer <secret>).
+- Sensitive fields (token, DB passwords) should be kept out of version control.
