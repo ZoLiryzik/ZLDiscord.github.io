@@ -47,7 +47,10 @@ All logic runs on your server; no user tokens are collected.
 **Goal:** Let players vote for a map change; if majority agrees, execute a command.
 
 ```bash
-/zevent "Vote for new map" "map switch-to new_map" 10m 123456789012345678
+/zevent "Vote for new map" "map switch-to new_map" 10m 123456789012345678```
+
+What happens next:
+
 • Discord embed appears in the channel.
 • Players vote ✅/❌.
 • When timer ends, if ✅ wins, the server runs map switch-to new_map.
