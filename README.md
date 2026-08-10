@@ -48,4 +48,7 @@ All logic runs on your server; no user tokens are collected.
 
 ```bash
 /zevent "Vote for new map" "map switch-to new_map" 10m 123456789012345678
-
+• Discord embed appears in the channel.
+• Players vote ✅/❌.
+• When timer ends, if ✅ wins, the server runs map switch-to new_map.
+• Use placeholders like %zoliryzik_in_vc% in chat prefixes or tablist.
