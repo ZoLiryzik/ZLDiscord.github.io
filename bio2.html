@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Биография ZoLiryzik</title>
+    <style>
+        :root {
+            --bg-color: #1e1e2e;
+            --card-bg: #2a2a40;
+            --accent-purple: #8b5cf6;
+            --accent-green: #4ade80;
+            --text-main: #ffffff;
+            --text-secondary: #a1a1aa;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 1px solid #3a3a55;
+        }
+
+        h1 {
+            margin: 0 0 10px 0;
+            font-size: 2rem;
+            color: var(--accent-purple);
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        main {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            border-left: 5px solid var(--accent-green);
+            padding-left: 15px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+
+        /* Timeline Styles */
+        .timeline {
+            position: relative;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 32px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--text-secondary);
+        }
+
+        .time-item {
+            padding-left: 60px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .time-date {
+            display: block;
+            color: var(--accent-purple);
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .time-content {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #3a3a55;
+        }
+
+        th {
+            background: #3a3a55;
+            color: var(--accent-green);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            background: var(--accent-green);
+            color: #000;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 480px) {
+            .time-item {
+                padding-left: 25px;
+            }
+            .timeline::before {
+                left: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>ZoLiryzik: Путь разработчика</h1>
+        <p class="subtitle">От туториалов по Juniper Bot до собственного плагина ZLDiscord</p>
+    </header>
+
+    <main>
+        
+        <section>
+            <h2>Кто это?</h2>
+            <p>ZoLiryzik — псевдоним русскоязычного разработчика-энтузиаста. Автор плагина <strong>ZLDiscord</strong> для Minecraft, который связывает игровой сервер с Discord.</p>
+            <p>Настоящее имя и личные данные не раскрываются. Проект развивается как личная инициатива с уклоном в нишевое комьюнити.</p>
+        </section>
+
+        <section>
+            <h2>Хронология (Таймлайн)</h2>
+            <div class="timeline">
+                <div class="time-item">
+                    <span class="time-date">Май 2022</span>
+                    <div class="time-content">
+                        Создание YouTube-канала. Аудитория — любители Minecraft и Discord-ботов.
+                    </div>
+                </div>
+                <div class="time-item">
+                    <span class="time-date">Август 2022</span>
+                    <div class="time-content">
+                        Выход первых гайдов по боту Juniper Bot: экономика, банк, работы.
+                    </div>
+                </div>
+                <div class="time-item">
+                    <span class="time-date">Конец 2023</span>
+                    <div class="time-content">
+                        Последнее видео на канале. Длительная пауза в контенте.
+                    </div>
+                </div>
+                <div class="time-item">
+                    <span class="time-date">2024–2025</span>
+                    <div class="time-content">
+                        Эксперименты на GitHub: заготовки сайтов, бот danyabot, поиск своего формата.
+                    </div>
+                </div>
+                <div class="time-item">
+                    <span class="time-date">4 августа 2025</span>
+                    <div class="time-content">
+                        Релиз <strong>ZLDiscord 1.0</strong> на SpigotMC. Базовая функциональность: голосования-ивенты.
+                    </div>
+                </div>
+                <div class="time-item">
+                    <span class="time-date">25 мая 2026</span>
+                    <div class="time-content">
+                        Версия <strong>1.2</strong>: добавлены кастомные команды, DataStore, LongPoll. Исправлен критический баг.
+                    </div>
+                </div>
+                <div class="time-item">
+                    <span class="time-date">17 июля 2026</span>
+                    <div class="time-content">
+                        Версия <strong>1.4</strong>: полная переработка ядра, добавлен SQLite, команды бота в Discord. Крупнейшее обновление.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Ключевые релизы ZLDiscord</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Версия</th>
+                        <th>Дата</th>
+                        <th>Главные изменения</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge">1.0</span></td>
+                        <td>4 августа 2025</td>
+                        <td>Первый релиз. Система голосований (ивентов).</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge">1.1</span></td>
+                        <td>10 августа 2025</td>
+                        <td>Поддержка русского и английского языков, команды Embed.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge">1.2</span></td>
+                        <td>25 мая 2026</td>
+                        <td>Кастомные команды, DataStore, LongPoll, исправление крашей.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge">1.3</span></td>
+                        <td>9 июня 2026</td>
+                        <td>Кросс-серверная синхронизация, маршрутизация LongPoll.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge">1.4</span></td>
+                        <td>17 июля 2026</td>
+                        <td>Переписанное ядро, SQLite, команды бота в Discord.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Почерк автора</h2>
+            <ul>
+                <li><strong>Права доступа:</strong> Названы в честь автора (например, <code>zoliryzik.link</code>).</li>
+                <li><strong>Сайт:</strong> Раздел «Чтото.» — неформальный стиль одиночного разработчика.</li>
+                <li><strong>Комьюнити:</strong> В профиле GitHub указано «ZoLiryzik Community», хотя проект остаётся личным.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Где найти</h2>
+            <p>
+                <strong>SpigotMC:</strong> Страница плагина и история загрузок.<br>
+                <strong>Modrinth / CurseForge:</strong> Альтернативные площадки для скачивания.<br>
+                <strong>plugin.zoliryzik.su:</strong> Официальная документация и поддержка.<br>
+                <strong>GitHub:</strong> Репозитории проектов и черновиков.
+            </p>
+        </section>
+
+    </main>
+
+    <footer>
+        &copy; 2026 Биография ZoLiryzik. Данные собраны из открытых источников.
+    </footer>
+
+</body>
+</html>
